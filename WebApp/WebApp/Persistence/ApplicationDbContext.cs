@@ -12,6 +12,7 @@ namespace WebApp.Persistence
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<User> Users { get; set; }
+        
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

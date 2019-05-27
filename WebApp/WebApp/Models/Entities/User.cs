@@ -13,6 +13,7 @@ namespace WebApp.Models
         public string UserName { get; set; }
         public string Email { get; set; }
         public DateTime? BirthDay { get; set; }
+        public TypeOfUser UserType { get; set; }
         
     }
 }
