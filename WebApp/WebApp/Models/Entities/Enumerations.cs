@@ -9,4 +9,5 @@ namespace WebApp.Models
     public enum TypeOfPassanger {Ordinary, Student, Pensioner};
     public enum TypeOfUser {Passanger, Controller, Admin };
     public enum TypeOfDay {Working, Saturday, Sunday };
+    public enum TypeOfTransportation { Urban, Suburban};
 }

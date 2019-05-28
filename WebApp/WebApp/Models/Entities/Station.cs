@@ -12,6 +12,7 @@ namespace WebApp.Models
         public string Adress { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        //public virtual Location Location { get; set; } 
         public virtual List<Line> Lines { get; set; }
     }
 }

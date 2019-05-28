@@ -8,7 +8,8 @@ namespace WebApp.Models
     public class TimeTable
     { 
         public TypeOfDay Day { get; set; }
+        public TypeOfTransportation Transportation { get; set; }
         public List<DateTime> Departures { get; set; }
-        public virtual Line Line { get; set; }
+        public virtual Line Line { get; set;}
     }
 }

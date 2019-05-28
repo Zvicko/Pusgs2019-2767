@@ -15,6 +15,7 @@ namespace WebApp.Persistence
         public DbSet<Line> Lines { get; set; }
         public DbSet<Station> Stations { get; set; }
         
+        
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
