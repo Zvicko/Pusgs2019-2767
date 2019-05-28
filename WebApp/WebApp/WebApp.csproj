@@ -296,6 +296,8 @@
     <Compile Include="Models\Entities\TimeTable.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\Repository\UserRepository.cs" />
+    <Compile Include="Persistence\Repository\IUserRepository.cs" />
     <Compile Include="Persistence\Repository\IRepository.cs" />
     <Compile Include="Persistence\Repository\Repository.cs" />
     <Compile Include="Persistence\UnitOfWork\DemoUnitOfWork.cs" />
