@@ -279,6 +279,10 @@
     <Compile Include="Migrations\201905271756331_AddedTypesOfUser.Designer.cs">
       <DependentUpon>201905271756331_AddedTypesOfUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905280907549_AddedSomeClasses.cs" />
+    <Compile Include="Migrations\201905280907549_AddedSomeClasses.Designer.cs">
+      <DependentUpon>201905280907549_AddedSomeClasses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -286,7 +290,10 @@
     <Compile Include="Models\Entities\ApplicationUser.cs" />
     <Compile Include="Models\Entities\Controller.cs" />
     <Compile Include="Models\Entities\Enumerations.cs" />
+    <Compile Include="Models\Entities\Line.cs" />
     <Compile Include="Models\Entities\Passanger.cs" />
+    <Compile Include="Models\Entities\Station.cs" />
+    <Compile Include="Models\Entities\TimeTable.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Persistence\Repository\IRepository.cs" />
@@ -410,6 +417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905271756331_AddedTypesOfUser.resx">
       <DependentUpon>201905271756331_AddedTypesOfUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905280907549_AddedSomeClasses.resx">
+      <DependentUpon>201905280907549_AddedSomeClasses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

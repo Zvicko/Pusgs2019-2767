@@ -152,3 +152,4 @@ C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\We
 C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.pdb
 C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.AddedTypesOfUser.resources
+C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.AddedSomeClasses.resources
