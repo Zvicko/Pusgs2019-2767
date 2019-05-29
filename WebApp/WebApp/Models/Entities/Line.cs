@@ -10,5 +10,6 @@ namespace WebApp.Models
         public int Id { get; set; }
         public virtual  List<Station> Stations { get; set; }
         public virtual List<Vehicle> Vehicles { get; set; }
+
     }
 }

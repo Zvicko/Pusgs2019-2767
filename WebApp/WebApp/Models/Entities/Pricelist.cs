@@ -7,9 +7,10 @@ namespace WebApp.Models
 {
     public class Pricelist
     {
-        
-        public double Price { get; set; }
-        public TypeOfTicket TicketType { get; set; }
-        public TypeOfPassanger PassangerType { get; set; }
+        public int Id { get; set; }
+        public virtual List<Ticket> Tickets { get; set; }
+        //public double Price { get; set; }
+        //public TypeOfTicket TicketType { get; set; }
+        //public TypeOfPassanger PassangerType { get; set; }
     }
 }
