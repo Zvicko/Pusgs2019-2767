@@ -12,6 +12,7 @@ namespace WebApp.Models
             UserType = TypeOfUser.Passanger;
         }
         public TypeOfPassanger PassangerType { get; set; }
+        public virtual Ticket PassangerTicket { get; set; }
         public bool Verified { get; set; }
         public string PhotoPath { get; set; }
 
