@@ -9,6 +9,7 @@ namespace WebApp.Persistence.Repository
 {
     public interface IStationRepository : IRepository<Station, int>
     {
+        IEnumerable<Station> GetAll(int pageIndex, int pageSize);
 
     }
 }

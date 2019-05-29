@@ -13,5 +13,11 @@ namespace WebApp.Persistence.Repository
         {
 
         }
+        protected ApplicationDbContext DemoContext { get { return context as ApplicationDbContext; } }
+
+        public IEnumerable<TimeTable> GetAll(int pageIndex, int pageSize)
+        {
+            return DemoContext.TimeTables.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+        }
     }
 }

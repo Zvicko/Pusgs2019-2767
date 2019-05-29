@@ -9,6 +9,7 @@ namespace WebApp.Persistence.Repository
 {
     public interface ILineRepository : IRepository<Line, int>
     {
+        IEnumerable<Line> GetAll(int pageIndex, int pageSize);
 
     }
 }

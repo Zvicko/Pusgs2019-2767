@@ -9,6 +9,6 @@ namespace WebApp.Persistence.Repository
 {
     public interface ITimeTableRepository : IRepository<TimeTable, int>
     {
-
+        IEnumerable<TimeTable> GetAll(int pageIndex, int pageSize);
     }
 }

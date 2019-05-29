@@ -9,6 +9,6 @@ namespace WebApp.Persistence.Repository
 {
     public interface IPricelistRepository : IRepository<Pricelist, int>
     {
-
+        IEnumerable<Pricelist> GetAll(int pageIndex, int pageSize);
     }
 }

@@ -9,6 +9,6 @@ namespace WebApp.Persistence.Repository
 {
     public interface ITicketRepository : IRepository<Ticket, int>
     {
-
+        IEnumerable<Ticket> GetAll(int pageIndex, int pageSize);
     }
 }
