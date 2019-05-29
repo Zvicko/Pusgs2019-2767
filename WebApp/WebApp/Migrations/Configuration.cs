@@ -57,16 +57,34 @@ namespace WebApp.Migrations
                  new User() { FullName = "Admin Adminovic" }
 
            );
+            context.Users.AddOrUpdate(
+                
+                u => u.FullName,
+                new Administrator() { FullName="Admin Admincic",BirthDay = DateTime.Parse("07/07/1994")}
+                
+           );
+
+            context.Users.AddOrUpdate(
+
+               u => u.FullName,
+               new Controller() { FullName = "Kontrolor  Kontrolovic", BirthDay = DateTime.Parse("10/11/1999") }
+          );
+
+            context.Users.AddOrUpdate(
+                
+                u => u.FullName,
+                new Passanger() { FullName = "Putnik Putnikovic",BirthDay = DateTime.Parse("10/11/1999"), PassangerType = TypeOfPassanger.Student}
+           );
 
             context.Users.AddOrUpdate(
 
                 p => p.FullName,
 
-                new User() { FullName = "AppUser AppUserovic" }
+                new User() { FullName = "AppUser AppUserovic", BirthDay = DateTime.Parse("07/01/1991") }
 
             );
             SaveChanges(context);
-
+           
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
 

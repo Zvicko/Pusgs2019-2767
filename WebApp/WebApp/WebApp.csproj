@@ -295,6 +295,7 @@
     <Compile Include="Models\Entities\Passanger.cs" />
     <Compile Include="Models\Entities\Pricelist.cs" />
     <Compile Include="Models\Entities\Station.cs" />
+    <Compile Include="Models\Entities\Ticket.cs" />
     <Compile Include="Models\Entities\TimeTable.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\Vehicle.cs" />
