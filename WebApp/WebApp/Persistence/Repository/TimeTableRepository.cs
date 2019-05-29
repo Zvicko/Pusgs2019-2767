@@ -7,9 +7,9 @@ using WebApp.Models;
 
 namespace WebApp.Persistence.Repository
 {
-    public class VehicleRepository : Repository<Vehicle, int>, IVehicleRepository
+    public class TimeTableRepository : Repository<TimeTable, int>, ITimeTableRepository
     {
-        public VehicleRepository(DbContext context) : base(context)
+        public TimeTableRepository(DbContext context) : base(context)
         {
 
         }
