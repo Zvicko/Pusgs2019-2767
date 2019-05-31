@@ -327,11 +327,12 @@ namespace WebApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
+            var passanger = new Passanger() { FullName = model.FullName, Email = model.Email, BirthDay = model.DateOfBirth,PassangerType = model.PassangerType};
+            var AppUser = new ApplicationUser() {Id=model.Email,UserName = model.Email, Email = model.Email,User = passanger};
+            AppUser.PasswordHash = ApplicationUser.HashPassword(model.Password);
+            
+            IdentityResult result = await UserManager.CreateAsync(AppUser, model.Password);
+            await UserManager.AddToRoleAsync(model.Email, "AppUser");
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
