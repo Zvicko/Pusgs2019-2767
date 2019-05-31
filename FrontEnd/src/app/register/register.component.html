@@ -1,3 +1,29 @@
-<p>
-  register works!
-</p>
+<div class="container">
+<form [formGroup]="userForm" class="form-horizontal">
+  <div class="panel panel-custom">
+    <div class="panel-heading">
+      <h3 class="panel-title">Registracija</h3>
+
+    </div>
+    <div class="panel-body">
+      <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('fullName').touched || userForm.get('fullName').dirty) && userForm.get('fullName').errors)}">
+        <label class="col-sm-2 control-label" for="fullName">Ime i prezime:</label>
+        <div class="col-sm-8">
+          <input id="fullName" formControlName="fullName" type="text" class="form-control">
+          <span class="help-block" *ngIf="((userForm.get('fullName').touched || userForm.get('fullName').dirty) && userForm.get('fullName').errors)">
+          <span *ngIf="userForm.get('fullName').errors.required">
+          Ime i prezime je obavezno
+          </span>
+          <span *ngIf="userForm.get('fullName').errors.minlength || userForm.get('fullName').errors.maxlength">
+              Ime i prezime mora da sadrzi izmedju 6 i 40 karaktera
+          </span>
+           
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</form>
+</div>
