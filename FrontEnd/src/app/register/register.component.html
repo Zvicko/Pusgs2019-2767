@@ -21,9 +21,42 @@
           </span>
         </div>
       </div>
-
+      
+        <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('email').touched || userForm.get('email').dirty) && userForm.get('email').errors)}">
+            <label class="col-sm-2 control-label" for="email">Email:</label>
+            <div class="col-sm-8">
+              <input id="email" formControlName="email" type="text" class="form-control">
+              <span class="help-block" *ngIf="((userForm.get('email').touched || userForm.get('email').dirty) && userForm.get('email').errors)">
+              <span *ngIf="userForm.get('email').errors.required">
+              Email je obavezan!
+              </span>
+              <span *ngIf="userForm.get('email').errors.email">
+                 Email nije upisan u pravilnom formatu. Primer pravilnog formata johndoe@doe.com
+              </span>
+               
+              </span>
+            </div>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('birthdate').touched || userForm.get('birthdate').dirty) && userForm.get('birthdate').errors)}">
+          <label class="col-sm-2 control-label" for="birthdate">Datum rodjenja:</label>
+          <div class="col-sm-8">
+            <input id="birthdate" formControlName="birthdate" type="date" class="form-control">
+            <span class="help-block" *ngIf="((userForm.get('birthdate').touched || userForm.get('birthdate').dirty) && userForm.get('birthdate').errors)">
+            <span *ngIf="userForm.get('birthdate').errors.required">
+              Datum rodjenja je obavezan!
+            </span>
+            <span *ngIf="userForm.get('birthdate').errors.validateDate">
+              Korisnik ne sme biti mladji od 12 godina i ne stariji od 100!
+            </span>
+             
+            </span>
+          </div>
     </div>
+      
 
+    
+
+  </div>
   </div>
 </form>
 </div>
