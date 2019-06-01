@@ -37,6 +37,34 @@
               </span>
             </div>
       </div>
+      <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('password').touched || userForm.get('password').dirty) && userForm.get('password').errors)}">
+          <label class="col-sm-2 control-label" for="password">Lozinka:</label>
+          <div class="col-sm-8">
+            <input id="password" formControlName="password" type="password" class="form-control">
+            <span class="help-block" *ngIf="((userForm.get('password').touched || userForm.get('password').dirty) && userForm.get('password').errors)">
+            <span *ngIf="userForm.get('password').errors.required">
+            Lozinka je obavezna!
+            </span>
+          
+             
+            </span>
+          </div>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('repPassword').touched || userForm.get('repPassword').dirty) && userForm.get('repPassword').errors)}">
+        <label class="col-sm-2 control-label" for="password">Potvrdi lozinku:</label>
+        <div class="col-sm-8">
+          <input id="repPassword" formControlName="repPassword" type="password" class="form-control">
+          <span class="help-block" *ngIf="((userForm.get('repPassword').touched || userForm.get('repPassword').dirty) && userForm.get('repPassword').errors)">
+          <span *ngIf="userForm.get('repPassword').errors.required">
+          Lozinka je obavezna!
+          </span>
+        
+           
+          </span>
+        </div>
+  </div>
+
+
       <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('birthdate').touched || userForm.get('birthdate').dirty) && userForm.get('birthdate').errors)}">
           <label class="col-sm-2 control-label" for="birthdate">Datum rodjenja:</label>
           <div class="col-sm-8">
@@ -52,6 +80,16 @@
             </span>
           </div>
     </div>
+    <div class="form-group" >
+        <label class="col-sm-2 control-label" for="passangerType">Tip putnika:</label>
+        <div class="col-sm-8">
+          <select id="passangerType" formControlName="passangerType" type="date" class="form-control">
+          <option value='1'>Redovan</option>
+          <option value='2'>Djak</option>
+          <option value='3'>Penzioner</option>
+          </select>
+        </div>
+  </div>
       
 
     

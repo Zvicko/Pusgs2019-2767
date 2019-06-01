@@ -13,7 +13,11 @@ export class RegisterComponent implements OnInit {
   this.userForm = this.fb.group({
     fullName : ['',[Validators.required,Validators.minLength(6),Validators.maxLength(40)]],
     email: ['',[Validators.required,Validators.email]],
-    birthdate : ['',[Validators.required,validateDate]]
+    password: ['',Validators.required],
+    repPassword: ['',Validators.required],
+    birthdate : ['',[Validators.required,validateDate]],
+    passangerType : ['']
+
   })
   }
 
@@ -43,4 +47,6 @@ function validateDate(control: AbstractControl) : {[key: string]:any} | null{
     return null;
   }
 
+}
+function validatePassword(control: AbstractControl) : {[key: string]:any} | null{
 }
