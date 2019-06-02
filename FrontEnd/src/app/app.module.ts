@@ -7,6 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import {HttpModule} from '@angular/http';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    HttpModule,
+    HttpClientXsrfModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

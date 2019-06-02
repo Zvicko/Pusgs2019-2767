@@ -57,9 +57,9 @@ namespace WebApp.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "RepeatedPassword")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        public string RepeatedPassword { get; set; }
     }
 
     public class RegisterExternalBindingModel

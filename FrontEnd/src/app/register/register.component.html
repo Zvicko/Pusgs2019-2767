@@ -1,20 +1,20 @@
 <div class="container">
-<form [formGroup]="userForm" class="form-horizontal">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-horizontal">
   <div class="panel panel-custom">
     <div class="panel-heading">
       <h3 class="panel-title">Registracija</h3>
 
     </div>
     <div class="panel-body">
-      <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('fullName').touched || userForm.get('fullName').dirty) && userForm.get('fullName').errors)}">
-        <label class="col-sm-2 control-label" for="fullName">Ime i prezime:</label>
+      <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('FullName').touched || userForm.get('FullName').dirty) && userForm.get('FullName').errors)}">
+        <label class="col-sm-2 control-label" for="FullName">Ime i prezime:</label>
         <div class="col-sm-8">
-          <input id="fullName" formControlName="fullName" type="text" class="form-control">
-          <span class="help-block" *ngIf="((userForm.get('fullName').touched || userForm.get('fullName').dirty) && userForm.get('fullName').errors)">
-          <span *ngIf="userForm.get('fullName').errors.required">
+          <input id="FullName" formControlName="FullName" type="text" class="form-control">
+          <span class="help-block" *ngIf="((userForm.get('FullName').touched || userForm.get('FullName').dirty) && userForm.get('FullName').errors)">
+          <span *ngIf="userForm.get('FullName').errors.required">
           Ime i prezime je obavezno
           </span>
-          <span *ngIf="userForm.get('fullName').errors.minlength || userForm.get('fullName').errors.maxlength">
+          <span *ngIf="userForm.get('FullName').errors.minlength || userForm.get('FullName').errors.maxlength">
               Ime i prezime mora da sadrzi izmedju 6 i 40 karaktera
           </span>
            
@@ -22,27 +22,27 @@
         </div>
       </div>
       
-        <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('email').touched || userForm.get('email').dirty) && userForm.get('email').errors)}">
-            <label class="col-sm-2 control-label" for="email">Email:</label>
+        <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('Email').touched || userForm.get('Email').dirty) && userForm.get('Email').errors)}">
+            <label class="col-sm-2 control-label" for="Email">Email:</label>
             <div class="col-sm-8">
-              <input id="email" formControlName="email" type="text" class="form-control">
-              <span class="help-block" *ngIf="((userForm.get('email').touched || userForm.get('email').dirty) && userForm.get('email').errors)">
-              <span *ngIf="userForm.get('email').errors.required">
+              <input id="Email" formControlName="Email" type="text" class="form-control">
+              <span class="help-block" *ngIf="((userForm.get('Email').touched || userForm.get('Email').dirty) && userForm.get('Email').errors)">
+              <span *ngIf="userForm.get('Email').errors.required">
               Email je obavezan!
               </span>
-              <span *ngIf="userForm.get('email').errors.email">
+              <span *ngIf="userForm.get('Email').errors.email">
                  Email nije upisan u pravilnom formatu. Primer pravilnog formata johndoe@doe.com
               </span>
                
               </span>
             </div>
       </div>
-      <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('password').touched || userForm.get('password').dirty) && userForm.get('password').errors)}">
-          <label class="col-sm-2 control-label" for="password">Lozinka:</label>
+      <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('Password').touched || userForm.get('Password').dirty) && userForm.get('Password').errors)}">
+          <label class="col-sm-2 control-label" for="Password">Lozinka:</label>
           <div class="col-sm-8">
-            <input id="password" formControlName="password" type="password" class="form-control">
-            <span class="help-block" *ngIf="((userForm.get('password').touched || userForm.get('password').dirty) && userForm.get('password').errors)">
-            <span *ngIf="userForm.get('password').errors.required">
+            <input id="Password" formControlName="Password" type="password" class="form-control">
+            <span class="help-block" *ngIf="((userForm.get('Password').touched || userForm.get('Password').dirty) && userForm.get('Password').errors)">
+            <span *ngIf="userForm.get('Password').errors.required">
             Lozinka je obavezna!
             </span>
           
@@ -50,12 +50,12 @@
             </span>
           </div>
     </div>
-    <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('repPassword').touched || userForm.get('repPassword').dirty) && userForm.get('repPassword').errors)}">
-        <label class="col-sm-2 control-label" for="password">Potvrdi lozinku:</label>
+    <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('RepeatedPassword').touched || userForm.get('RepeatedPassword').dirty) && userForm.get('RepeatedPassword').errors)}">
+        <label class="col-sm-2 control-label" for="RepeatedPassword">Potvrdi lozinku:</label>
         <div class="col-sm-8">
-          <input id="repPassword" formControlName="repPassword" type="password" class="form-control">
-          <span class="help-block" *ngIf="((userForm.get('repPassword').touched || userForm.get('repPassword').dirty) && userForm.get('repPassword').errors)">
-          <span *ngIf="userForm.get('repPassword').errors.required">
+          <input id="RepeatedPassword" formControlName="RepeatedPassword" type="password" class="form-control">
+          <span class="help-block" *ngIf="((userForm.get('RepeatedPassword').touched || userForm.get('RepeatedPassword').dirty) && userForm.get('RepeatedPassword').errors)">
+          <span *ngIf="userForm.get('RepeatedPassword').errors.required">
           Lozinka je obavezna!
           </span>
         
@@ -65,15 +65,15 @@
   </div>
 
 
-      <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('birthdate').touched || userForm.get('birthdate').dirty) && userForm.get('birthdate').errors)}">
-          <label class="col-sm-2 control-label" for="birthdate">Datum rodjenja:</label>
+      <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('DateOfBirth').touched || userForm.get('DateOfBirth').dirty) && userForm.get('DateOfBirth').errors)}">
+          <label class="col-sm-2 control-label" for="DateOfBirth">Datum rodjenja:</label>
           <div class="col-sm-8">
-            <input id="birthdate" formControlName="birthdate" type="date" class="form-control">
-            <span class="help-block" *ngIf="((userForm.get('birthdate').touched || userForm.get('birthdate').dirty) && userForm.get('birthdate').errors)">
-            <span *ngIf="userForm.get('birthdate').errors.required">
+            <input id="DateOfBirth" formControlName="DateOfBirth" type="date" class="form-control">
+            <span class="help-block" *ngIf="((userForm.get('DateOfBirth').touched || userForm.get('DateOfBirth').dirty) && userForm.get('DateOfBirth').errors)">
+            <span *ngIf="userForm.get('DateOfBirth').errors.required">
               Datum rodjenja je obavezan!
             </span>
-            <span *ngIf="userForm.get('birthdate').errors.validateDate">
+            <span *ngIf="userForm.get('DateOfBirth').errors.validateDate">
               Korisnik ne sme biti mladji od 12 godina i ne stariji od 100!
             </span>
              
@@ -81,12 +81,12 @@
           </div>
     </div>
     <div class="form-group" >
-        <label class="col-sm-2 control-label" for="passangerType">Tip putnika:</label>
+        <label class="col-sm-2 control-label" for="PassangerType">Tip putnika:</label>
         <div class="col-sm-8">
-          <select id="passangerType" formControlName="passangerType" type="date" class="form-control">
-          <option value='1'>Redovan</option>
-          <option value='2'>Djak</option>
-          <option value='3'>Penzioner</option>
+          <select id="PassangerType" formControlName="PassangerType" type="text" class="form-control">
+          <option value='Ordinary'>Redovan</option>
+          <option value='Student'>Djak</option>
+          <option value='Pensioner'>Penzioner</option>
           </select>
         </div>
   </div>
@@ -94,6 +94,10 @@
 
     
 
+
+  </div>
+  <div class="panel-footer">
+     <button class="btn btn-primary" type="submit">Sacuvaj</button>
   </div>
   </div>
 </form>
