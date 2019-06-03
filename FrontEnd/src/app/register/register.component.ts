@@ -10,6 +10,7 @@ import {User} from '../models/user.model';
 })
 export class RegisterComponent implements OnInit {
   userForm : FormGroup;
+  defaultPassangerType = "Ordinary";
   constructor(private fb: FormBuilder,private registerServiceService : RegisterServiceService) { }
 
   ngOnInit() {
@@ -20,42 +21,37 @@ export class RegisterComponent implements OnInit {
     PassangerType : [''],
     Password: ['',Validators.required],
     RepeatedPassword: ['',Validators.required],
-    
-   
-
   })
   }
 
     onSubmit() : void{
 
-      if(this.userForm.valid)
-      {
+      // if(this.userForm.valid)
+      // {
+        console.log(this.userForm.get('Password'))
+        if(this.userForm.get('Password').value == this.userForm.get('RepeatedPassword').value)
+        {
         const result: User = Object.assign({}, this.userForm.value);
         // alert(JSON.stringify(result));
         // alert("valid");
         this.registerServiceService.postUser(result).subscribe(
           data => {
-            alert("You have been successfully registered!");
+            alert("Uspesno ste se registrovali!");
           },
           error => {
-            alert("User already exists!");
+            alert("Korisnik sa vasim kredencijalima vec postoji!");
           });
-      }
-      else
-      {
+        }
+        else
+        {
+          alert("Lozinke Vam se ne podudaraju! Molimo Vas, popunite ponovo!");
 
-        alert("not valid");
-      }
+        }
+    
     }
 
-// function validateDate(control: AbstratctControl) : {[key: string]:any} | null{
-//   const date : string  = control.value;
 
-
-//   return null;
-
-// }
-
+  
 }
 function validateDate(control: AbstractControl) : {[key: string]:any} | null{
   const dateString : string  = control.value;

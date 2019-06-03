@@ -40,25 +40,29 @@
       <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('Password').touched || userForm.get('Password').dirty) && userForm.get('Password').errors)}">
           <label class="col-sm-2 control-label" for="Password">Lozinka:</label>
           <div class="col-sm-8">
-            <input id="Password" formControlName="Password" type="password" class="form-control">
+            <input id="Password" formControlName="Password" type="password" class="form-control"  pattern="(?=.*\d)(?=.*[!@#$%^*/\._?])(?=.*[a-z])(?=.*[A-Z]).{7,}">
             <span class="help-block" *ngIf="((userForm.get('Password').touched || userForm.get('Password').dirty) && userForm.get('Password').errors)">
-            <span *ngIf="userForm.get('Password').errors.required">
-            Lozinka je obavezna!
-            </span>
-          
-             
-            </span>
+              <span *ngIf="userForm.get('Password').errors.required">
+              Lozinka je obavezna!
+              </span>
+              <span *ngIf="userForm.get('Password').errors.pattern">
+               Lozinka mora imati barem 7 karaktera, od kojih su barem 1 veliko slovo, 1 malo slovo, 1 broj i 1 specijalni karakter!
+              </span>
+               
+              </span>
           </div>
     </div>
     <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('RepeatedPassword').touched || userForm.get('RepeatedPassword').dirty) && userForm.get('RepeatedPassword').errors)}">
         <label class="col-sm-2 control-label" for="RepeatedPassword">Potvrdi lozinku:</label>
         <div class="col-sm-8">
-          <input id="RepeatedPassword" formControlName="RepeatedPassword" type="password" class="form-control">
+          <input id="RepeatedPassword" formControlName="RepeatedPassword" type="password" class="form-control" pattern="(?=.*\d)(?=.*[!@#$%^*/\._?])(?=.*[a-z])(?=.*[A-Z]).{7,}">
           <span class="help-block" *ngIf="((userForm.get('RepeatedPassword').touched || userForm.get('RepeatedPassword').dirty) && userForm.get('RepeatedPassword').errors)">
           <span *ngIf="userForm.get('RepeatedPassword').errors.required">
           Lozinka je obavezna!
           </span>
-        
+          <span *ngIf="userForm.get('RepeatedPassword').errors.pattern">
+           Lozinka mora imati barem 7 karaktera, od kojih su barem 1 veliko slovo, 1 malo slovo, 1 broj i 1 specijalni karakter!
+          </span>
            
           </span>
         </div>
@@ -83,7 +87,7 @@
     <div class="form-group" >
         <label class="col-sm-2 control-label" for="PassangerType">Tip putnika:</label>
         <div class="col-sm-8">
-          <select id="PassangerType" formControlName="PassangerType" type="text" class="form-control">
+          <select id="PassangerType" formControlName="PassangerType" type="text" class="form-control" [(ngModel)] = 'defaultPassangerType' >
           <option value='Ordinary'>Redovan</option>
           <option value='Student'>Djak</option>
           <option value='Pensioner'>Penzioner</option>
@@ -97,7 +101,7 @@
 
   </div>
   <div class="panel-footer">
-     <button class="btn btn-primary" type="submit">Sacuvaj</button>
+     <button class="btn btn-primary" type="submit" [disabled]="!userForm.valid">Sacuvaj</button>
   </div>
   </div>
 </form>
