@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormControl,Validators,FormBuilder,AbstractControl} from '@angular/forms';
-import {User} from '../models/user.model';
+import {LoginUser} from '../models/loginUser.model';
+import { LoginServiceService } from '../services/login-service.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [LoginServiceService]
 })
 export class LoginComponent implements OnInit {
 
   userForm : FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private loginService : LoginServiceService) { }
 
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -19,7 +21,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() : void{
-  
+    const result: LoginUser = Object.assign({}, this.userForm.value);
+    alert(JSON.stringify(result));
+    this.loginService.getTheToken(result);
     
   }
 
