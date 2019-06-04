@@ -7,9 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import {HttpModule} from '@angular/http';
-
+import { TokenInterceptorService } from 'src/app/token/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,13 @@ import {HttpModule} from '@angular/http';
     HttpModule,
     HttpClientXsrfModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
