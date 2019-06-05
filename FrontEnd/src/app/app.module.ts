@@ -10,13 +10,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import { TokenInterceptorService } from 'src/app/token/token-interceptor.service';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { CanActivateAdmin } from './guard/CanActivateAdmin';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -26,11 +29,23 @@ import { TokenInterceptorService } from 'src/app/token/token-interceptor.service
     HttpModule,
     HttpClientXsrfModule,
   ],
-  providers: [
+  providers: [ CanActivateAdmin,
     {
       provide : HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
+    },
+    {
+      provide:'CanAlwaysActivateGuard',
+      useValue: () => {
+        return true;
+      }
+    },
+    {
+      provide:'CanAppUserActivateGuard',
+      useValue: () => { if(localStorage.role !=undefined)
+        return true;
+      }
     }
   ],
   bootstrap: [AppComponent]

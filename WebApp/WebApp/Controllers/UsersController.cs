@@ -25,16 +25,33 @@ namespace WebApp.Controllers
         }
 
         // GET: api/Users
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<AppUser> GetUsers()
         {
-            return unitOfWork.Users.GetAll();
+            return unitOfWork.AppUsers.GetAll();
+        }
+
+        [Route("api/Users/GetCurrentUser")]
+        [HttpGet]
+        public IHttpActionResult GetCurrentUser()
+        {
+            try
+            {
+                var username = User.Identity.Name;
+                var user = db.Users.Where(u => u.UserName == username).Include(u1 => u1.User).First();
+                var appUser = user.User;
+                return Ok(appUser);
+            }
+            catch
+            {
+                return Ok();
+            }
         }
 
         // GET: api/Users/5
-        [ResponseType(typeof(User))]
+        [ResponseType(typeof(AppUser))]
         public IHttpActionResult GetUser(int id)
         {
-            User user = db.Users.Find(id);
+            AppUser user = db.AppUsers.Find(id);
             if (user == null)
             {
                 return NotFound();
@@ -45,7 +62,7 @@ namespace WebApp.Controllers
 
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(int id, User user)
+        public IHttpActionResult PutUser(int id, AppUser user)
         {
             if (!ModelState.IsValid)
             {
@@ -79,31 +96,31 @@ namespace WebApp.Controllers
         }
 
         // POST: api/Users
-        [ResponseType(typeof(User))]
-        public IHttpActionResult PostUser(User user)
+        [ResponseType(typeof(AppUser))]
+        public IHttpActionResult PostUser(AppUser user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Users.Add(user);
+            db.AppUsers.Add(user);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
         // DELETE: api/Users/5
-        [ResponseType(typeof(User))]
+        [ResponseType(typeof(AppUser))]
         public IHttpActionResult DeleteUser(int id)
         {
-            User user = db.Users.Find(id);
+            AppUser user = db.AppUsers.Find(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(user);
+            db.AppUsers.Remove(user);
             db.SaveChanges();
 
             return Ok(user);
@@ -120,7 +137,7 @@ namespace WebApp.Controllers
 
         private bool UserExists(int id)
         {
-            return db.Users.Count(e => e.Id == id) > 0;
+            return db.AppUsers.Count(e => e.Id == id) > 0;
         }
     }
 }
