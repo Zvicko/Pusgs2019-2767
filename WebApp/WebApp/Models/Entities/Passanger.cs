@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApp.Models
 {
-    public class Passanger : User
+    public class Passanger : AppUser
     {
         public Passanger()
         {

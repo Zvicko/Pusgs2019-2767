@@ -50,37 +50,37 @@ namespace WebApp.Migrations
 
                 manager.Create(role);
             }
-            context.Users.AddOrUpdate(
+            context.AppUsers.AddOrUpdate(
 
                  u => u.FullName,
 
-                 new User() { FullName = "Admin Adminovic" }
+                 new AppUser() { FullName = "Admin Adminovic" }
 
            );
-            context.Users.AddOrUpdate(
+            context.AppUsers.AddOrUpdate(
                 
                 u => u.FullName,
                 new Administrator() { FullName="Admin Admincic",BirthDay = DateTime.Parse("07/07/1994")}
                 
            );
 
-            context.Users.AddOrUpdate(
+            context.AppUsers.AddOrUpdate(
 
                u => u.FullName,
                new Controller() { FullName = "Kontrolor  Kontrolovic", BirthDay = DateTime.Parse("10/11/1999") }
           );
 
-            context.Users.AddOrUpdate(
+            context.AppUsers.AddOrUpdate(
                 
                 u => u.FullName,
                 new Passanger() { FullName = "Putnik Putnikovic",BirthDay = DateTime.Parse("10/11/1999"), PassangerType = TypeOfPassanger.Student}
            );
 
-            context.Users.AddOrUpdate(
+            context.AppUsers.AddOrUpdate(
 
                 p => p.FullName,
 
-                new User() { FullName = "AppUser AppUserovic", BirthDay = DateTime.Parse("07/01/1991") }
+                new AppUser() { FullName = "AppUser AppUserovic", BirthDay = DateTime.Parse("07/01/1991") }
 
             );
             SaveChanges(context);
@@ -88,14 +88,21 @@ namespace WebApp.Migrations
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
 
-            if (!context.Users.Any(u => u.UserName == "admin@yahoo.com"))
+            if (!context.AppUsers.Any(u => u.UserName == "zdravko@admin.com"))
+            {
+                var user = new ApplicationUser() { Id = "ZdravkoAdmin", UserName = "zdravko@admin.com", Email = "zdravko@admin.com", PasswordHash = ApplicationUser.HashPassword("Zdravko94!") };
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "Admin");
+            }
+
+                if (!context.AppUsers.Any(u => u.UserName == "admin@yahoo.com"))
             {
                 var user = new ApplicationUser() { Id = "admin", UserName = "admin@yahoo.com", Email = "admin@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Admin123!") };
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "Admin");
             }
 
-            if (!context.Users.Any(u => u.UserName == "appu@yahoo.com"))
+            if (!context.AppUsers.Any(u => u.UserName == "appu@yahoo.com"))
             { 
                 var user = new ApplicationUser() { Id = "appu", UserName = "appu@yahoo", Email = "appu@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Appu123!") };
                 userManager.Create(user);

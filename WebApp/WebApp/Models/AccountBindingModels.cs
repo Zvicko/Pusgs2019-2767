@@ -29,7 +29,7 @@ namespace WebApp.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        public string NewRepeatedPassword { get; set; }
     }
 
     public class RegisterBindingModel
@@ -60,6 +60,25 @@ namespace WebApp.Models
         [Display(Name = "RepeatedPassword")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string RepeatedPassword { get; set; }
+    }
+
+    public class EditUserBindingModel
+    {
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
+        [Display(Name = "FullName")]
+        public string FullName { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Display(Name = "BirthDay")]
+        public DateTime? BirthDay { get; set; }
+
+        [Required]
+        [Display(Name = "PassangerType")]
+        public TypeOfPassanger PassangerType { get; set; }
     }
 
     public class RegisterExternalBindingModel

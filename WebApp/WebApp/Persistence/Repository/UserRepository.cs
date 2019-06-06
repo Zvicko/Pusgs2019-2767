@@ -7,7 +7,7 @@ using WebApp.Models;
 
 namespace WebApp.Persistence.Repository
 {
-    public class UserRepository : Repository<User, int>, IUserRepository
+    public class UserRepository : Repository<AppUser, int>, IUserRepository
     {
         public UserRepository(DbContext context) : base(context)
         {
@@ -16,9 +16,9 @@ namespace WebApp.Persistence.Repository
 
         protected ApplicationDbContext DemoContext { get { return context as ApplicationDbContext; } }
 
-        public IEnumerable<User> GetAll(int pageIndex, int pageSize)
+        public IEnumerable<AppUser> GetAll(int pageIndex, int pageSize)
         {
-            return DemoContext.Users.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            return DemoContext.AppUsers.Skip((pageIndex - 1) * pageSize).Take(pageSize);
         }
     }
 }

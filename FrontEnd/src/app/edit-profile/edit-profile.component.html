@@ -1,0 +1,169 @@
+<button class="btn btn-primary" (click)="changePassButton()">Promeni lozinku</button>
+<button class="btn btn-primary" (click)="changeDataButton()">Promeni ostale podatke</button>
+<button class="btn btn-primary" (click)="addPhotoButton()" *ngIf="showAddPhoto">Dodaj fotografiju</button>
+<hr/>
+<div class="container" *ngIf="changePass">
+ <form [formGroup]="passForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+     <div class="panel panel-custom">
+         <div class="panel-heading">
+           <h3 class="panel-title">Promena lozinke:</h3>
+     
+         </div>
+     <div class="panel-body">
+         <div class="form-group" [ngClass]="{'has-error' : ((passForm.get('OldPassword').touched || passForm.get('OldPassword').dirty) && passForm.get('OldPassword').errors)}">
+             <label class="col-sm-2 control-label" for="OldPassword">Stara Lozinka:</label>
+             <div class="col-sm-8">
+               <input id="OldPassword" formControlName="OldPassword" type="password" class="form-control"  pattern="(?=.*\d)(?=.*[!@#$%^*/\._?])(?=.*[a-z])(?=.*[A-Z]).{7,}">
+               <span class="help-block" *ngIf="((passForm.get('OldPassword').touched || passForm.get('OldPassword').dirty) && passForm.get('OldPassword').errors)">
+                 <span *ngIf="passForm.get('OldPassword').errors.required">
+                 Lozinka je obavezna!
+                 </span>
+                 <span *ngIf="passForm.get('OldPassword').errors.pattern">
+                  Lozinka mora imati barem 7 karaktera, od kojih su barem 1 veliko slovo, 1 malo slovo, 1 broj i 1 specijalni karakter!
+                 </span>
+                  
+                 </span>
+             </div>
+       </div>
+       <div class="form-group" [ngClass]="{'has-error' : ((passForm.get('NewPassword').touched || passForm.get('NewPassword').dirty) && passForm.get('NewPassword').errors)}">
+           <label class="col-sm-2 control-label" for="NewPassword">Nova  lozinka:</label>
+           <div class="col-sm-8">
+             <input id="NewPassword" formControlName="NewPassword" type="password" class="form-control" pattern="(?=.*\d)(?=.*[!@#$%^*/\._?])(?=.*[a-z])(?=.*[A-Z]).{7,}">
+             <span class="help-block" *ngIf="((passForm.get('NewPassword').touched || passForm.get('NewPassword').dirty) && passForm.get('NewPassword').errors)">
+             <span *ngIf="passForm.get('NewPassword').errors.required">
+             Lozinka je obavezna!
+             </span>
+             <span *ngIf="passForm.get('NewPassword').errors.pattern">
+              Lozinka mora imati barem 7 karaktera, od kojih su barem 1 veliko slovo, 1 malo slovo, 1 broj i 1 specijalni karakter!
+             </span>
+              
+             </span>
+           </div>
+     </div>
+ 
+     <div class="form-group" [ngClass]="{'has-error' : ((passForm.get('NewRepeatedPassword').touched || passForm.get('NewRepeatedPassword').dirty) && passForm.get('NewRepeatedPassword').errors)}">
+       <label class="col-sm-2 control-label" for="NewRepeatedPassword">Potvrdi novu  lozinku:</label>
+       <div class="col-sm-8">
+         <input id="NewRepeatedPassword" formControlName="NewRepeatedPassword" type="password" class="form-control" pattern="(?=.*\d)(?=.*[!@#$%^*/\._?])(?=.*[a-z])(?=.*[A-Z]).{7,}">
+         <span class="help-block" *ngIf="((passForm.get('NewRepeatedPassword').touched || passForm.get('NewRepeatedPassword').dirty) && passForm.get('NewRepeatedPassword').errors)">
+         <span *ngIf="passForm.get('NewRepeatedPassword').errors.required">
+         Lozinka je obavezna!
+         </span>
+         <span *ngIf="passForm.get('NewRepeatedPassword').errors.pattern">
+          Lozinka mora imati barem 7 karaktera, od kojih su barem 1 veliko slovo, 1 malo slovo, 1 broj i 1 specijalni karakter!
+         </span>
+          
+         </span>
+       </div>
+ </div>
+ 
+ <div class="panel-footer">
+     <button class="btn btn-primary" type="submit" [disabled]="!passForm.valid">Sacuvaj</button>
+  </div>
+     </div>
+     </div>
+   </form>
+</div>
+
+
+<div class="container" *ngIf="changeData">
+ <form [formGroup]="userForm" (ngSubmit)="onSubmitData()" class="form-horizontal">
+
+     <div class="panel panel-custom">
+         <div class="panel-heading">
+           <h3 class="panel-title">Uredi porfil</h3>
+     
+         </div>
+         <div class="panel-body">
+           <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('FullName').touched || userForm.get('FullName').dirty) && userForm.get('FullName').errors)}">
+             <label class="col-sm-2 control-label" for="FullName">Ime i prezime:</label>
+             <div class="col-sm-8">
+               <input id="FullName" formControlName="FullName" type="text" class="form-control">
+               <span class="help-block" *ngIf="((userForm.get('FullName').touched || userForm.get('FullName').dirty) && userForm.get('FullName').errors)">
+               <span *ngIf="userForm.get('FullName').errors.required">
+               Ime i prezime je obavezno
+               </span>
+               <span *ngIf="userForm.get('FullName').errors.minlength || userForm.get('FullName').errors.maxlength">
+                   Ime i prezime mora da sadrzi izmedju 6 i 40 karaktera
+               </span>
+                
+               </span>
+             </div>
+           </div>
+           <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('Email').touched || userForm.get('Email').dirty) && userForm.get('Email').errors)}">
+               <label class="col-sm-2 control-label" for="Email">Email:</label>
+               <div class="col-sm-8">
+                 <input id="Email" formControlName="Email" type="text" class="form-control">
+                 <span class="help-block" *ngIf="((userForm.get('Email').touched || userForm.get('Email').dirty) && userForm.get('Email').errors)">
+                 <span *ngIf="userForm.get('Email').errors.required">
+                 Email je obavezan!
+                 </span>
+                 <span *ngIf="userForm.get('Email').errors.email">
+                    Email nije upisan u pravilnom formatu. Primer pravilnog formata johndoe@doe.com
+                 </span>
+                  
+                 </span>
+               </div>
+         </div>
+           <div class="form-group" [ngClass]="{'has-error' : ((userForm.get('BirthDay').touched || userForm.get('BirthDay').dirty) && userForm.get('BirthDay').errors)}">
+               <label class="col-sm-2 control-label" for="DateOfBirth">Datum rodjenja:</label>
+               <div class="col-sm-8">
+                 <input id="BirthDay" formControlName="BirthDay" type="date" class="form-control">
+                 <span class="help-block" *ngIf="((userForm.get('BirthDay').touched || userForm.get('BirthDay').dirty) && userForm.get('BirthDay').errors)">
+                 <span *ngIf="userForm.get('BirthDay').errors.required">
+                   Datum rodjenja je obavezan!
+                 </span>
+                 <span *ngIf="userForm.get('BirthDay').errors.validateDate">
+                   Korisnik ne sme biti mladji od 12 godina i ne stariji od 100!
+                 </span>
+                  
+                 </span>
+               </div>
+         </div>
+
+         <div class="form-group" >
+             <label class="col-sm-2 control-label" for="PassangerType">Tip putnika:</label>
+             <div class="col-sm-8">
+               <select id="PassangerType" formControlName="PassangerType" type="text" class="form-control">
+               <option value='Ordinary'>Redovan</option>
+               <option value='Student'>Djak</option>
+               <option value='Pensioner'>Penzioner</option>
+               </select>
+             </div>
+       </div>
+         <p class="yellow-paragraph">NAPOMENA: Promena email adrese ne utice na prijavljivanje. Ono samo sluzi da informacije o Vasem profilu dobijate na novoj email adresi!</p>
+         </div>
+         <div class="panel-footer">
+            <button class="btn btn-primary" type="submit" [disabled]="!userForm.valid">Sacuvaj</button>
+         </div>
+         </div>
+
+ </form>
+
+
+ </div>
+
+ <div class="container" *ngIf="addPhoto">
+    <form [formGroup]="imageForm" (ngSubmit)="onSubmitImage()" class="form-horizontal">
+     <div class="panel panel-custom">
+         <div class="panel-heading">
+           <h3 class="panel-title">Dodaj fotografiju:</h3>
+     
+         </div>
+     <div class="panel-body">
+     <div  class="form-group">
+       <div class="col-sm-8">
+         <img [src]="defaultImg" style="width:250px; height:150px">
+         <br>
+         <br>
+         <input type="file" (change)="handleFileInput($event.target.files)" #Image accept="image/*">
+         <br>
+       </div>
+     </div>
+     <div class="panel-footer">
+       <button class="btn btn-primary" type="submit" [disabled]="!userForm.valid">Sacuvaj</button>
+    </div>
+    </div>
+    </div>
+    </form>
+ </div>
