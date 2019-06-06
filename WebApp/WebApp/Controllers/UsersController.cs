@@ -6,6 +6,10 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
+using System.IO;
+using Microsoft.AspNet.Identity;
+using System.Collections;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApp.Models;
@@ -14,6 +18,7 @@ using WebApp.Persistence.UnitOfWork;
 
 namespace WebApp.Controllers
 {
+    [RoutePrefix("api/Users")]
     public class UsersController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -30,8 +35,9 @@ namespace WebApp.Controllers
             return unitOfWork.AppUsers.GetAll();
         }
 
-        [Route("api/Users/GetCurrentUser")]
+        [Route("GetCurrentUser")]
         [HttpGet]
+        [ResponseType(typeof(AppUser))]
         public IHttpActionResult GetCurrentUser()
         {
             try
@@ -58,6 +64,32 @@ namespace WebApp.Controllers
             }
 
             return Ok(user);
+        }
+        [HttpPost]
+        [Route("EditUser")]
+        public HttpResponseMessage EditUser(EditUserBindingModel editUser)
+        {
+
+
+            try
+            {
+                var username = User.Identity.Name;
+                var user = db.Users.Where(u => u.UserName == username).Include(u1 => u1.User).First();
+                var appuser = user.User as Passanger;
+                appuser.FullName = editUser.FullName;
+                appuser.PassangerType = editUser.PassangerType;
+                appuser.Email = editUser.Email;
+                appuser.BirthDay = editUser.BirthDay;
+                user.User = appuser;
+                db.Users.Attach(user);
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.Created);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
         }
 
         // PUT: api/Users/5

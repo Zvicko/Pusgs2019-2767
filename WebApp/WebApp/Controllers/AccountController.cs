@@ -134,6 +134,34 @@ namespace WebApp.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        [Route("EditUser")]
+        public IHttpActionResult EditUser(EditUserBindingModel model)
+        {
+
+
+            try
+            {
+                var username = User.Identity.Name;
+                //var user = db.Users.Where(u => u.UserName == username).Include(u1 => u1.User).First();
+                //var appuser = user.User as Passanger;
+                //appuser.FullName = model.FullName;
+                //appuser.PassangerType = model.PassangerType;
+                //appuser.Email = model.Email;
+                //appuser.BirthDay = model.BirthDay;
+                //user.User = appuser;
+                //db.Users.Attach(user);
+                //db.Entry(user).State = EntityState.Modified;
+                //db.SaveChanges();
+                return Ok();
+            }
+            catch
+            {
+                return NotFound();
+            }
+
+        }
+
         // POST api/Account/SetPassword
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)

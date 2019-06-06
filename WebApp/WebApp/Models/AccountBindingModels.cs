@@ -62,6 +62,25 @@ namespace WebApp.Models
         public string RepeatedPassword { get; set; }
     }
 
+    public class EditUserBindingModel
+    {
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
+        [Display(Name = "FullName")]
+        public string FullName { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Display(Name = "BirthDay")]
+        public DateTime? BirthDay { get; set; }
+
+        [Required]
+        [Display(Name = "PassangerType")]
+        public TypeOfPassanger PassangerType { get; set; }
+    }
+
     public class RegisterExternalBindingModel
     {
         [Required]
