@@ -14,16 +14,27 @@ import {ChangePasswordService} from '../services/change-password.service';
 export class EditProfileComponent implements OnInit {
   passForm : FormGroup; // form builder za promenu lozinke
   userForm : FormGroup;
+  imageForm: FormGroup;
+  defaultImg : string = "/assets/images/Default.gif"
   user: User;
+  fileToUpload : File = null;
   // changePassword : ChangePassword;
   private changePass : boolean = false;
   private changeData : boolean = false;
   private showAddPhoto : boolean = false;
   private addPhoto : boolean = false;
 
-  constructor(private editProfile: EditProfileService,private fb: FormBuilder,private fb2: FormBuilder,private changePassServ : ChangePasswordService) { }
+  constructor(private editProfile: EditProfileService,private fb3: FormBuilder,private fb: FormBuilder,private fb2: FormBuilder,private changePassServ : ChangePasswordService) { }
 
   ngOnInit() {
+
+    this.imageForm = this.fb3.group(
+      {
+        imageUrl : [this.defaultImg,Validators.required]
+
+      }
+    )
+
      this.passForm  = this.fb.group(
        {
          OldPassword: ['',Validators.required],
@@ -98,6 +109,18 @@ export class EditProfileComponent implements OnInit {
   }
 
 
+  handleFileInput(file: FileList){
+    this.fileToUpload = file.item(0);
+    //prikazivanje slike
+    var reader = new FileReader();
+    reader.onload = (event:any)=>{
+      this.imageForm.controls['imageUrl'].setValue(event.target.result);
+      this.defaultImg = event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
+  }
+
+
    onSubmit(){
 
      if(this.passForm.get('NewPassword').value == this.passForm.get('NewRepeatedPassword').value)
@@ -144,7 +167,10 @@ export class EditProfileComponent implements OnInit {
 
     // }
   }
+  onSubmitImage()
+  {
 
+  }
 
 }
 function validateDate(control: AbstractControl) : {[key: string]:any} | null{
