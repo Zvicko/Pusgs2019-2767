@@ -7,9 +7,9 @@ using WebApp.Models;
 
 namespace WebApp.Persistence.Repository
 {
-    public interface IUserRepository : IRepository<AppUser,int>
+    public interface IUserRepository : IRepository<User,int>
     {
-        IEnumerable<AppUser> GetAll(int pageIndex, int pageSize);
+        IEnumerable<User> GetAll(int pageIndex, int pageSize);
 
     }
 }

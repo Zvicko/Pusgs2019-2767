@@ -10,7 +10,7 @@ namespace WebApp.Persistence.UnitOfWork
     public interface IUnitOfWork : IDisposable
     {
         
-        IUserRepository AppUsers { get; set; }
+        IUserRepository Users { get; set; }
         ILineRepository Lines { get; set; }
         IPricelistRepository Pricelists { get; set; }
         IStationRepository Stations { get; set; }

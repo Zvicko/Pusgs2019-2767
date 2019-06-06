@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApp.Models
 {
-    public class Administrator : AppUser
+    public class Administrator : User
     {
         public Administrator()
         {

@@ -292,10 +292,6 @@
     <Compile Include="Migrations\201905290916092_AddedSomeClasses2.Designer.cs">
       <DependentUpon>201905290916092_AddedSomeClasses2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906041450448_RenameUser.cs" />
-    <Compile Include="Migrations\201906041450448_RenameUser.Designer.cs">
-      <DependentUpon>201906041450448_RenameUser.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -454,9 +450,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905290916092_AddedSomeClasses2.resx">
       <DependentUpon>201905290916092_AddedSomeClasses2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906041450448_RenameUser.resx">
-      <DependentUpon>201906041450448_RenameUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
