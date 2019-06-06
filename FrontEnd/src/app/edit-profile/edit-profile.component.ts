@@ -5,6 +5,7 @@ import {User} from '../models/user.model';
 import {EditUser} from '../models/editUser.model';
 import {ChangePassword} from '../models/ChangePassword.model';
 import {ChangePasswordService} from '../services/change-password.service';
+import {AddPhotoModel} from '../models/addPhotoModel.model';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -17,6 +18,7 @@ export class EditProfileComponent implements OnInit {
   imageForm: FormGroup;
   defaultImg : string = "/assets/images/Default.gif"
   user: User;
+  
   fileToUpload : File = null;
   // changePassword : ChangePassword;
   private changePass : boolean = false;
@@ -30,7 +32,7 @@ export class EditProfileComponent implements OnInit {
 
     this.imageForm = this.fb3.group(
       {
-        imageUrl : [this.defaultImg,Validators.required]
+        PhotoPath : [this.defaultImg,Validators.required]
 
       }
     )
@@ -53,6 +55,7 @@ export class EditProfileComponent implements OnInit {
         let birthdaystring = birthday.toISOString().substring(0, 10);
         console.log("birdaj :" + birthday);
         let passangerTypeString;
+        
         if(jsonUser.PassangerType == 0 )
         {
           passangerTypeString = 'Ordinary';
@@ -60,10 +63,22 @@ export class EditProfileComponent implements OnInit {
         else if(jsonUser.PassangerType == 1)
         {
           passangerTypeString = 'Student';
+         
+            if(jsonUser.PhotoPath != null)
+            {
+              this.imageForm.controls['PhotoPath'].setValue(jsonUser.PhotoPath);
+              this.defaultImg = jsonUser.PhotoPath;
+            }
+          
         }
         else if(jsonUser.PassangerType == 2)
         {
           passangerTypeString = 'Pensioner';
+          if(jsonUser.PhotoPath != null)
+            {
+              this.imageForm.controls['PhotoPath'].setValue(jsonUser.PhotoPath);
+              this.defaultImg = jsonUser.PhotoPath;
+            }
 
         }
       if( passangerTypeString != 'Ordinary')
@@ -114,7 +129,7 @@ export class EditProfileComponent implements OnInit {
     //prikazivanje slike
     var reader = new FileReader();
     reader.onload = (event:any)=>{
-      this.imageForm.controls['imageUrl'].setValue(event.target.result);
+      this.imageForm.controls['PhotoPath'].setValue(event.target.result);
       this.defaultImg = event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
@@ -169,7 +184,16 @@ export class EditProfileComponent implements OnInit {
   }
   onSubmitImage()
   {
-
+    if("/assets/images/Default.gif" !=  this.imageForm.get('PhotoPath').value)
+    {
+      this.editProfile.postUploadPhoto(this.fileToUpload).subscribe(
+        data => {
+          alert("Uspesno ste dodali fotografiju!");
+        },
+        error => {
+          alert("Doslo je do greske. Vasi podaci se nisu azurirali!");
+        });
+    }
   }
 
 }
