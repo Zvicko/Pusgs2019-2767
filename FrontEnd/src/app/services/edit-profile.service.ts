@@ -34,15 +34,5 @@ export class EditProfileService {
 
     });
 
-
-
 }
-  postUploadPhoto(photo :File) : Observable<any>
-  {
-    const endpoint : string ="http://localhost:52295/api/Users/UploadPhoto";
-    const formData: FormData = new FormData();
-    formData.append("Photo",photo,photo.name);
-
-    return this.HttpClient.post(endpoint, formData);
-  }
 }

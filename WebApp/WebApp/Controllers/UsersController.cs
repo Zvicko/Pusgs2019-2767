@@ -91,31 +91,6 @@ namespace WebApp.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
         }
-        [HttpPost]
-        [Route("UploadPhoto")]
-        public HttpResponseMessage UploadPhoto()
-        {
-            var httpRequest = HttpContext.Current.Request;
-            var username = User.Identity.Name;
-            var postedFile = httpRequest.Files["Photo"];
-
-
-            string imageName = new string(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
-           
-
-            var user = db.Users.Where(u => u.UserName == username).Include(u1 => u1.User).First();
-            var appuser = user.User as Passanger;
-            imageName = imageName + appuser.FullName + Path.GetExtension(postedFile.FileName);
-            var filePath = HttpContext.Current.Server.MapPath("~/Photos/" + imageName);
-            postedFile.SaveAs(filePath);
-            appuser.PhotoPath = imageName;
-            user.User = appuser;
-            db.Users.Attach(user);
-            db.Entry(user).State = EntityState.Modified;
-            db.SaveChanges();
-
-            return Request.CreateResponse(HttpStatusCode.Created);
-        }
 
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
