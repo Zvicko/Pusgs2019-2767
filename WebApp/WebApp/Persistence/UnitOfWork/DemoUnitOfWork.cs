@@ -13,7 +13,7 @@ namespace WebApp.Persistence.UnitOfWork
         private readonly DbContext _context;
       
         [Dependency]
-        public IUserRepository Users { get; set; }
+        public IUserRepository AppUsers { get; set; }
         [Dependency]
         public ILineRepository Lines { get; set; }
         [Dependency]

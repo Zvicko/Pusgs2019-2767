@@ -79,7 +79,10 @@ namespace WebApp.App_Start
             container.RegisterType<IVehicleRepository, VehicleRepository>();
 
             
-           
+            container.RegisterType<ApplicationUserManager>();
+            container.RegisterType<ISecureDataFormat<AuthenticationTicket>, CustomJwtFormat>(new InjectionConstructor("http://localhost:51680"));
+            container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
+            new InjectionConstructor(typeof(DbContext)));
         }
 
         public void Dispose()

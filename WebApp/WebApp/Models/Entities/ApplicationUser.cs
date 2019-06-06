@@ -17,7 +17,7 @@ namespace WebApp.Models
     {
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public User User { get; set; }
+        public AppUser User { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {

@@ -11,7 +11,7 @@ namespace WebApp.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Line> Lines { get; set; }
         public DbSet<Station> Stations { get; set; }
         public DbSet<Pricelist> Pricelists { get; set; }
