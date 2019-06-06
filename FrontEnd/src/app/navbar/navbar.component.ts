@@ -35,7 +35,10 @@ export class NavbarComponent implements OnInit {
   {
 
     localStorage.clear();
+<<<<<<< HEAD
     this.router.navigateByUrl('login');
+=======
+>>>>>>> parent of d8d28e1... user can now change his/her password
   }
 
 

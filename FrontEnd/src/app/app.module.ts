@@ -10,16 +10,25 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import { TokenInterceptorService } from 'src/app/token/token-interceptor.service';
+<<<<<<< HEAD
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CanActivateAdmin } from './guard/CanActivateAdmin';
+import { PriceListComponent } from './price-list/price-list.component';
+=======
+>>>>>>> parent of d8d28e1... user can now change his/her password
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     RegisterComponent,
+<<<<<<< HEAD
     LoginComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    PriceListComponent
+=======
+    LoginComponent
+>>>>>>> parent of d8d28e1... user can now change his/her password
   ],
   imports: [
     BrowserModule,
@@ -29,23 +38,11 @@ import { CanActivateAdmin } from './guard/CanActivateAdmin';
     HttpModule,
     HttpClientXsrfModule,
   ],
-  providers: [ CanActivateAdmin,
+  providers: [
     {
       provide : HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    },
-    {
-      provide:'CanAlwaysActivateGuard',
-      useValue: () => {
-        return true;
-      }
-    },
-    {
-      provide:'CanAppUserActivateGuard',
-      useValue: () => { if(localStorage.role !=undefined)
-        return true;
-      }
     }
   ],
   bootstrap: [AppComponent]

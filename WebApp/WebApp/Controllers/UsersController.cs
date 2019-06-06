@@ -30,8 +30,9 @@ namespace WebApp.Controllers
         }
 
         // GET: api/Users
-        public IEnumerable<AppUser> GetUsers()
+        public IEnumerable<User> GetUsers()
         {
+<<<<<<< HEAD
             return unitOfWork.AppUsers.GetAll();
         }
 
@@ -51,13 +52,16 @@ namespace WebApp.Controllers
             {
                 return Ok();
             }
+=======
+            return unitOfWork.Users.GetAll();
+>>>>>>> parent of d8d28e1... user can now change his/her password
         }
 
         // GET: api/Users/5
-        [ResponseType(typeof(AppUser))]
+        [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
-            AppUser user = db.AppUsers.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
@@ -119,7 +123,7 @@ namespace WebApp.Controllers
 
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(int id, AppUser user)
+        public IHttpActionResult PutUser(int id, User user)
         {
             if (!ModelState.IsValid)
             {
@@ -153,31 +157,31 @@ namespace WebApp.Controllers
         }
 
         // POST: api/Users
-        [ResponseType(typeof(AppUser))]
-        public IHttpActionResult PostUser(AppUser user)
+        [ResponseType(typeof(User))]
+        public IHttpActionResult PostUser(User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.AppUsers.Add(user);
+            db.Users.Add(user);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
         // DELETE: api/Users/5
-        [ResponseType(typeof(AppUser))]
+        [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(int id)
         {
-            AppUser user = db.AppUsers.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            db.AppUsers.Remove(user);
+            db.Users.Remove(user);
             db.SaveChanges();
 
             return Ok(user);
@@ -194,7 +198,7 @@ namespace WebApp.Controllers
 
         private bool UserExists(int id)
         {
-            return db.AppUsers.Count(e => e.Id == id) > 0;
+            return db.Users.Count(e => e.Id == id) > 0;
         }
     }
 }

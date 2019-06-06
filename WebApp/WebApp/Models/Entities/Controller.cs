@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApp.Models
 {
-    public class Controller : AppUser
+    public class Controller : User
     {
         public Controller()
         {

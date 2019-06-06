@@ -50,43 +50,38 @@ namespace WebApp.Migrations
 
                 manager.Create(role);
             }
-            context.AppUsers.AddOrUpdate(
+            context.Users.AddOrUpdate(
 
                  u => u.FullName,
 
-                 new AppUser() { FullName = "Admin Adminovic" }
+                 new User() { FullName = "Admin Adminovic" }
 
            );
-            context.AppUsers.AddOrUpdate(
+            context.Users.AddOrUpdate(
                 
                 u => u.FullName,
                 new Administrator() { FullName="Admin Admincic",BirthDay = DateTime.Parse("07/07/1994")}
                 
            );
+           
 
-            context.AppUsers.AddOrUpdate(
+            context.Users.AddOrUpdate(
 
                u => u.FullName,
                new Controller() { FullName = "Kontrolor  Kontrolovic", BirthDay = DateTime.Parse("10/11/1999") }
           );
 
-            context.AppUsers.AddOrUpdate(
+            context.Users.AddOrUpdate(
                 
                 u => u.FullName,
                 new Passanger() { FullName = "Putnik Putnikovic",BirthDay = DateTime.Parse("10/11/1999"), PassangerType = TypeOfPassanger.Student}
            );
 
-            context.AppUsers.AddOrUpdate(
-
-             u => u.FullName,
-             new Passanger() { FullName = "Test Testovic", BirthDay = DateTime.Parse("10/11/1989"), PassangerType = TypeOfPassanger.Ordinary }
-        );
-
-            context.AppUsers.AddOrUpdate(
+            context.Users.AddOrUpdate(
 
                 p => p.FullName,
 
-                new AppUser() { FullName = "AppUser AppUserovic", BirthDay = DateTime.Parse("07/01/1991") }
+                new User() { FullName = "AppUser AppUserovic", BirthDay = DateTime.Parse("07/01/1991") }
 
             );
             SaveChanges(context);
