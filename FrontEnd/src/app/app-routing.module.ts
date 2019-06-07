@@ -4,11 +4,13 @@ import {RouterModule, Routes} from '@angular/router';
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
 import {EditProfileComponent} from './edit-profile/edit-profile.component';
+import {AdminPricelistComponent} from './admin-pricelist/admin-pricelist.component';
+import { CanActivateAdmin } from './guard/CanActivateAdmin';
 const appRoutes: Routes = [
   {path: 'register', component : RegisterComponent, canActivate : ['CanAlwaysActivateGuard'] },
   {path: 'login', component : LoginComponent ,canActivate : ['CanAlwaysActivateGuard']},
-  {path : 'profile', component :EditProfileComponent, canActivate: ['CanAppUserActivateGuard']}
-
+  {path : 'profile', component :EditProfileComponent, canActivate: ['CanAppUserActivateGuard']},
+  {path: 'admin_pricelist', component: AdminPricelistComponent, canActivate: [CanActivateAdmin]}
 
 ]
 

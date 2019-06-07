@@ -252,6 +252,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinesController.cs" />
+    <Compile Include="Controllers\PricelistsController.cs" />
     <Compile Include="Controllers\StationsController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -299,6 +300,10 @@
     <Compile Include="Migrations\201906062159083_Fix.cs" />
     <Compile Include="Migrations\201906062159083_Fix.Designer.cs">
       <DependentUpon>201906062159083_Fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906070737556_Pricelist_modification.cs" />
+    <Compile Include="Migrations\201906070737556_Pricelist_modification.Designer.cs">
+      <DependentUpon>201906070737556_Pricelist_modification.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -464,6 +469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906062159083_Fix.resx">
       <DependentUpon>201906062159083_Fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906070737556_Pricelist_modification.resx">
+      <DependentUpon>201906070737556_Pricelist_modification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

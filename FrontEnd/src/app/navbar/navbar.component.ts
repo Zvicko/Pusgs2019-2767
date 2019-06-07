@@ -26,6 +26,11 @@ export class NavbarComponent implements OnInit {
     this.userRole=localStorage.getItem("role");
   }
 
+  isAdmin()
+  {
+    return this.userRole == "Admin";
+
+  }
   isLoggedIn()
   {
     return !!localStorage.jwt;

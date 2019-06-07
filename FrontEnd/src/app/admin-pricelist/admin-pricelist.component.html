@@ -1,0 +1,32 @@
+<div class="container">
+    <form [formGroup]="pricelistForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+        <div class="panel panel-custom">
+            <div class="panel-heading">
+              <h3 class="panel-title">Promena lozinke:</h3>
+        
+            </div>
+        <div class="panel-body">
+            <div class="form-group" [ngClass]="{'has-error' : ((pricelistForm.get('StartingPrice').touched || pricelistForm.get('StartingPrice').dirty) && pricelistForm.get('StartingPrice').errors)}">
+                <label class="col-sm-2 control-label" for="StartingPrice">Startna cena:</label>
+                <div class="col-sm-8">
+                  <input id="StartingPrice" formControlName="StartingPrice" type="text" class="form-control">
+                  <span class="help-block" *ngIf="((pricelistForm.get('StartingPrice').touched || pricelistForm.get('StartingPrice').dirty) && pricelistForm.get('StartingPrice').errors)">
+                    <span *ngIf="pricelistForm.get('StartingPrice').errors.required">
+                    Startna cena je obavezna!
+                    </span>
+                    <span *ngIf="pricelistForm.get('StartingPrice').errors.validateNumber">
+                    Startna cena mora biti broj veci ili jednak 0!
+                    </span>
+                     
+                    </span>
+                </div>
+          </div>
+          
+    
+    <div class="panel-footer">
+        <button class="btn btn-primary" type="submit" [disabled]="!pricelistForm.valid">Sacuvaj</button>
+     </div>
+        </div>
+        </div>
+      </form>
+   </div>

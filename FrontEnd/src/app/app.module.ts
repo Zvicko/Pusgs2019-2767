@@ -12,6 +12,7 @@ import {HttpModule} from '@angular/http';
 import { TokenInterceptorService } from 'src/app/token/token-interceptor.service';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CanActivateAdmin } from './guard/CanActivateAdmin';
+import { AdminPricelistComponent } from './admin-pricelist/admin-pricelist.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CanActivateAdmin } from './guard/CanActivateAdmin';
     NavbarComponent,
     RegisterComponent,
     LoginComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    AdminPricelistComponent
   ],
   imports: [
     BrowserModule,
