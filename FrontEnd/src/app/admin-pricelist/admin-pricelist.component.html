@@ -2,7 +2,7 @@
     <form [formGroup]="pricelistForm" (ngSubmit)="onSubmit()" class="form-horizontal">
         <div class="panel panel-custom">
             <div class="panel-heading">
-              <h3 class="panel-title">Promena lozinke:</h3>
+              <h3 class="panel-title">Cenovnik:</h3>
         
             </div>
         <div class="panel-body">
@@ -21,12 +21,156 @@
                     </span>
                 </div>
           </div>
+
+          <div class="form-group" [ngClass]="{'has-error' : ((pricelistForm.get('StudentMultiplicator').touched || pricelistForm.get('StudentMultiplicator').dirty) && pricelistForm.get('StudentMultiplicator').errors)}">
+                <label class="col-sm-2 control-label" for="StudentMultiplicator">Student multiplikator:</label>
+                <div class="col-sm-8">
+                  <input id="StudentMultiplicator" formControlName="StudentMultiplicator" type="text" class="form-control">
+                  <span class="help-block" *ngIf="((pricelistForm.get('StudentMultiplicator').touched || pricelistForm.get('StudentMultiplicator').dirty) && pricelistForm.get('StudentMultiplicator').errors)">
+                    <span *ngIf="pricelistForm.get('StudentMultiplicator').errors.required">
+                    Student multiplikator  je obavezan!
+                    </span>
+                    <span *ngIf="pricelistForm.get('StudentMultiplicator').errors.validateNumber">
+                    Student multiplikator mora biti broj veci ili jednak 0!
+                    </span>
+                     
+                    </span>
+                </div>
+          </div>
+
+          <div class="form-group" [ngClass]="{'has-error' : ((pricelistForm.get('RegularMultiplicator').touched || pricelistForm.get('RegularMultiplicator').dirty) && pricelistForm.get('RegularMultiplicator').errors)}">
+                <label class="col-sm-2 control-label" for="RegularMultiplicator">Putnik multiplikator:</label>
+                <div class="col-sm-8">
+                  <input id="RegularMultiplicator" formControlName="RegularMultiplicator" type="text" class="form-control">
+                  <span class="help-block" *ngIf="((pricelistForm.get('RegularMultiplicator').touched || pricelistForm.get('RegularMultiplicator').dirty) && pricelistForm.get('RegularMultiplicator').errors)">
+                    <span *ngIf="pricelistForm.get('RegularMultiplicator').errors.required">
+                        Putnik multiplikator je obavezan!
+                    </span>
+                    <span *ngIf="pricelistForm.get('RegularMultiplicator').errors.validateNumber">
+                        Putnik multiplikator mora biti broj veci ili jednak 0!
+                    </span>
+                     
+                    </span>
+                </div>
+          </div>
+
+          <div class="form-group" [ngClass]="{'has-error' : ((pricelistForm.get('PensionerMultiplicator').touched || pricelistForm.get('PensionerMultiplicator').dirty) && pricelistForm.get('PensionerMultiplicator').errors)}">
+                <label class="col-sm-2 control-label" for="PensionerMultiplicator">Penzioner multiplikator:</label>
+                <div class="col-sm-8">
+                  <input id="PensionerMultiplicator" formControlName="PensionerMultiplicator" type="text" class="form-control">
+                  <span class="help-block" *ngIf="((pricelistForm.get('PensionerMultiplicator').touched || pricelistForm.get('PensionerMultiplicator').dirty) && pricelistForm.get('PensionerMultiplicator').errors)">
+                    <span *ngIf="pricelistForm.get('PensionerMultiplicator').errors.required">
+                            Penzioner multiplikator je obavezan!
+                    </span>
+                    <span *ngIf="pricelistForm.get('PensionerMultiplicator').errors.validateNumber">
+                            Penzioner multiplikator mora biti broj veci ili jednak 0!
+                    </span>
+                     
+                    </span>
+                </div>
+          </div>
+
+          <div class="form-group" [ngClass]="{'has-error' : ((pricelistForm.get('UrbanMultiplicator').touched || pricelistForm.get('UrbanMultiplicator').dirty) && pricelistForm.get('UrbanMultiplicator').errors)}">
+                <label class="col-sm-2 control-label" for="UrbanMultiplicator">Gradski multiplikator:</label>
+                <div class="col-sm-8">
+                  <input id="UrbanMultiplicator" formControlName="UrbanMultiplicator" type="text" class="form-control">
+                  <span class="help-block" *ngIf="((pricelistForm.get('UrbanMultiplicator').touched || pricelistForm.get('UrbanMultiplicator').dirty) && pricelistForm.get('UrbanMultiplicator').errors)">
+                    <span *ngIf="pricelistForm.get('UrbanMultiplicator').errors.required">
+                            Gradski multiplikator je obavezan!
+                    </span>
+                    <span *ngIf="pricelistForm.get('UrbanMultiplicator').errors.validateNumber">
+                            Gradski multiplikator mora biti broj veci ili jednak 0!
+                    </span>
+                     
+                    </span>
+                </div>
+          </div>
+
+          <div class="form-group" [ngClass]="{'has-error' : ((pricelistForm.get('SuburbanMultiplicator').touched || pricelistForm.get('SuburbanMultiplicator').dirty) && pricelistForm.get('SuburbanMultiplicator').errors)}">
+                <label class="col-sm-2 control-label" for="SuburbanMultiplicator">Prigradski multiplikator:</label>
+                <div class="col-sm-8">
+                  <input id="SuburbanMultiplicator" formControlName="SuburbanMultiplicator" type="text" class="form-control">
+                  <span class="help-block" *ngIf="((pricelistForm.get('SuburbanMultiplicator').touched || pricelistForm.get('SuburbanMultiplicator').dirty) && pricelistForm.get('SuburbanMultiplicator').errors)">
+                    <span *ngIf="pricelistForm.get('SuburbanMultiplicator').errors.required">
+                            Prigradski multiplikator je obavezan!
+                    </span>
+                    <span *ngIf="pricelistForm.get('SuburbanMultiplicator').errors.validateNumber">
+                            Prigradski multiplikator mora biti broj veci ili jednak 0!
+                    </span>
+                     
+                    </span>
+                </div>
+          </div>
           
-    
-    <div class="panel-footer">
-        <button class="btn btn-primary" type="submit" [disabled]="!pricelistForm.valid">Sacuvaj</button>
-     </div>
+          <div class="form-group" [ngClass]="{'has-error' : ((pricelistForm.get('HourlyTicketMultiplicator').touched || pricelistForm.get('HourlyTicketMultiplicator').dirty) && pricelistForm.get('HourlyTicketMultiplicator').errors)}">
+                <label class="col-sm-2 control-label" for="HourlyTicketMultiplicator">Multiplikator vremenske karte:</label>
+                <div class="col-sm-8">
+                  <input id="HourlyTicketMultiplicator" formControlName="HourlyTicketMultiplicator" type="text" class="form-control">
+                  <span class="help-block" *ngIf="((pricelistForm.get('HourlyTicketMultiplicator').touched || pricelistForm.get('HourlyTicketMultiplicator').dirty) && pricelistForm.get('HourlyTicketMultiplicator').errors)">
+                    <span *ngIf="pricelistForm.get('HourlyTicketMultiplicator').errors.required">
+                            Multiplikator vremenske karte je obavezan!
+                    </span>
+                    <span *ngIf="pricelistForm.get('HourlyTicketMultiplicator').errors.validateNumber">
+                            Multiplikator vremenske karte mora biti broj veci ili jednak 0!
+                    </span>
+                     
+                    </span>
+                </div>
+          </div>
+
+          <div class="form-group" [ngClass]="{'has-error' : ((pricelistForm.get('DailyTicketMultiplicator').touched || pricelistForm.get('DailyTicketMultiplicator').dirty) && pricelistForm.get('DailyTicketMultiplicator').errors)}">
+                <label class="col-sm-2 control-label" for="DailyTicketMultiplicator">Multiplikator dnevne karte:</label>
+                <div class="col-sm-8">
+                  <input id="DailyTicketMultiplicator" formControlName="DailyTicketMultiplicator" type="text" class="form-control">
+                  <span class="help-block" *ngIf="((pricelistForm.get('DailyTicketMultiplicator').touched || pricelistForm.get('DailyTicketMultiplicator').dirty) && pricelistForm.get('DailyTicketMultiplicator').errors)">
+                    <span *ngIf="pricelistForm.get('DailyTicketMultiplicator').errors.required">
+                            Multiplikator dnevne karte je obavezan!
+                    </span>
+                    <span *ngIf="pricelistForm.get('DailyTicketMultiplicator').errors.validateNumber">
+                            Multiplikator dnevne karte mora biti broj veci ili jednak 0!
+                    </span>
+                     
+                    </span>
+                </div>
+          </div>
+          
+          <div class="form-group" [ngClass]="{'has-error' : ((pricelistForm.get('MonthlyTicketMultiplicator').touched || pricelistForm.get('MonthlyTicketMultiplicator').dirty) && pricelistForm.get('MonthlyTicketMultiplicator').errors)}">
+                <label class="col-sm-2 control-label" for="MonthlyTicketMultiplicator">Multiplikator mesecne karte:</label>
+                <div class="col-sm-8">
+                  <input id="MonthlyTicketMultiplicator" formControlName="MonthlyTicketMultiplicator" type="text" class="form-control">
+                  <span class="help-block" *ngIf="((pricelistForm.get('MonthlyTicketMultiplicator').touched || pricelistForm.get('MonthlyTicketMultiplicator').dirty) && pricelistForm.get('MonthlyTicketMultiplicator').errors)">
+                    <span *ngIf="pricelistForm.get('MonthlyTicketMultiplicator').errors.required">
+                            Multiplikator mesecne karte je obavezan!
+                    </span>
+                    <span *ngIf="pricelistForm.get('MonthlyTicketMultiplicator').errors.validateNumber">
+                            Multiplikator mesecne karte mora biti broj veci ili jednak 0!
+                    </span>
+                     
+                    </span>
+                </div>
+          </div>
+
+          <div class="form-group" [ngClass]="{'has-error' : ((pricelistForm.get('YearlyTicketMultiplicator').touched || pricelistForm.get('YearlyTicketMultiplicator').dirty) && pricelistForm.get('YearlyTicketMultiplicator').errors)}">
+                <label class="col-sm-2 control-label" for="YearlyTicketMultiplicator">Multiplikator godisnje karte:</label>
+                <div class="col-sm-8">
+                  <input id="YearlyTicketMultiplicator" formControlName="YearlyTicketMultiplicator" type="text" class="form-control">
+                  <span class="help-block" *ngIf="((pricelistForm.get('YearlyTicketMultiplicator').touched || pricelistForm.get('YearlyTicketMultiplicator').dirty) && pricelistForm.get('YearlyTicketMultiplicator').errors)">
+                    <span *ngIf="pricelistForm.get('YearlyTicketMultiplicator').errors.required">
+                            Multiplikator godisnje karte je obavezan!
+                    </span>
+                    <span *ngIf="pricelistForm.get('YearlyTicketMultiplicator').errors.validateNumber">
+                            Multiplikator godisnje karte mora biti broj veci ili jednak 0!
+                    </span>
+                     
+                    </span>
+                </div>
+          </div>
+
+  
         </div>
+        <div class="panel-footer">
+            <button class="btn btn-primary" type="submit" [disabled]="!pricelistForm.valid">Sacuvaj</button>
+         </div>
         </div>
       </form>
    </div>

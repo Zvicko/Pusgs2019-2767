@@ -2,7 +2,7 @@ export class Pricelist
 {
 
     constructor(
-        public Id: number,
+        public Id : number,
         public StartingPrice: number,
         public StudentMultiplicator: number,
         public RegularMultiplicator: number,
