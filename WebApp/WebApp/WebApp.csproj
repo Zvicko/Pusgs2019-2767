@@ -261,49 +261,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905222056072_InitialMigration.cs" />
-    <Compile Include="Migrations\201905222056072_InitialMigration.Designer.cs">
-      <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201906081538261_Initial.cs" />
+    <Compile Include="Migrations\201906081538261_Initial.Designer.cs">
+      <DependentUpon>201906081538261_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905271153437_proba.cs" />
-    <Compile Include="Migrations\201905271153437_proba.Designer.cs">
-      <DependentUpon>201905271153437_proba.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905271201090_updated_user.cs" />
-    <Compile Include="Migrations\201905271201090_updated_user.Designer.cs">
-      <DependentUpon>201905271201090_updated_user.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905271208326_smallUpdate.cs" />
-    <Compile Include="Migrations\201905271208326_smallUpdate.Designer.cs">
-      <DependentUpon>201905271208326_smallUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905271212365_smallUpdate2.cs" />
-    <Compile Include="Migrations\201905271212365_smallUpdate2.Designer.cs">
-      <DependentUpon>201905271212365_smallUpdate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905271756331_AddedTypesOfUser.cs" />
-    <Compile Include="Migrations\201905271756331_AddedTypesOfUser.Designer.cs">
-      <DependentUpon>201905271756331_AddedTypesOfUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905280907549_AddedSomeClasses.cs" />
-    <Compile Include="Migrations\201905280907549_AddedSomeClasses.Designer.cs">
-      <DependentUpon>201905280907549_AddedSomeClasses.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905290916092_AddedSomeClasses2.cs" />
-    <Compile Include="Migrations\201905290916092_AddedSomeClasses2.Designer.cs">
-      <DependentUpon>201905290916092_AddedSomeClasses2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906061620265_NameChange.cs" />
-    <Compile Include="Migrations\201906061620265_NameChange.Designer.cs">
-      <DependentUpon>201906061620265_NameChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906062159083_Fix.cs" />
-    <Compile Include="Migrations\201906062159083_Fix.Designer.cs">
-      <DependentUpon>201906062159083_Fix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906070737556_Pricelist_modification.cs" />
-    <Compile Include="Migrations\201906070737556_Pricelist_modification.Designer.cs">
-      <DependentUpon>201906070737556_Pricelist_modification.cs</DependentUpon>
+    <Compile Include="Migrations\201906081607451_TicketUpdate.cs" />
+    <Compile Include="Migrations\201906081607451_TicketUpdate.Designer.cs">
+      <DependentUpon>201906081607451_TicketUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -440,38 +404,11 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905222056072_InitialMigration.resx">
-      <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906081538261_Initial.resx">
+      <DependentUpon>201906081538261_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905271153437_proba.resx">
-      <DependentUpon>201905271153437_proba.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905271201090_updated_user.resx">
-      <DependentUpon>201905271201090_updated_user.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905271208326_smallUpdate.resx">
-      <DependentUpon>201905271208326_smallUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905271212365_smallUpdate2.resx">
-      <DependentUpon>201905271212365_smallUpdate2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905271756331_AddedTypesOfUser.resx">
-      <DependentUpon>201905271756331_AddedTypesOfUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905280907549_AddedSomeClasses.resx">
-      <DependentUpon>201905280907549_AddedSomeClasses.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905290916092_AddedSomeClasses2.resx">
-      <DependentUpon>201905290916092_AddedSomeClasses2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906061620265_NameChange.resx">
-      <DependentUpon>201906061620265_NameChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906062159083_Fix.resx">
-      <DependentUpon>201906062159083_Fix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906070737556_Pricelist_modification.resx">
-      <DependentUpon>201906070737556_Pricelist_modification.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906081607451_TicketUpdate.resx">
+      <DependentUpon>201906081607451_TicketUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

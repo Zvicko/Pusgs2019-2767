@@ -13,6 +13,7 @@ import { TokenInterceptorService } from 'src/app/token/token-interceptor.service
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CanActivateAdmin } from './guard/CanActivateAdmin';
 import { AdminPricelistComponent } from './admin-pricelist/admin-pricelist.component';
+import { TicketComponentComponent } from './ticket-component/ticket-component.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AdminPricelistComponent } from './admin-pricelist/admin-pricelist.compo
     RegisterComponent,
     LoginComponent,
     EditProfileComponent,
-    AdminPricelistComponent
+    AdminPricelistComponent,
+    TicketComponentComponent
   ],
   imports: [
     BrowserModule,

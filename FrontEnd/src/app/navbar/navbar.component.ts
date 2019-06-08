@@ -26,10 +26,10 @@ export class NavbarComponent implements OnInit {
     this.userRole=localStorage.getItem("role");
   }
 
-  isAdmin()
-  {
-    return this.userRole == "Admin";
-
+  isInRole(r: string){
+    if(localStorage.getItem('role') == r){
+      return true;
+    }
   }
   isLoggedIn()
   {
@@ -43,5 +43,6 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('login');
   }
 
-
+ 
 }
+window.addEventListener('storage', function(e){});
