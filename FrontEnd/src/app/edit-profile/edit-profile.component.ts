@@ -81,7 +81,7 @@ export class EditProfileComponent implements OnInit {
             }
 
         }
-      if( passangerTypeString == 'Ordinary' )
+      if( passangerTypeString != 'Ordinary')
       {
         this.showAddPhoto = true;
 

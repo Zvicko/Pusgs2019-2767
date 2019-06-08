@@ -86,7 +86,7 @@ namespace WebApp.Migrations
 
             context.Pricelists.AddOrUpdate(
              p => p.Id,
-             new Pricelist() { StartingPrice = 0, StudentMultiplicator = 0, PensionerMultiplicator = 0, DailyTicketMultiplicator = 0, HourlyTicketMultiplicator = 0, MonthlyTicketMultiplicator = 0, RegularMultiplicator = 0, SuburbanMultiplicator = 0, TotalPrice = 0, UrbanMultiplicator = 0, YearlyTicketMultiplicator = 0 }
+             new Pricelist() { StartingPrice = 0, StudentMultiplicator = 0, PensionerMultiplicator = 0, DailyTicketMultiplicator = 0, HourlyTicketMultiplicator = 0, MonthlyTicketMultiplicator = 0, RegularMultiplicator = 0, SuburbanMultipilicator = 0, TotalPrice = 0, UrbanMultiplicator = 0, YearlyTicketMultiplicator = 0 }
              );
             SaveChanges(context);
            

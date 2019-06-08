@@ -15,7 +15,7 @@ export class PricelistServiceService {
     return this.HttpClient.get("http://localhost:52295/api/Pricelists/1");
   }
 
-  putPricelist(pricelist) : Observable<any>{
+  postPricelist(pricelist) : Observable<any>{
     return this.HttpClient.put("http://localhost:52295/api/Pricelists/1",pricelist,
     {
       headers: new HttpHeaders({

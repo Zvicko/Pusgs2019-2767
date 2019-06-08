@@ -13,7 +13,7 @@ namespace WebApp.Models
         public double RegularMultiplicator { get; set; }
         public double PensionerMultiplicator { get; set; }
         public double UrbanMultiplicator { get; set; }
-        public double SuburbanMultiplicator { get; set; }
+        public double SuburbanMultipilicator { get; set; }
         public double HourlyTicketMultiplicator { get; set; }
         public double DailyTicketMultiplicator { get; set; }
         public double MonthlyTicketMultiplicator { get; set; }

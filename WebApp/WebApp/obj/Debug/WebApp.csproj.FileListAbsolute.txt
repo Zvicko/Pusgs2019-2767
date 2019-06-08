@@ -305,12 +305,11 @@ C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\We
 C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.AddedTypesOfUser.resources
 C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.AddedSomeClasses.resources
 C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.AddedSomeClasses2.resources
-C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.NameChange.resources
-C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.Fix.resources
-C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.Pricelist_modification.resources
-C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.FixPricelist.resources
 C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.csproj.GenerateResource.cache
 C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.csproj.CoreCompileInputs.cache
 C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.csproj.CopyComplete
 C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.pdb
+C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.NameChange.resources
+C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.Fix.resources
+C:\Users\CyborgZvicko\Documents\GitHub\Pusgs2019-2767\WebApp\WebApp\obj\Debug\WebApp.Migrations.Pricelist_modification.resources
