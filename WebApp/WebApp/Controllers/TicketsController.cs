@@ -81,10 +81,10 @@ namespace WebApp.Controllers
                     totalPrice *= pricelist.RegularMultiplicator;
                     break;
                 case TypeOfPassanger.Student:
-                    totalPrice *= totalPrice - totalPrice * pricelist.StudentMultiplicator;
+                    totalPrice *= pricelist.StudentMultiplicator;
                     break;
                 case TypeOfPassanger.Pensioner:
-                    totalPrice *= totalPrice - totalPrice * pricelist.StudentMultiplicator;
+                    totalPrice *= pricelist.PensionerMultiplicator;
                     break;
             }
 

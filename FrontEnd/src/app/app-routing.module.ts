@@ -12,7 +12,7 @@ const appRoutes: Routes = [
   {path: 'login', component : LoginComponent ,canActivate : ['CanAlwaysActivateGuard']},
   {path : 'profile', component :EditProfileComponent, canActivate: ['CanAppUserActivateGuard']},
   {path: 'admin_pricelist', component: AdminPricelistComponent, canActivate: [CanActivateAdmin]},
-  {path: 'ticket', component: BuyTicketComponent, canActivate: ['CanAppUserActivateGuard']}
+  {path: 'ticket', component: BuyTicketComponent, canActivate: ['CanAlwaysActivateGuard']}
 
 ]
 

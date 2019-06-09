@@ -10,7 +10,7 @@ namespace WebApp.Models
         public int Id { get; set; }
         public TypeOfDay Day { get; set; }
         public TypeOfTransportation Transportation { get; set; }
-        public List<DateTime> Departures { get; set; }
+        public virtual List<Departure> Departures { get; set; }
         public virtual Line Line { get; set;}
     }
 }

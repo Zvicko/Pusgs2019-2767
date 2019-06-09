@@ -255,6 +255,7 @@
     <Compile Include="Controllers\PricelistsController.cs" />
     <Compile Include="Controllers\StationsController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
+    <Compile Include="Controllers\TimeTablesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
@@ -269,12 +270,37 @@
     <Compile Include="Migrations\201906081607451_TicketUpdate.Designer.cs">
       <DependentUpon>201906081607451_TicketUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906091841083_TimeTableUpdate.cs" />
+    <Compile Include="Migrations\201906091841083_TimeTableUpdate.Designer.cs">
+      <DependentUpon>201906091841083_TimeTableUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906091900011_DeparturesCreated.cs" />
+    <Compile Include="Migrations\201906091900011_DeparturesCreated.Designer.cs">
+      <DependentUpon>201906091900011_DeparturesCreated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906091928461_DepartureModification.cs" />
+    <Compile Include="Migrations\201906091928461_DepartureModification.Designer.cs">
+      <DependentUpon>201906091928461_DepartureModification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906091934032_DepartureModification2.cs" />
+    <Compile Include="Migrations\201906091934032_DepartureModification2.Designer.cs">
+      <DependentUpon>201906091934032_DepartureModification2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906091945379_DepartureModification3.cs" />
+    <Compile Include="Migrations\201906091945379_DepartureModification3.Designer.cs">
+      <DependentUpon>201906091945379_DepartureModification3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906091950292_DepartureModification4.cs" />
+    <Compile Include="Migrations\201906091950292_DepartureModification4.Designer.cs">
+      <DependentUpon>201906091950292_DepartureModification4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\Administrator.cs" />
     <Compile Include="Models\Entities\ApplicationUser.cs" />
     <Compile Include="Models\Entities\Controller.cs" />
+    <Compile Include="Models\Entities\Departure.cs" />
     <Compile Include="Models\Entities\Enumerations.cs" />
     <Compile Include="Models\Entities\Line.cs" />
     <Compile Include="Models\Entities\Location.cs" />
@@ -409,6 +435,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906081607451_TicketUpdate.resx">
       <DependentUpon>201906081607451_TicketUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906091841083_TimeTableUpdate.resx">
+      <DependentUpon>201906091841083_TimeTableUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906091900011_DeparturesCreated.resx">
+      <DependentUpon>201906091900011_DeparturesCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906091928461_DepartureModification.resx">
+      <DependentUpon>201906091928461_DepartureModification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906091934032_DepartureModification2.resx">
+      <DependentUpon>201906091934032_DepartureModification2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906091945379_DepartureModification3.resx">
+      <DependentUpon>201906091945379_DepartureModification3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906091950292_DepartureModification4.resx">
+      <DependentUpon>201906091950292_DepartureModification4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

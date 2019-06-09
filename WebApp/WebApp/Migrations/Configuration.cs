@@ -3,6 +3,7 @@ namespace WebApp.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Data.Entity.Validation;
@@ -83,6 +84,22 @@ namespace WebApp.Migrations
                 new AppUser() { FullName = "AppUser AppUserovic", BirthDay = DateTime.Parse("07/01/1991") }
 
             );
+            context.Departures.AddOrUpdate(new Departure() {DepartureTime = new DateTime(2019,12,12,15,30,52,DateTimeKind.Local)});
+            //context.TimeTables.AddOrUpdate(
+            //    new TimeTable() { Day = TypeOfDay.Working, Transportation = TypeOfTransportation.Urban, Departures =
+            //    });
+            if (context.TimeTables.Any(t => t.Id == 2))
+            {
+                Departure dep = new Departure(); 
+                dep.DepartureTime = new DateTime(2017, 10, 10, 12, 33, 52, DateTimeKind.Local);
+                context.Departures.AddOrUpdate(dep);
+                TimeTable timeTable = context.TimeTables.Where(t => t.Id == 2).FirstOrDefault();
+                timeTable.Departures.Add(dep);
+               
+                context.TimeTables.AddOrUpdate(timeTable);
+                
+               
+            }
 
             context.Pricelists.AddOrUpdate(
              p => p.Id,
