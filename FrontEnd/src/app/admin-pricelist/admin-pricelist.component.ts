@@ -82,7 +82,7 @@ function validateNumber(control: AbstractControl) : {[key: string]:any} | null{
   
   let number = Number(valueString);
   
-  if(isNaN(number) || number < 0)
+  if(isNaN(number) || number <= 0)
   {
     
     return {'validateNumber':true};

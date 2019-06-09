@@ -7,7 +7,9 @@ export class User
     public DateOfBirth: Date,
     public PassangerType: TypeOfPassanger, 
     public Password: string,
-    public RepeatedPassword: string )
+    public RepeatedPassword: string,
+    public Verified: boolean
+    )
         {}
     
 }
@@ -51,5 +53,11 @@ export class EditUser
     public BirthDay: Date, 
     public PassangerType : TypeOfPassanger
        )   {}
+
+}
+
+export class Passanger
+{
+
 
 }

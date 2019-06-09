@@ -1,0 +1,54 @@
+<div class="container" *ngIf="verifiedBool == false">
+  <p>Da biste kupili kartu morate biti verifikovani od strane kontrolera!</p>
+
+</div>
+<div class="container" *ngIf="verifiedBool == true">
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <div class="panel panel-custom">
+        <div class="panel-heading">
+          <h3 class="panel-title">Kupovina karte :</h3>
+          <p>Popunite polja kako bismo odredili cenu karte.</p>
+    
+        </div>
+    <div class="panel-body">
+        <div class="form-group" >
+            <label class="col-sm-2 control-label" for="TransportationType">Tip prevoza:</label>
+            <div class="col-sm-8">
+              <select id="TransportationType" formControlName="TransportationType" type="text" class="form-control">
+              <option value='Urban'>Gradski</option>
+              <option value='Suburban'>Prigradski</option>
+              
+              </select>
+            </div>
+      </div>
+      
+      <div class="form-group" >
+          <label class="col-sm-2 control-label" for="TicketType">Tip prevoza:</label>
+          <div class="col-sm-8">
+            <select id="TicketType" formControlName="TicketType" type="text" class="form-control">
+            <option value='Hourly'>Vremenska</option>
+            <option value='Daily'>Dnevna</option>
+            <option value='Monthly'>Mesecna</option>
+            <option value='Yearly'>Godisnja</option>
+            </select>
+          </div>
+    </div>
+
+
+
+    </div>
+
+    <div class="panel-footer">
+        <button class="btn btn-primary" type="submit" [disabled]="!ticketForm.valid">Sacuvaj</button>
+     </div>
+
+
+    </div>
+    </form>
+
+</div>
+
+<div class="container" *ngIf="offerBool == true">
+  <p>Cena vase karte je {{totalPrice}}</p>
+ 
+</div>

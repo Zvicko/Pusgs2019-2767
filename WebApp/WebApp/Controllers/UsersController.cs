@@ -65,6 +65,7 @@ namespace WebApp.Controllers
 
             return Ok(user);
         }
+    
         [HttpPost]
         [Route("EditUser")]
         public HttpResponseMessage EditUser(EditUserBindingModel editUser)

@@ -14,6 +14,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CanActivateAdmin } from './guard/CanActivateAdmin';
 import { AdminPricelistComponent } from './admin-pricelist/admin-pricelist.component';
 import { TicketComponentComponent } from './ticket-component/ticket-component.component';
+import { BuyTicketComponent } from './buy-ticket/buy-ticket.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TicketComponentComponent } from './ticket-component/ticket-component.co
     LoginComponent,
     EditProfileComponent,
     AdminPricelistComponent,
-    TicketComponentComponent
+    TicketComponentComponent,
+    BuyTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,7 @@ import { TicketComponentComponent } from './ticket-component/ticket-component.co
     },
     {
       provide:'CanAppUserActivateGuard',
-      useValue: () => { if(localStorage.role !=undefined)
+      useValue: () => { if(localStorage.role =='AppUser')
         return true;
       }
     }

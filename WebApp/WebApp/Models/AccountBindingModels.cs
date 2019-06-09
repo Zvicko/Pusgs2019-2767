@@ -13,6 +13,23 @@ namespace WebApp.Models
         public string ExternalAccessToken { get; set; }
     }
 
+    public class TicketPriceModel
+    {
+        [Required]
+        [Display(Name = "TicketType")]
+        public TypeOfTicket TicketType { get; set; }
+
+        [Required]
+        [Display(Name = "PassangerType")]
+        public TypeOfPassanger PassangerType { get; set; }
+
+        [Required]
+        [Display(Name = "TransportationType")]
+        public TypeOfTransportation TransportationType { get; set; }
+
+    }
+
+
     public class ChangePasswordBindingModel
     {
         [Required]

@@ -42,6 +42,55 @@ namespace WebApp.Controllers
 
             return Ok(ticket);
         }
+        [HttpPost]
+        [Route("api/Tickets/GetTicketPrice")]
+        public IHttpActionResult GetTicketPrice(TicketPriceModel model)
+        {
+            var pricelist = db.Pricelists.First();
+            double totalPrice = pricelist.StartingPrice;
+            if (model.TransportationType == TypeOfTransportation.Urban)
+            {
+                totalPrice *= pricelist.UrbanMultiplicator;
+            }
+            else
+            {
+                totalPrice *= pricelist.SuburbanMultiplicator;
+            }
+
+            switch (model.TicketType)
+            {
+                case TypeOfTicket.Hourly:
+                    totalPrice *= pricelist.HourlyTicketMultiplicator;
+                    break;
+                case TypeOfTicket.Daily:
+                    totalPrice *= pricelist.DailyTicketMultiplicator;
+                    break;
+                case TypeOfTicket.Monthly:
+                    totalPrice *= pricelist.MonthlyTicketMultiplicator;
+                    break;
+                case TypeOfTicket.Yearly:
+                    totalPrice *= pricelist.YearlyTicketMultiplicator;
+                    break;
+
+
+            }
+
+            switch (model.PassangerType)
+            {
+                case TypeOfPassanger.Ordinary:
+                    totalPrice *= pricelist.RegularMultiplicator;
+                    break;
+                case TypeOfPassanger.Student:
+                    totalPrice *= totalPrice - totalPrice * pricelist.StudentMultiplicator;
+                    break;
+                case TypeOfPassanger.Pensioner:
+                    totalPrice *= totalPrice - totalPrice * pricelist.StudentMultiplicator;
+                    break;
+            }
+
+            return Ok(totalPrice);
+        }
+
 
         // PUT: api/Tickets/5
         [ResponseType(typeof(void))]
