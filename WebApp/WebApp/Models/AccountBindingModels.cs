@@ -29,6 +29,28 @@ namespace WebApp.Models
 
     }
 
+    public class BuyTicketModel
+    {
+        [Required]
+        [Display(Name = "TicketType")]
+        public TypeOfTicket TicketType { get; set; }
+
+        [Required]
+        [Display(Name = "PassangerType")]
+        public TypeOfPassanger PassangerType { get; set; }
+
+        [Required]
+        [Display(Name = "TransportationType")]
+        public TypeOfTransportation TransportationType { get; set; }
+
+        [Required]
+        [Display(Name ="Price")]
+        public double Price { get; set; }
+
+    }
+
+
+
 
     public class ChangePasswordBindingModel
     {

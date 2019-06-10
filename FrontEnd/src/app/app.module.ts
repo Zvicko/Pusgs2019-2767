@@ -15,6 +15,7 @@ import { CanActivateAdmin } from './guard/CanActivateAdmin';
 import { AdminPricelistComponent } from './admin-pricelist/admin-pricelist.component';
 import { TicketComponentComponent } from './ticket-component/ticket-component.component';
 import { BuyTicketComponent } from './buy-ticket/buy-ticket.component';
+import { AdminTimetableComponent } from './admin-timetable/admin-timetable.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BuyTicketComponent } from './buy-ticket/buy-ticket.component';
     EditProfileComponent,
     AdminPricelistComponent,
     TicketComponentComponent,
-    BuyTicketComponent
+    BuyTicketComponent,
+    AdminTimetableComponent
   ],
   imports: [
     BrowserModule,

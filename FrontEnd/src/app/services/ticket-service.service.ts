@@ -24,5 +24,15 @@ export class TicketServiceService {
     });
   }
 
+  postBuyTicket(ticket) : Observable<any>{
+    return this.HttpClient.post("http://localhost:52295/api/Tickets/BuyTicket",ticket,
+    {
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json'
+      })
+
+    }
+  );
+  }
 
 }

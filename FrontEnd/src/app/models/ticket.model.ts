@@ -1,9 +1,11 @@
 export class Ticket
 {
-    Id: number;
-    Price: number;
-    TicketType: TypeOfTicket;
-    PassangerType: TypeOfPassanger;
+    constructor(
+        public TicketType: TypeOfTicket,
+        public PassangerType : TypeOfPassanger,
+        public TransportationType:TypeOfTransportation,
+    
+        ){}
 }
 
 export class BuyTicket
@@ -12,7 +14,9 @@ export class BuyTicket
     public TicketType: TypeOfTicket,
     public PassangerType : TypeOfPassanger,
     public TransportationType:TypeOfTransportation,
-
+    public Price : number
+    // public DateOfIssue : Date,
+    // public ExpireDate : Date
     ){}
 
 }

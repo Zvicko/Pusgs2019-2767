@@ -2,8 +2,11 @@ import { Line } from "./line.model";
 
 export class TimeTable
 {
-    Id: number;
-    Day: TypeOfDay;
-    Transportation: TypeOfTransportation;
-    Line: Line;
+    constructor(
+    public Id: number,
+    public TransportationType: TypeOfTransportation,
+    public DayType: TypeOfDay,
+    public Line: number // id linije    
+    ){}
+  
 }

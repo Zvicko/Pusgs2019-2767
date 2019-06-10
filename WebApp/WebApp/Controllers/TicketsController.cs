@@ -91,6 +91,57 @@ namespace WebApp.Controllers
             return Ok(totalPrice);
         }
 
+        [HttpPost]
+        [Route("api/Tickets/BuyTicket")]
+        public IHttpActionResult BuyTicket(BuyTicketModel model)
+        {
+            var username = User.Identity.Name;
+            var user = db.Users.Where(u => u.UserName == username).Include(u1 => u1.User).First();
+            var appuser = user.User as Passanger;
+            Ticket t = new Ticket();
+            t.PassangerType = appuser.PassangerType;
+            t.Price = model.Price;
+            t.TicketType = model.TicketType;
+            t.DateOfIssue = DateTime.Now;
+
+            switch (t.TicketType)
+            {
+                case TypeOfTicket.Hourly:
+                    t.ExpireDate =t.DateOfIssue.AddHours(1);
+                    break;
+                case TypeOfTicket.Daily:
+                    int year = t.DateOfIssue.Year;
+                    int month = t.DateOfIssue.Month;
+                    int day = t.DateOfIssue.Day;
+
+                    t.ExpireDate = new DateTime(year, month, day, 23, 59, 59);
+                    break;
+                case TypeOfTicket.Monthly:
+                    year = t.DateOfIssue.Year;
+                    month = t.DateOfIssue.Month;
+                    day = DateTime.DaysInMonth(year, month);
+                    t.ExpireDate = new DateTime(year, month, day, 23, 59, 59);
+                    break;
+                case TypeOfTicket.Yearly:
+                    year = t.DateOfIssue.Year;
+                    
+                   
+                    t.ExpireDate = new DateTime(year, 12,31 , 23, 59, 59);
+                    break;
+
+
+
+            }
+            db.Tickets.Add(t);
+            appuser.PassangerTicket = t;
+            user.User = appuser;
+            db.Users.Attach(user);
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Ok(t.ExpireDate);
+        }
+
 
         // PUT: api/Tickets/5
         [ResponseType(typeof(void))]

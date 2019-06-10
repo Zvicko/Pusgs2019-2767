@@ -3,7 +3,7 @@ import {EditProfileService} from '../services/edit-profile.service';
 import {TicketServiceService} from '../services/ticket-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {User} from '../models/user.model';
-import { BuyTicket } from '../models/ticket.model';
+import { BuyTicket,Ticket } from '../models/ticket.model';
 @Component({
   selector: 'app-buy-ticket',
   templateUrl: './buy-ticket.component.html',
@@ -18,13 +18,14 @@ export class BuyTicketComponent implements OnInit {
   offerBool : boolean = false;
   user : User;
   totalPrice : number = 0;
-
+  expireDateInfo : string = '';
   constructor(private verification : EditProfileService,private fb: FormBuilder,private fb2: FormBuilder, private ticketService : TicketServiceService) { }
 
   ngOnInit() {
     console.log("Usao u ngOninit");
     this.offerBool = false;
     this.loggedInBool = false;
+    this.expireDateInfo = '';
     this.ticketForm = this.fb.group({
       TicketType : ['',[Validators.required]],
       TransportationType : ['',[Validators.required]],
@@ -69,9 +70,9 @@ export class BuyTicketComponent implements OnInit {
   onSubmit()
   {
 
-    const  buyTicket : BuyTicket = Object.assign({}, this.ticketForm.value);
-    buyTicket.PassangerType = this.user.PassangerType;
-    this.ticketService.getTicketPrice(buyTicket).subscribe(
+    const  ticket : Ticket = Object.assign({}, this.ticketForm.value);
+    ticket.PassangerType = this.user.PassangerType;
+    this.ticketService.getTicketPrice(ticket).subscribe(
       data =>
       {
         this.totalPrice = Number(data);
@@ -91,11 +92,11 @@ export class BuyTicketComponent implements OnInit {
   onSubmit2()
   {
 
-      const  buyTicket : BuyTicket  = Object.assign({}, this.ticketForm2.value); // mislim da ovaj deo ne treba
-    buyTicket.TicketType = this.ticketForm2.get('TicketType2').value;
-    buyTicket.TransportationType = this.ticketForm2.get('TransportationType2').value;
-    buyTicket.PassangerType = this.ticketForm2.get('PassangerType2').value;
-    this.ticketService.getTicketPrice(buyTicket).subscribe(
+      const  ticket : Ticket  = Object.assign({}, this.ticketForm2.value); // mislim da ovaj deo ne treba
+    ticket.TicketType = this.ticketForm2.get('TicketType2').value;
+    ticket.TransportationType = this.ticketForm2.get('TransportationType2').value;
+    ticket.PassangerType = this.ticketForm2.get('PassangerType2').value;
+    this.ticketService.getTicketPrice(ticket).subscribe(
       data =>
       {
         this.totalPrice = Number(data);
@@ -117,7 +118,28 @@ export class BuyTicketComponent implements OnInit {
 
   onBuyTicket()
   {
+    const  buyTicket : BuyTicket  = Object.assign({}, this.ticketForm2.value); // mislim da ovaj deo ne treba
+    buyTicket.TicketType = this.ticketForm.get('TicketType').value;
+    buyTicket.TransportationType = this.ticketForm.get('TransportationType').value;
+    buyTicket.PassangerType = this.user.PassangerType;
+    buyTicket.Price = this.totalPrice;
+    console.log("Tip ticketa:" + buyTicket.TicketType);
     
+    this.ticketService.postBuyTicket(buyTicket).subscribe(
+      data=>
+      {
+        alert('Uspesno ste kupili kartu!');
+        this.expireDateInfo = JSON.parse(JSON.stringify(data));
+
+      },
+      error =>
+      {
+
+        alert('Doslo je do greske prilikom kupovine karte!');
+      }
+    
+
+    );
 
   }
 

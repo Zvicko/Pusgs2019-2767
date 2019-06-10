@@ -115,4 +115,5 @@
 
   <div class="container">
   <button class="btn btn-primary" (click)="onBuyTicket()" *ngIf ="(verifiedBool==true && offerBool==true)">Kupi kartu</button>
+  <p>Vasa karta istice : {{expireDateInfo | date:'dd-MM-yyyy HH:mm:ss'}}</p>
 </div>

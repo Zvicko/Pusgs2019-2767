@@ -1,0 +1,64 @@
+<div class="container">
+  <form [formGroup] ="timeTableForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+      <div class="panel panel-custom">
+          <div class="panel-heading">
+            <h3 class="panel-title">Cenovnik:</h3>
+      
+          </div>
+      <div class="panel-body">
+        
+              <div class="form-group" >
+                  <label class="col-sm-2 control-label" for="TransportationType">Tip prevoza:</label>
+                  <div class="col-sm-8">
+                    <select id="TransportationType" formControlName="TransportationType" type="text" class="form-control">
+                    <option value='Urban'>Gradski</option>
+                    <option value='Suburban'>Prigradski</option>
+                    
+                    </select>
+                  </div>
+            </div>
+
+           
+               
+                    <div class="form-group" >
+                        <label class="col-sm-2 control-label" for="DayType">Tip prevoza:</label>
+                        <div class="col-sm-8">
+                          <select id="DayType" formControlName="DayType" type="text" class="form-control">
+                          <option value='Working'>Radni dani</option>
+                          <option value='Saturday'>Subota</option>
+                          <option value='Sunday'>Nedelja</option>
+                          </select>
+                        </div>
+                  </div>
+
+                  <div class="form-group" [ngClass]="{'has-error' : ((timeTableForm.get('Line').touched || timeTableForm.get('Line').dirty) && timeTableForm.get('Line').errors)}">
+                      <label class="col-sm-2 control-label" for="Line">Linija:</label>
+                      <div class="col-sm-8">
+                        <input id="Line" formControlName="Line" type="text" class="form-control">
+                        <span class="help-block" *ngIf="((timeTableForm.get('Line').touched || timeTableForm.get('Line').dirty) && timeTableForm.get('Line').errors)">
+                          <span *ngIf="timeTableForm.get('Line').errors.required">
+                              Putnik multiplikator je obavezan!
+                          </span>
+                          <span *ngIf="timeTableForm.get('Line').errors.validateNumber">
+                              Putnik multiplikator mora biti broj veci ili jednak 0!
+                          </span>
+                           
+                          </span>
+                      </div>
+                </div>
+            
+      
+      
+      </div>
+    <div class="panel-footer">
+        <button class="btn btn-primary" type="submit" [disabled]="!timeTableForm.valid">Sacuvaj</button>
+    </div>
+  </div>
+
+
+
+  </form>
+
+
+
+</div>
