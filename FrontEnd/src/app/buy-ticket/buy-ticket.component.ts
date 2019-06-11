@@ -84,7 +84,7 @@ export class BuyTicketComponent implements OnInit {
         alert('Greska!');
       }
 
-    )
+    );
 
 
   }

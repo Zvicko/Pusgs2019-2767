@@ -1,12 +1,18 @@
-<div class="container">
+<button class="btn btn-primary" (click)="timeTableButton()">Uredi red voznje</button>
+<button class="btn btn-primary" (click)="departureButton()">Uredi polaske</button>
+<div class="container" *ngIf="timeTableBool">
   <form [formGroup] ="timeTableForm" (ngSubmit)="onSubmit()" class="form-horizontal">
       <div class="panel panel-custom">
           <div class="panel-heading">
-            <h3 class="panel-title">Cenovnik:</h3>
+            <h3 class="panel-title">Red voznje:</h3>
       
           </div>
       <div class="panel-body">
         
+      
+
+
+
               <div class="form-group" >
                   <label class="col-sm-2 control-label" for="TransportationType">Tip prevoza:</label>
                   <div class="col-sm-8">
@@ -21,7 +27,7 @@
            
                
                     <div class="form-group" >
-                        <label class="col-sm-2 control-label" for="DayType">Tip prevoza:</label>
+                        <label class="col-sm-2 control-label" for="DayType">Tip dana:</label>
                         <div class="col-sm-8">
                           <select id="DayType" formControlName="DayType" type="text" class="form-control">
                           <option value='Working'>Radni dani</option>
@@ -31,24 +37,41 @@
                         </div>
                   </div>
 
-                  <div class="form-group" [ngClass]="{'has-error' : ((timeTableForm.get('Line').touched || timeTableForm.get('Line').dirty) && timeTableForm.get('Line').errors)}">
-                      <label class="col-sm-2 control-label" for="Line">Linija:</label>
+                  <div class="form-group" [ngClass]="{'has-error' : ((timeTableForm.get('LineNumber').touched || timeTableForm.get('LineNumber').dirty) && timeTableForm.get('LineNumber').errors)}">
+                      <label class="col-sm-2 control-label" for="LineNumber">Broj Linije:</label>
                       <div class="col-sm-8">
-                        <input id="Line" formControlName="Line" type="text" class="form-control">
-                        <span class="help-block" *ngIf="((timeTableForm.get('Line').touched || timeTableForm.get('Line').dirty) && timeTableForm.get('Line').errors)">
-                          <span *ngIf="timeTableForm.get('Line').errors.required">
-                              Putnik multiplikator je obavezan!
+                        <input id="LineNumber" formControlName="LineNumber" type="text" class="form-control">
+                        <span class="help-block" *ngIf="((timeTableForm.get('LineNumber').touched || timeTableForm.get('LineNumber').dirty) && timeTableForm.get('LineNumber').errors)">
+                          <span *ngIf="timeTableForm.get('LineNumber').errors.required">
+                             Linija je obavezna!
                           </span>
-                          <span *ngIf="timeTableForm.get('Line').errors.validateNumber">
-                              Putnik multiplikator mora biti broj veci ili jednak 0!
+                          <span *ngIf="timeTableForm.get('LineNumberne').errors.validateNumber">
+                              Broj linije je broj veci od 0!
                           </span>
                            
                           </span>
                       </div>
                 </div>
+
+                <!-- <div class="form-group" [ngClass]="{'has-error' : ((timeTableForm.get('BirthDay').touched || timeTableForm.get('BirthDay').dirty) && timeTableForm.get('BirthDay').errors)}">
+                    <label class="col-sm-2 control-label" for="DateOfBirth">Datum rodjenja:</label>
+                    <div class="col-sm-8">
+                      <input id="BirthDay" formControlName="BirthDay" type="date" class="form-control">
+                      <span class="help-block" *ngIf="((timeTableForm.get('BirthDay').touched || timeTableForm.get('BirthDay').dirty) && timeTableForm.get('BirthDay').errors)">
+                      <span *ngIf="timeTableForm.get('BirthDay').errors.required">
+                        Datum rodjenja je obavezan!
+                      </span>
+                      <span *ngIf="timeTableForm.get('BirthDay').errors.validateDate">
+                        Korisnik ne sme biti mladji od 12 godina i ne stariji od 100!
+                      </span>
+                       
+                      </span>
+                    </div>
+              </div> -->
             
-      
-      
+      <p class="yellow-paragraph">NAPOMEN 1: Ukoliko unesete Id reda voznje koji vec postoji red voznje ce se azurirati, ukoliko unesete Id reda voznje koji ne postoji kreirace se novi red voznje!</p>
+      <p class="yellow-paragraph">NAPOMENA 2: Ukoliko unesete broj linije koji nepostoji, linija ce biti automatski generisana sa praznim poljima!</p>
+      <p class="yellow-paragraph">NAPOMENA 3: Ukoliko unesete broj linije sa postojecim brojem linije, linija ce biti azurirana!</p>
       </div>
     <div class="panel-footer">
         <button class="btn btn-primary" type="submit" [disabled]="!timeTableForm.valid">Sacuvaj</button>
@@ -60,5 +83,74 @@
   </form>
 
 
+
+</div>
+<div class="container" *ngIf="departureBool">
+        <form [formGroup] ="departureForm" (ngSubmit)="onSubmitDeparture()" class="form-horizontal">
+                <div class="panel panel-custom">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Dodaj polaske:</h3>
+                
+                    </div>
+                <div class="panel-body">
+
+                        <div class="form-group" [ngClass]="{'has-error' : ((departureForm.get('TimeT').touched || departureForm.get('TimeT').dirty) && departureForm.get('TimeT').errors)}">
+                                <label class="col-sm-2 control-label" for="TimeT">ID reda voznje:</label>
+                                <div class="col-sm-8">
+                                  <input id="TimeT" formControlName="TimeT" type="text" class="form-control">
+                                  <span class="help-block" *ngIf="((departureForm.get('TimeT').touched || departureForm.get('TimeT').dirty) && departureForm.get('TimeT').errors)">
+                                    <span *ngIf="departureForm.get('TimeT').errors.required">
+                                       ID reda voznje je obavezan!
+                                    </span>
+                                    <span *ngIf="departureForm.get('TimeT').errors.validateNumber">
+                                    ID reda voznje je broj veci od 0!
+                                    </span>
+                                     
+                                    </span>
+                                </div>
+                          </div>
+          
+                          <div class="form-group" [ngClass]="{'has-error' : ((departureForm.get('DepartureDate').touched || departureForm.get('DepartureDate').dirty) && departureForm.get('DepartureDate').errors)}">
+                              <label class="col-sm-2 control-label" for="DepartureDate">Datum:</label>
+                              <div class="col-sm-8">
+                                <input id="DepartureDate" formControlName="DepartureDate" type="date" class="form-control">
+                                <span class="help-block" *ngIf="((departureForm.get('DepartureDate').touched || departureForm.get('DepartureDate').dirty) && departureForm.get('DepartureDate').errors)">
+                                <span *ngIf="departureForm.get('DepartureDate').errors.required">
+                                  Datum polaska  je obavezan!
+                                </span>
+                                <span *ngIf="departureForm.get('DepartureDate').errors.validateDate">
+                                  Najraniji datum je danasnji datum!
+                                </span>
+                                 
+                                </span>
+                              </div>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{'has-error' : ((departureForm.get('Time').touched || departureForm.get('Time').dirty) && departureForm.get('Time').errors)}">
+                                <label class="col-sm-2 control-label" for="Time">Vreme:</label>
+                                <div class="col-sm-8">
+                                  <input id="Time" formControlName="Time" type="time" class="form-control">
+                                  <span class="help-block" *ngIf="((departureForm.get('Time').touched || departureForm.get('Time').dirty) && departureForm.get('Time').errors)">
+                                  <span *ngIf="departureForm.get('Time').errors.required">
+                                    Datum polaska  je obavezan!
+                                  </span>
+                                  <!-- <span *ngIf="departureForm.get('Time').errors.validateDate">
+                                    Najraniji datum je danasnji datum!
+                                  </span> -->
+                                   
+                                  </span>
+                                </div>
+                          </div>
+                        
+
+                    </div>
+                    <p class="yellow-paragraph">NAPOMENA : Ukoliko unesete ID reda voznje koji nepostoji, Vase izmene se nece sacuvati!</p>
+                    <div class="panel-footer">
+                            <button class="btn btn-primary" type="submit" [disabled]="!departureForm.valid">Sacuvaj</button>
+                        </div>
+                    </div>
+                  
+            
+        </form>
 
 </div>

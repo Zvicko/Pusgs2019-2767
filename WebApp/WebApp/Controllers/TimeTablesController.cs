@@ -73,17 +73,38 @@ namespace WebApp.Controllers
 
         // POST: api/TimeTables
         [ResponseType(typeof(TimeTable))]
-        public IHttpActionResult PostTimeTable(TimeTable timeTable)
+        public IHttpActionResult PostTimeTable(TimeTableBindingModel model)
         {
-            if (!ModelState.IsValid)
+            Line line = db.Lines.Where(l => l.LineNumber == model.LineNumber).FirstOrDefault();
+            TimeTable timeTable = new TimeTable();
+            timeTable.Day = model.DayType;
+            timeTable.Transportation = model.TransportationType;
+            if (line == null)
             {
-                return BadRequest(ModelState);
+                Line newLine = new Line();
+                newLine.LineNumber = model.LineNumber;
+
+                db.Lines.Add(newLine);
+                timeTable.Line = newLine;
+                db.TimeTables.Add(timeTable);
+                //db.Entry(timeTable).State = EntityState.Modified;
+                db.SaveChanges();
+                return Ok();
+
+
             }
-
+            timeTable.Line = line;
             db.TimeTables.Add(timeTable);
+            //db.Entry(timeTable).State = EntityState.Modified;
             db.SaveChanges();
+            return Ok();
 
-            return CreatedAtRoute("DefaultApi", new { id = timeTable.Id }, timeTable);
+           
+
+
+
+        
+        
         }
 
         // DELETE: api/TimeTables/5

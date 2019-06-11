@@ -29,6 +29,25 @@ namespace WebApp.Models
 
     }
 
+    public class TimeTableBindingModel
+    {
+        //[Required]
+        //[Display(Name ="Id")]
+        //public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "TransportationType")]
+        public TypeOfTransportation TransportationType { get; set; }
+
+        [Required]
+        [Display(Name = "DayType")]
+        public TypeOfDay DayType { get; set; }
+
+        [Required]
+        [Display(Name = "LineNumber")]
+        public int LineNumber { get; set; }
+    }
+
     public class BuyTicketModel
     {
         [Required]
