@@ -1,5 +1,6 @@
 <button class="btn btn-primary" (click)="timeTableButton()">Uredi red voznje</button>
 <button class="btn btn-primary" (click)="departureButton()">Uredi polaske</button>
+<button class="btn btn-primary" (click)="deleteButton()">Brisanje reda voznje</button>
 <div class="container" *ngIf="timeTableBool">
   <form [formGroup] ="timeTableForm" (ngSubmit)="onSubmit()" class="form-horizontal">
       <div class="panel panel-custom">
@@ -154,3 +155,16 @@
         </form>
 
 </div>
+
+<div class="column" *ngIf="deleteBool">
+  <div class="thumbnail"  *ngFor="let t of timeTableDelete">
+    <div class="caption">
+     <h3> Red voznje id : {{t.Id}} </h3>
+    
+   
+     
+      <button class="btn btn-primary" (click)="deleteTimeTable(t.Id)">Brisanje reda voznje</button>
+    </div>
+  
+  </div>
+  </div>

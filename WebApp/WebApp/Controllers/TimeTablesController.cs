@@ -10,17 +10,24 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using WebApp.Models;
 using WebApp.Persistence;
+using WebApp.Persistence.UnitOfWork;
 
 namespace WebApp.Controllers
 {
     public class TimeTablesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private IUnitOfWork unitOfWork;
+
+        public TimeTablesController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
 
         // GET: api/TimeTables
-        public IQueryable<TimeTable> GetTimeTables()
+        public IEnumerable<TimeTable> GetTimeTables()
         {
-            return db.TimeTables;
+            return db.TimeTables.ToList();
         }
 
         // GET: api/TimeTables/5
@@ -105,6 +112,19 @@ namespace WebApp.Controllers
 
         
         
+        }
+
+        [HttpPost]
+        [Route("api/TimeTables/PostDeparture")]
+        public IHttpActionResult PostDeparture(DepartureModel model)
+        {
+            TimeTable timeTable = db.TimeTables.Where(t => t.Id == model.TimeT).FirstOrDefault();
+            Departure departure = new Departure();
+            departure.DepartureTime = model.DepartureDate + model.Time;
+            timeTable.Departures.Add(departure);
+            db.Entry(timeTable).State = EntityState.Modified;
+            db.SaveChanges();
+            return Ok();
         }
 
         // DELETE: api/TimeTables/5

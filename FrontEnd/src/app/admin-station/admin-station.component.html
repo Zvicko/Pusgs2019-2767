@@ -1,0 +1,163 @@
+
+<button class="btn btn-primary" (click)="stationButton()">Dodaj stanicu</button>
+<button class="btn btn-primary" (click)="stationButtonList()">Uredi stanice</button>
+<button class="btn btn-primary" (click)="lineButton()">Uredi liniju</button>
+
+<div class="container" *ngIf="stationBool">
+<form [formGroup]="stationForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+  <div class="panel panel-custom">
+    <div class="panel-heading">
+      <h3 class="panel-title">Stanica:</h3>
+
+    </div>
+  <div class="panel-body">
+      <div class="form-group" [ngClass]="{'has-error' : ((stationForm.get('Name').touched || stationForm.get('Name').dirty) && stationForm.get('Name').errors)}">
+          <label class="col-sm-2 control-label" for="Name">Naziv stanice:</label>
+          <div class="col-sm-8">
+            <input id="Name" formControlName="Name" type="text" class="form-control">
+            <span class="help-block" *ngIf="((stationForm.get('Name').touched || stationForm.get('Name').dirty) && stationForm.get('Name').errors)">
+              <span *ngIf="stationForm.get('Name').errors.required">
+              Naziv stanice je obavezan!
+              </span>
+              <!-- <span *ngIf="stationForm.get('Name').errors.validateNumber">
+              Startna cena mora biti broj veci ili jednak 0!
+              </span> -->
+               
+              </span>
+          </div>
+    </div>
+
+    
+        <div class="form-group" [ngClass]="{'has-error' : ((stationForm.get('Address').touched || stationForm.get('Address').dirty) && stationForm.get('Address').errors)}">
+            <label class="col-sm-2 control-label" for="Address">Adresa:</label>
+            <div class="col-sm-8">
+              <input id="Address" formControlName="Address" type="text" class="form-control">
+              <span class="help-block" *ngIf="((stationForm.get('Address').touched || stationForm.get('Address').dirty) && stationForm.get('Address').errors)">
+                <span *ngIf="stationForm.get('Address').errors.required">
+                Adresa je obavezna!
+                </span>
+                <!-- <span *ngIf="stationForm.get('Name').errors.validateNumber">
+                Startna cena mora biti broj veci ili jednak 0!
+                </span> -->
+                 
+                </span>
+            </div>
+      </div>
+      
+      
+          <div class="form-group" [ngClass]="{'has-error' : ((stationForm.get('Latitude').touched || stationForm.get('Latitude').dirty) && stationForm.get('Latitude').errors)}">
+              <label class="col-sm-2 control-label" for="Latitude">Geografska sirina:</label>
+              <div class="col-sm-8">
+                <input id="Latitude" formControlName="Latitude" type="text" class="form-control" min="-90" max="90">
+                <span class="help-block" *ngIf="((stationForm.get('Latitude').touched || stationForm.get('Latitude').dirty) && stationForm.get('Latitude').errors)">
+                  <span *ngIf="stationForm.get('Latitude').errors.required">
+                  Geografska sirina je obavezna!
+                  </span>
+                <span *ngIf="stationForm.get('Latitude').errors.min || stationForm.get('Latitude').errors.max">
+                  Geografska sirina mora biti u rasponu od -90 do 90 stepeni!
+                  </span> 
+                   
+                  </span>
+              </div>
+        </div>
+  
+
+        
+            <div class="form-group" [ngClass]="{'has-error' : ((stationForm.get('Longitude').touched || stationForm.get('Longitude').dirty) && stationForm.get('Longitude').errors)}">
+                <label class="col-sm-2 control-label" for="Longitude">Geografska visina:</label>
+                <div class="col-sm-8">
+                  <input id="Longitude" formControlName="Longitude" type="text" class="form-control" min="-180" max="180">
+                  <span class="help-block" *ngIf="((stationForm.get('Longitude').touched || stationForm.get('Longitude').dirty) && stationForm.get('Longitude').errors)">
+                    <span *ngIf="stationForm.get('Longitude').errors.required">
+                    Geografska visina je obavezna!
+                    </span>
+                  <span *ngIf="stationForm.get('Longitude').errors.min || stationForm.get('Longitude').errors.max">
+                    Geografska visina mora biti u rasponu od -180 do 180 stepeni!
+                    </span> 
+                     
+                    </span>
+                </div>
+          </div>
+  
+  
+  
+  </div>
+  <div class="panel-footer">
+      <button class="btn btn-primary" type="submit" [disabled]="!stationForm.valid">Sacuvaj</button>
+   </div>
+
+
+    </div>
+</form>
+</div>
+
+<div class="container" *ngIf="stationListBool" >
+  <div class="column">
+    <div class="thumbnail"  *ngFor="let s of stationList">
+      <div class="caption">
+       <h3> Naziv stanice : {{s.Name}} </h3>
+      
+        <p>Adresa : {{s.Address}}</p>
+        <p>Geografska sirina i duzina : {{s.Latitude}}  i  {{s.Longitude}}</p>
+        
+        <button class="btn btn-primary" (click)="deleteStation(s.Id)">Brisanje stanice</button>
+        <button class="btn btn-primary" (click)="updateStationButton(s)">Izmeni podatke</button>
+      </div>
+    
+    </div>
+    </div>
+</div>
+
+
+
+<div class="container" *ngIf="lineBool">
+    <form [formGroup]="lineForm" (ngSubmit)="onSubmitLine()" class="form-horizontal">
+        <div class="panel panel-custom">
+            <div class="panel-heading">
+              <h3 class="panel-title">Dodavanje linije u stanicu:</h3>
+            </div>
+            <div class="panel-body">
+            
+                <div class="form-group" [ngClass]="{'has-error' : ((lineForm.get('StationName').touched || lineForm.get('StationName').dirty) && lineForm.get('StationName').errors)}">
+                    <label class="col-sm-2 control-label" for="StationName">Naziv stanice:</label>
+                    <div class="col-sm-8">
+                      <input id="StationName" formControlName="StationName" type="text" class="form-control">
+                      <span class="help-block" *ngIf="((lineForm.get('StationName').touched || lineForm.get('StationName').dirty) && lineForm.get('StationName').errors)">
+                        <span *ngIf="lineForm.get('StationName').errors.required">
+                        Naziv stanice je obavezan!
+                        </span>
+                        <!-- <span *ngIf="stationForm.get('Name').errors.validateNumber">
+                        Startna cena mora biti broj veci ili jednak 0!
+                        </span> -->
+                         
+                        </span>
+                    </div>
+              </div>
+              
+              <div class="form-group" [ngClass]="{'has-error' : ((lineForm.get('LineNumber').touched || lineForm.get('LineNumber').dirty) && lineForm.get('LineNumber').errors)}">
+                  <label class="col-sm-2 control-label" for="LineNumber">Broj linije:</label>
+                  <div class="col-sm-8">
+                    <input id="LineNumber" formControlName="LineNumber" type="text" class="form-control" >
+                    <span class="help-block" *ngIf="((lineForm.get('LineNumber').touched || lineForm.get('LineNumber').dirty) && lineForm.get('LineNumber').errors)">
+                      <span *ngIf="lineForm.get('LineNumber').errors.required">
+                      Geografska sirina je obavezna!
+                      </span>
+                    <!-- <span *ngIf="lineForm.get('LineNumber').errors.min || lineForm.get('LineNumber').errors.max">
+                      Geografska sirina mora biti u rasponu od -90 do 90 stepeni!
+                      </span>  -->
+                       
+                      </span>
+                  </div>
+            </div>
+    
+    
+    
+    
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-primary" type="submit" [disabled]="!lineForm.valid">Sacuvaj</button>
+     </div>
+  
+    </div>
+    </form>
+</div>

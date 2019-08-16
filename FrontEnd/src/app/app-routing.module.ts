@@ -8,13 +8,15 @@ import {AdminPricelistComponent} from './admin-pricelist/admin-pricelist.compone
 import { CanActivateAdmin } from './guard/CanActivateAdmin';
 import { BuyTicketComponent } from './buy-ticket/buy-ticket.component';
 import { AdminTimetableComponent } from './admin-timetable/admin-timetable.component';
+import { AdminStationComponent } from './admin-station/admin-station.component';
 const appRoutes: Routes = [
   {path: 'register', component : RegisterComponent, canActivate : ['CanAlwaysActivateGuard'] },
   {path: 'login', component : LoginComponent ,canActivate : ['CanAlwaysActivateGuard']},
   {path : 'profile', component :EditProfileComponent, canActivate: ['CanAppUserActivateGuard']},
   {path: 'admin_pricelist', component: AdminPricelistComponent, canActivate: [CanActivateAdmin]},
   {path: 'ticket', component: BuyTicketComponent, canActivate: ['CanAlwaysActivateGuard']},
-  {path: 'admin_timetable', component:AdminTimetableComponent, canActivate:[CanActivateAdmin]}
+  {path: 'admin_timetable', component:AdminTimetableComponent, canActivate:[CanActivateAdmin]},
+  {path: 'admin_station', component:AdminStationComponent, canActivate: [CanActivateAdmin]}
 ]
 
 @NgModule({

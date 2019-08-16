@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TimetableServiceService} from '../services/timetable-service.service';
 import {FormGroup,FormControl,Validators,FormBuilder,AbstractControl} from '@angular/forms';
-import {TimeTable} from '../models/timetable.model';
+import {TimeTable,Departure,TimeTableDelete} from '../models/timetable.model';
+import { Time } from '@angular/common';
 @Component({
   selector: 'app-admin-timetable',
   templateUrl: './admin-timetable.component.html',
@@ -14,6 +15,8 @@ export class AdminTimetableComponent implements OnInit {
   departureForm : FormGroup;
   timeTableBool : boolean = false;
   departureBool : boolean = false;
+  timeTableDelete : TimeTableDelete[];
+  deleteBool : boolean;
   constructor(private fb : FormBuilder,private fb2: FormBuilder,private timeTableService : TimetableServiceService) { }
 
   ngOnInit() {
@@ -28,7 +31,7 @@ export class AdminTimetableComponent implements OnInit {
     );
     this.departureForm = this.fb2.group(
       {
-        LineNumber: [1,[Validators.required,validateNumber]],
+        TimeT: [1,[Validators.required,validateNumber]],
         DepartureDate : ['',[Validators.required,validateDate]],
         Time : ['',[Validators.required]]
       }
@@ -42,7 +45,7 @@ export class AdminTimetableComponent implements OnInit {
   {
     this.timeTableBool = true;
     this.departureBool = false;
-
+    this.deleteBool = false;
 
   }
 
@@ -50,7 +53,41 @@ export class AdminTimetableComponent implements OnInit {
   {
     this.departureBool = true;
     this.timeTableBool = false;
+    this.deleteBool = false;
   }
+
+  deleteButton()
+  {
+    this.timeTableService.getTimeTables().subscribe(
+      data =>
+      {
+        this.timeTableDelete = data;
+        this.deleteBool = true;
+
+      }
+    )
+
+  }
+
+  deleteTimeTable(id)
+  {
+    if(confirm("Da li ste sigurni da zelite da izbrisete"))
+    {
+      console.log("Id je" + id);
+    this.timeTableService.deleteTimeTable(id).subscribe(
+      data =>
+      {
+       alert("Uspesno ste izbrisali red voznje!"); 
+      },
+      error =>
+      {
+        alert("Greska!");
+
+      }
+    );
+    }
+  }
+
 
 
   onSubmit()
@@ -73,7 +110,21 @@ export class AdminTimetableComponent implements OnInit {
 
   onSubmitDeparture()
   {
+    const departure : Departure = Object.assign({}, this.departureForm.value);
+   
+    this.timeTableService.postDeparture(departure).subscribe(
+      data=>
+      {
 
+
+      },
+      error=>
+      {
+
+
+      }
+
+    )
 
   }
 
@@ -107,17 +158,28 @@ function validateDate(control: AbstractControl) : {[key: string]:any} | null{
   let minMonth = new Date().getMonth();
   let minDay = new Date().getDay();
   
-  
+  let minDate = new Date();
   let date = new Date(dateString);
   // alert(date);
-  if((date.getFullYear() > minYear && date.getMonth() > minMonth && date.getDay() > minDay) && date != null)
-  {
+  // if((date.getFullYear() > minYear && date.getMonth() > minMonth && date.getDay() > minDay) && date != null)
+  // {
 
-    return {'validateDate':true};
+  //   return {'validateDate':true};
+  // }
+  // else
+  // {
+  //   return {'validateDate':false};
+  // }
+
+  if(date > minDate)
+  {
+    return null;
+
   }
   else
   {
-    return null;
+    return {'validateDate':true};
+
   }
 
 }

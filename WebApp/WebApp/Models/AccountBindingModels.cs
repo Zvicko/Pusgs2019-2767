@@ -48,6 +48,53 @@ namespace WebApp.Models
         public int LineNumber { get; set; }
     }
 
+    public class DepartureModel
+    {
+        [Required]
+        [Display(Name="TimeT")]
+        public int TimeT { get; set; }
+
+        [Required]
+        [Display(Name ="DepartureDate")]
+        public DateTime DepartureDate { get; set; }
+
+        [Required]
+        [Display(Name = "Time")]
+        public TimeSpan Time { get; set; }
+
+
+    }
+
+    public class StationModel
+    {
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name ="Address")]
+        public string Address { get; set; }
+
+        [Required]
+        [Display(Name = "Latitude")]
+        public double Latitude { get; set; }
+
+        [Required]
+        [Display(Name = "Longitude")]
+        public double Longitude { get; set; }
+    }
+
+    public class AddLineToStation
+    {
+        [Required]
+        [Display(Name = "StationName")]
+        public string StationName { get; set; }
+
+        [Required]
+        [Display(Name = "LineNumber")]
+        public int LineNumber { get; set; }
+    }
+
     public class BuyTicketModel
     {
         [Required]

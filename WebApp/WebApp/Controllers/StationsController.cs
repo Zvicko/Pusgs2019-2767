@@ -27,7 +27,7 @@ namespace WebApp.Controllers
         // GET: api/Stations
         public IEnumerable<Station> GetStations()
         {
-            return unitOfWork.Stations.GetAll() ;
+            return db.Stations.ToList();
         }
 
         // GET: api/Stations/5
@@ -80,17 +80,111 @@ namespace WebApp.Controllers
 
         // POST: api/Stations
         [ResponseType(typeof(Station))]
-        public IHttpActionResult PostStation(Station station)
+        public IHttpActionResult PostStation(StationModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Stations.Add(station);
-            db.SaveChanges();
+            Station station = db.Stations.Where(s => s.Name == model.Name).FirstOrDefault();
+            if (station == null)
+            {
+                Station newStation = new Station();
+                newStation.Name = model.Name;
+                newStation.Address = model.Address;
+                newStation.Latitude = model.Latitude;
+                newStation.Longitude = model.Longitude;
+                db.Stations.Add(newStation);
+                db.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                station.Name = model.Name;
+                station.Address = model.Address;
+                station.Latitude = model.Latitude;
+                station.Longitude = model.Longitude;
+                db.Stations.Add(station);
+                db.SaveChanges();
+                return Ok();
 
-            return CreatedAtRoute("DefaultApi", new { id = station.Id }, station);
+            }
+
+        
+
+           
+        }
+        [HttpPost]
+        [Route("api/Stations/AddLine")]
+        public IHttpActionResult AddLine(AddLineToStation model) // testirati ovo
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Station station = db.Stations.Where(s => s.Name == model.StationName).FirstOrDefault();
+            Line line = db.Lines.Where(l => l.LineNumber == model.LineNumber).FirstOrDefault();
+
+            if (station != null)
+            {
+                if (line != null)
+                {
+                    station.Lines.Add(line);
+                    line.Stations.Add(station);
+                  
+                    
+                    db.Entry(station).State = EntityState.Modified;
+                    db.Entry(line).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Ok();
+                }
+                else
+                {
+                    Line newLine = new Line();
+                    newLine.LineNumber = model.LineNumber;
+                    station.Lines.Add(newLine);
+                    newLine.Stations.Add(station);
+                    db.Lines.Add(newLine);
+                    db.Entry(station).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Ok();
+                }
+
+
+            }
+            else
+            {
+                if (line != null)
+                {
+                    Station newStation = new Station();
+                    newStation.Name = model.StationName;
+                    newStation.Lines.Add(line);
+                    line.Stations.Add(newStation);
+                    db.Stations.Add(newStation);
+                    db.Entry(line).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Ok();
+
+                }
+                else
+                {
+                    Station newStation = new Station();
+                    Line newLine = new Line();
+                    newStation.Name = model.StationName;
+                    newLine.LineNumber = model.LineNumber;
+                    newStation.Lines.Add(newLine);
+                    newLine.Stations.Add(newStation);
+                    db.Stations.Add(newStation);
+                    db.Lines.Add(newLine);
+                    db.SaveChanges();
+                    return Ok();
+                }
+
+            }
+            
+
         }
 
         // DELETE: api/Stations/5
