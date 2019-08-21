@@ -16,7 +16,8 @@ export class EditProfileComponent implements OnInit {
   passForm : FormGroup; // form builder za promenu lozinke
   userForm : FormGroup;
   imageForm: FormGroup;
-  defaultImg : string = "/assets/images/Default.gif"
+  defaultImg : string = null;
+  imagePreview : string = null;
   user: User;
   
   fileToUpload : File = null;
@@ -48,7 +49,15 @@ export class EditProfileComponent implements OnInit {
     .subscribe(
       data=>{
         this.user = data;
+        localStorage.setItem("Verified",this.user.Verified.toString())
         const jsonUser = JSON.parse(JSON.stringify(this.user));
+        //
+          this.defaultImg = jsonUser.PhotoPath;
+          console.log("THE DEFAULT IMAGE :" + this.defaultImg);
+          console.log("JSON USER PHOTO PATH :" )
+        //
+
+
         console.log("Passanger Type:" + jsonUser.PassangerType);
         let  birthday = new Date (jsonUser.BirthDay); // prikazuje dan manje od pravog rodjendana, verovatno zato sto je prilikom registracije stavljeno u 12 AM
         birthday.setDate(birthday.getDate()+1); // zbog toga sam morao da dodam taj jedan dan, kako bi bilo tacno
@@ -121,6 +130,16 @@ export class EditProfileComponent implements OnInit {
      this.addPhoto = true;
      this.changePass = false;
     this.changeData = false;
+
+    // //
+    // this.editProfile.GetPhoto(this.defaultImg).subscribe(
+    //  data => 
+    //  {
+    //    handleFileInput(data;
+    //  }
+    // )
+    // //
+
   }
 
 
@@ -130,7 +149,7 @@ export class EditProfileComponent implements OnInit {
     var reader = new FileReader();
     reader.onload = (event:any)=>{
       this.imageForm.controls['PhotoPath'].setValue(event.target.result);
-      this.defaultImg = event.target.result;
+      this.imagePreview = event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
   }

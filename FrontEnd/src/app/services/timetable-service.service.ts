@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {TimeTableDelete} from '../models/timetable.model';
+import {TimeTableDelete, TimeTableList} from '../models/timetable.model';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable({
@@ -14,6 +14,15 @@ export class TimetableServiceService {
   constructor(private HttpClient: HttpClient) { }
 
   
+  getTimeTablesForView():Observable<TimeTableList[]>{
+    return this.HttpClient.get<TimeTableList[]>("http://localhost:52295/api/TimeTables",{
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json'
+      })
+
+    });
+  }
+
   getTimeTables():Observable<TimeTableDelete[]>{
     return this.HttpClient.get<TimeTableDelete[]>("http://localhost:52295/api/TimeTables",{
       headers: new HttpHeaders({

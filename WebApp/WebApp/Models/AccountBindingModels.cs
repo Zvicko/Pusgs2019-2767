@@ -51,11 +51,11 @@ namespace WebApp.Models
     public class DepartureModel
     {
         [Required]
-        [Display(Name="TimeT")]
+        [Display(Name = "TimeT")]
         public int TimeT { get; set; }
 
         [Required]
-        [Display(Name ="DepartureDate")]
+        [Display(Name = "DepartureDate")]
         public DateTime DepartureDate { get; set; }
 
         [Required]
@@ -67,12 +67,15 @@ namespace WebApp.Models
 
     public class StationModel
     {
+        [Display(Name = "Id")]
+        public int Id { get; set; }
+
         [Required]
         [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name ="Address")]
+        [Display(Name = "Address")]
         public string Address { get; set; }
 
         [Required]
@@ -110,7 +113,7 @@ namespace WebApp.Models
         public TypeOfTransportation TransportationType { get; set; }
 
         [Required]
-        [Display(Name ="Price")]
+        [Display(Name = "Price")]
         public double Price { get; set; }
 
     }
@@ -184,6 +187,17 @@ namespace WebApp.Models
         [Required]
         [Display(Name = "PassangerType")]
         public TypeOfPassanger PassangerType { get; set; }
+    }
+
+    public class VerifyUserModel
+    {
+        [Required]
+        [Display(Name ="Id")]
+        public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "IsAccepted")]
+        public bool IsAccepted { get; set; }
     }
 
     public class RegisterExternalBindingModel

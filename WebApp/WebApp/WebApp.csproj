@@ -302,6 +302,22 @@
     <Compile Include="Migrations\201908160914140_StationUpdate.Designer.cs">
       <DependentUpon>201908160914140_StationUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908200941415_PassangerUpdate.cs" />
+    <Compile Include="Migrations\201908200941415_PassangerUpdate.Designer.cs">
+      <DependentUpon>201908200941415_PassangerUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908200943354_PassangerUpdateFix.cs" />
+    <Compile Include="Migrations\201908200943354_PassangerUpdateFix.Designer.cs">
+      <DependentUpon>201908200943354_PassangerUpdateFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908200950479_PassangerUpdateFix1.cs" />
+    <Compile Include="Migrations\201908200950479_PassangerUpdateFix1.Designer.cs">
+      <DependentUpon>201908200950479_PassangerUpdateFix1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908201645022_PassangerModification.cs" />
+    <Compile Include="Migrations\201908201645022_PassangerModification.Designer.cs">
+      <DependentUpon>201908201645022_PassangerModification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -354,6 +370,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Photos\Default.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -467,6 +484,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908160914140_StationUpdate.resx">
       <DependentUpon>201908160914140_StationUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908200941415_PassangerUpdate.resx">
+      <DependentUpon>201908200941415_PassangerUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908200943354_PassangerUpdateFix.resx">
+      <DependentUpon>201908200943354_PassangerUpdateFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908200950479_PassangerUpdateFix1.resx">
+      <DependentUpon>201908200950479_PassangerUpdateFix1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908201645022_PassangerModification.resx">
+      <DependentUpon>201908201645022_PassangerModification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -153,15 +153,17 @@
      <div class="panel-body">
      <div  class="form-group">
        <div class="col-sm-8">
-         <img [src]="defaultImg" style="width:250px; height:150px">
+         <img *ngIf="imagePreview == null" src='http://localhost:52295/api/Users/GetPhoto?imagePath={{defaultImg}}' style="width:250px; height:150px">
+         <img *ngIf="imagePreview != null" [src]='imagePreview' style="width:250px; height:150px">
          <br>
          <br>
          <input type="file" (change)="handleFileInput($event.target.files)" #Image accept="image/*">
          <br>
        </div>
+       
      </div>
      <div class="panel-footer">
-       <button class="btn btn-primary" type="submit" [disabled]="!userForm.valid">Sacuvaj</button>
+       <button class="btn btn-primary" type="submit" [disabled]="!imageForm.valid">Sacuvaj</button>
     </div>
     </div>
     </div>

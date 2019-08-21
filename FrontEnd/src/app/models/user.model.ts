@@ -8,7 +8,8 @@ export class User
     public PassangerType: TypeOfPassanger, 
     public Password: string,
     public RepeatedPassword: string,
-    public Verified: boolean
+    public Verified: VerificationStatus
+  
     )
         {}
     
@@ -51,13 +52,41 @@ export class EditUser
     public FullName: string,
     public Email: string,
     public BirthDay: Date, 
-    public PassangerType : TypeOfPassanger
+    public PassangerType : TypeOfPassanger,
+   
        )   {}
 
 }
 
 export class Passanger
 {
+    constructor(
+    public FullName: string,
+    public Email: string,
+    public PhotoPath: string,
+    public PassangerType : TypeOfPassanger,
+    public Verified: boolean
 
+    ){}
 
 }
+
+export class VerifyUser
+{
+    constructor(
+    public Id : number,
+    public IsAccepted : boolean
+
+    ){}
+
+}
+
+// export class ForVerificationStatus
+// {
+//     constructor(
+//         public PassangerType : TypeOfPassanger,
+//         p
+//     )
+
+// }
+

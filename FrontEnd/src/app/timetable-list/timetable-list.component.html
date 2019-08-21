@@ -1,0 +1,79 @@
+<div class="container">
+    <form [formGroup]="timeTableForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+   
+        <div class="panel panel-custom">
+            <div class="panel-heading">
+              <h3 class="panel-title">Pretraga</h3>
+        
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="LineNumber">Broj linije :</label>
+                    <div class="col-sm-8">
+                      <input id="LineNumber" formControlName="LineNumber" type="number" class="form-control">
+                      
+                    </div>
+                  </div>
+
+                  <div class="form-group" >
+                      <label class="col-sm-2 control-label" for="DayType">Tip dana:</label>
+                      <div class="col-sm-8">
+                        <select id="DayType" formControlName="DayType" type="text" class="form-control">
+                        <option value="All">svi</option>
+                        <option value='Working'>radni</option>
+                        <option value='Saturday'>subota</option>
+                        <option value='Sunday'>nedelja</option>
+                        </select>
+                      </div>
+                </div>
+
+                <div class="form-group" >
+                    <label class="col-sm-2 control-label" for="Transportation">Tip putnika:</label>
+                    <div class="col-sm-8">
+                      <select id="Transportation" formControlName="Transportation" type="text" class="form-control">
+                      <option value="All">svi</option>
+                      <option value='Urban'>gradski</option>
+                      <option value='Suburban'>prigradski</option>
+                      
+                      </select>
+                    </div>
+              </div>
+
+            </div>
+            <div class="panel-footer">
+               <button class="btn btn-primary" type="submit">Filtriraj</button>
+            </div>
+            </div>
+   
+    </form>
+   
+   
+    </div>
+
+
+
+
+<div class="container">
+  <div class="column">
+    
+    <div class="thumbnail"  *ngFor="let t of timeTableFilter">
+      <div class="caption">
+       <h3> Red voznje id: {{t.Id}} </h3>
+        <p>Tip dana : {{dayType[t.Day]}}</p>
+        <p>Tip transporta : {{transportation[t.Transportation]}}</p>
+        <!-- prvi upitnik proveravat da li je Line null i preventira gresku -->
+        <p>Broj linije: {{(t.Line?.LineNumber !== null) ? t.Line.LineNumber : "Nedostupno"}}</p> 
+        <div *ngFor="let d of t.Departures">
+            <p>Polazak : {{d.DepartureTime | date :'dd/MM/yyyy hh:mm'}}</p>
+    
+        </div>
+      
+      
+       
+        
+      
+      </div>
+    
+    </div>
+    </div>
+</div>

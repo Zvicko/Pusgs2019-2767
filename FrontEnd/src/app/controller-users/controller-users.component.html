@@ -1,0 +1,21 @@
+<div class="container" >
+    <div class="column">
+      <div class="thumbnail"  *ngFor="let p of passangers">
+        <div class="caption">
+        <img src="http://localhost:52295/api/Users/GetPhoto?imagePath={{p.PhotoPath}}" style="width:250px; height:150px">
+         <h3> Ime i prezime: {{p.FullName}} </h3>
+        
+      
+          <p>Email : {{p.Email}}</p>
+          <p>Tip putnika : {{passangerTypes[p.PassangerType]}}</p>
+         </div>
+        
+         
+          
+          <button class="btn btn-primary" [disabled]="checkPassanger(p)" (click)="verify(p.Id,1)">Verifikuj</button>
+          <button class="btn btn-primary" (click)="verify(p.Id,2)">Odbij</button>
+        </div>
+      
+      </div>
+</div>
+

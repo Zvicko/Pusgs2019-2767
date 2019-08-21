@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import { TokenInterceptorService } from 'src/app/token/token-interceptor.service';
@@ -17,6 +17,8 @@ import { TicketComponentComponent } from './ticket-component/ticket-component.co
 import { BuyTicketComponent } from './buy-ticket/buy-ticket.component';
 import { AdminTimetableComponent } from './admin-timetable/admin-timetable.component';
 import { AdminStationComponent } from './admin-station/admin-station.component';
+import { ControllerUsersComponent } from './controller-users/controller-users.component';
+import { TimetableListComponent } from './timetable-list/timetable-list.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { AdminStationComponent } from './admin-station/admin-station.component';
     TicketComponentComponent,
     BuyTicketComponent,
     AdminTimetableComponent,
-    AdminStationComponent
+    AdminStationComponent,
+    ControllerUsersComponent,
+    TimetableListComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +42,7 @@ import { AdminStationComponent } from './admin-station/admin-station.component';
     HttpClientModule,
     HttpModule,
     HttpClientXsrfModule,
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
   providers: [ CanActivateAdmin,
     {
@@ -56,7 +61,14 @@ import { AdminStationComponent } from './admin-station/admin-station.component';
       useValue: () => { if(localStorage.role =='AppUser')
         return true;
       }
+    },
+    {
+      provide: 'CanControllerActivateGuard',
+      useValue: () => {if(localStorage.role == "Controller")
+        return true;
+      }
     }
+
   ],
   bootstrap: [AppComponent]
 })

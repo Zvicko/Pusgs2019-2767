@@ -106,10 +106,17 @@ namespace WebApp.Controllers
 
             var user = db.Users.Where(u => u.UserName == username).Include(u1 => u1.User).First();
             var appuser = user.User as Passanger;
-            imageName = imageName + appuser.FullName + Path.GetExtension(postedFile.FileName);
+            imageName = imageName + appuser.Id + Path.GetExtension(postedFile.FileName);
             var filePath = HttpContext.Current.Server.MapPath("~/Photos/" + imageName);
             postedFile.SaveAs(filePath);
             appuser.PhotoPath = imageName;
+            if (appuser.Verified == VerificationStatus.NotAccepted)
+                appuser.Verified = VerificationStatus.Inprocess;
+            else if (appuser.Verified == VerificationStatus.Accepted)
+                appuser.Verified = VerificationStatus.Accepted;
+            else
+                appuser.Verified = VerificationStatus.Inprocess;
+
             user.User = appuser;
             db.Users.Attach(user);
             db.Entry(user).State = EntityState.Modified;
@@ -117,6 +124,71 @@ namespace WebApp.Controllers
 
             return Request.CreateResponse(HttpStatusCode.Created);
         }
+
+        [HttpGet]
+        [Route("GetPhoto")]
+        public HttpResponseMessage GetPhoto(string imagePath)
+        {
+            if(imagePath == null)
+            {
+                imagePath = "Default.gif";
+            }
+
+            var filePath = HttpContext.Current.Server.MapPath("~/Photos/" + imagePath);
+            var ext = System.IO.Path.GetExtension(filePath);
+            var contents = System.IO.File.ReadAllBytes(filePath);
+
+            System.IO.MemoryStream ms = new System.IO.MemoryStream(contents);
+
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StreamContent(ms);
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("Photos/" + ext);
+
+            return response;
+
+
+        }
+
+
+        [HttpGet]
+        [Route("GetAllUnverified")]
+        public IEnumerable<Passanger> GetAllUnverifiedUsers()
+
+        {
+            List<Passanger> passangers = db.AppUsers.Where(u => u.UserType == TypeOfUser.Passanger).OfType<Passanger>().ToList();
+            return passangers.Where(p => p.Verified == VerificationStatus.Inprocess).ToList();
+
+           
+           
+
+        }
+        [HttpPut]
+        [Route("VerifyUser")]
+        public IHttpActionResult VerifyUser(VerifyUserModel model)
+        {
+            
+
+            var user = db.Users.Where(u => u.UserId == model.Id).Include(u1 => u1.User).First();
+            var pass = user.User as Passanger;
+            if (model.IsAccepted)
+                pass.Verified = VerificationStatus.Accepted;
+            else
+                pass.Verified = VerificationStatus.NotAccepted;
+           
+            user.User = pass;
+            db.Users.Attach(user);
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+
+
+            
+
+
+            return Ok();
+        }
+
 
         // PUT: api/Users/5
         [ResponseType(typeof(void))]

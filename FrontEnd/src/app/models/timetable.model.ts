@@ -1,4 +1,4 @@
-import { Line } from "./line.model";
+import { Line, LineForList } from "./line.model";
 import { Time } from "@angular/common";
 
 export class TimeTable
@@ -12,6 +12,23 @@ export class TimeTable
   
 }
 
+export class TimeTableList // za korisnicki prikaz
+{
+   
+    constructor(
+    public Id  : number,
+    public Day : TypeOfDay,
+    public Transportation : TypeOfTransportation,
+    public Depratures : Departure[],
+    public Line : LineForList    // za korisnicki prikaz
+
+    ) {
+       
+        
+    }
+
+}
+
 export class TimeTableDelete
 {
     constructor(
@@ -21,6 +38,15 @@ export class TimeTableDelete
     public LineNumber: number // broj linije, ne id!    
     ){}
   
+}
+
+export class DepartureList // za korisnicki prikaz
+{
+    constructor(
+    public Id : number,
+    public DepartureTime : Date    
+    ){}
+
 }
 
 export class Departure

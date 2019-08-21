@@ -45,37 +45,22 @@ namespace WebApp.Controllers
 
         // PUT: api/Stations/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutStation(int id, Station station)
+        public IHttpActionResult PutStation(int id, StationModel station)
         {
-            if (!ModelState.IsValid)
+            Station s = db.Stations.Where(st => st.Id == id).FirstOrDefault();
+            if(s != null)
             {
-                return BadRequest(ModelState);
-            }
-
-            if (id != station.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(station).State = EntityState.Modified;
-
-            try
-            {
+                s.Name = station.Name;
+                s.Address = station.Address;
+                s.Latitude = station.Latitude;
+                s.Longitude = station.Longitude;
+                db.Entry(s).State = EntityState.Modified;
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                return Ok();
+                
 
-            return StatusCode(HttpStatusCode.NoContent);
+            }
+            return NotFound();
         }
 
         // POST: api/Stations
@@ -87,7 +72,7 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            Station station = db.Stations.Where(s => s.Name == model.Name).FirstOrDefault();
+            Station station = db.Stations.Where(s => s.Id == model.Id).FirstOrDefault();
             if (station == null)
             {
                 Station newStation = new Station();
@@ -131,6 +116,12 @@ namespace WebApp.Controllers
             {
                 if (line != null)
                 {
+                    // proveriti da li ovo valja
+                    station.Lines = new List<Line>();
+                    line.Stations = new List<Station>(); 
+                    /////////////////////////////////////
+
+
                     station.Lines.Add(line);
                     line.Stations.Add(station);
                   
@@ -173,6 +164,8 @@ namespace WebApp.Controllers
                     Station newStation = new Station();
                     Line newLine = new Line();
                     newStation.Name = model.StationName;
+                    newStation.Lines = new List<Line>();
+                    newLine.Stations = new List<Station>();
                     newLine.LineNumber = model.LineNumber;
                     newStation.Lines.Add(newLine);
                     newLine.Stations.Add(newStation);

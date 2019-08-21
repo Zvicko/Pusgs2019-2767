@@ -4,13 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpHeaders } from '@angular/common/http';
 import {LoginUser} from '../models/user.model';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginServiceService {
 
 
-  constructor(private http: Http,private httpClient : HttpClient) { }
+  constructor(private http: Http,private httpClient : HttpClient, private router : Router) { }
 
   getTheToken(loginUser: LoginUser): any {
     let headers = new HttpHeaders();
@@ -38,9 +39,10 @@ export class LoginServiceService {
           console.log('decodedJwtJsonData: ' + decodedJwtJsonData)
           console.log('decodedJwtData: ' + decodedJwtData)
           console.log('Role ' + role)
-
+          
           localStorage.setItem('jwt', jwt)
           localStorage.setItem('role', role);
+          this.router.navigateByUrl('profile')
         },
         err => {
           console.log("Error occured");

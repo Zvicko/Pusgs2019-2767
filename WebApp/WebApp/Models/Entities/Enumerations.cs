@@ -10,4 +10,5 @@ namespace WebApp.Models
     public enum TypeOfUser {Passanger, Controller, Admin };
     public enum TypeOfDay {Working, Saturday, Sunday };
     public enum TypeOfTransportation { Urban, Suburban};
+    public enum VerificationStatus {Accepted, NotAccepted,Inprocess};
 }

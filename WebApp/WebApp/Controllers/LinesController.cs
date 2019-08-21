@@ -102,7 +102,12 @@ namespace WebApp.Controllers
             {
                 return NotFound();
             }
-
+            // ovaj deo sam dodao zbog izuzetka sa TimeTable
+            TimeTable tt = db.TimeTables.Where(t => t.Line.Id == line.Id).FirstOrDefault();
+            tt.Line = null;
+            db.Entry(tt).State = EntityState.Modified;
+            db.SaveChanges();
+            //
             db.Lines.Remove(line);
             db.SaveChanges();
 

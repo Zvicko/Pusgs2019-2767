@@ -327,7 +327,8 @@ namespace WebApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var passanger = new Passanger() { FullName = model.FullName, Email = model.Email, BirthDay = model.DateOfBirth,PassangerType = model.PassangerType};
+
+            var passanger = new Passanger() { FullName = model.FullName, Email = model.Email, BirthDay = model.DateOfBirth,PassangerType = model.PassangerType, Verified = VerificationStatus.Inprocess};
             var AppUser = new ApplicationUser() {Id=model.Email,UserName = model.Email, Email = model.Email,User = passanger};
             AppUser.PasswordHash = ApplicationUser.HashPassword(model.Password);
             

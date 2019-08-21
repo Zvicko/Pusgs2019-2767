@@ -4,7 +4,7 @@ import { Headers, RequestOptions } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { Station, StationList } from '../models/station.model';
+import { Station, UpdateStation, UpdateLine} from '../models/station.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,33 @@ export class StationServiceService {
 
   }
 
-  getStations():Observable<StationList[]>{
-    return this.HttpClient.get<StationList[]>("http://localhost:52295/api/Stations",{
+  updateStation(uStation : UpdateStation) : Observable<any>
+  {
+    console.log("Update Station :"  + uStation.Id);
+    console.log("Update Station :"  + uStation.Name);
+    console.log("Update Station :"  + uStation.Address);
+    console.log("Update Station :"  + uStation.Latitude);
+    console.log("Update Station :"  + uStation.Longitude);
+    return this.HttpClient.put<any>(`http://localhost:52295/api/Stations/${uStation.Id}`,uStation,{
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json'
+      })
+  
+    });
+
+  }
+
+  getStations():Observable<UpdateStation[]>{
+    return this.HttpClient.get<UpdateStation[]>("http://localhost:52295/api/Stations",{
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json'
+      })
+
+    });
+  }
+
+  getLines():Observable<UpdateLine[]>{
+    return this.HttpClient.get<UpdateLine[]>("http://localhost:52295/api/Lines",{
       headers: new HttpHeaders({
         'Content-Type' : 'application/json'
       })
@@ -42,6 +67,10 @@ export class StationServiceService {
     return this.HttpClient.delete(`http://localhost:52295/api/Stations/${id}`,);
   }
 
+  deleteLine(id) : Observable<any>
+  {
+    return this.HttpClient.delete(`http://localhost:52295/api/Lines/${id}`,);
+  }
 
   addLineToStation(addLine) : Observable<any>
   {
