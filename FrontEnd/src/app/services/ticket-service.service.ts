@@ -34,5 +34,18 @@ export class TicketServiceService {
     }
   );
   }
+  VerifyTicket(id) : Observable<any>{
+    return this.HttpClient.put(`http://localhost:52295/api/Tickets/VerifyTicket/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json'
+      })
+
+    });
+  }
+
+  DeleteTicket(id) : Observable<any>
+  {
+    return this.HttpClient.delete(`http://localhost:52295/api/Tickets/${id}`,);
+  }
 
 }

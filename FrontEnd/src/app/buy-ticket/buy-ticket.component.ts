@@ -47,7 +47,7 @@ export class BuyTicketComponent implements OnInit {
         console.log("Data :" + data);
         const jsonUser = JSON.parse(JSON.stringify(this.user));
         console.log("JSON USER :" + jsonUser);
-        this.verifiedBool = jsonUser.Verified;
+        this.verifiedBool = jsonUser.Verified === 0 ? true : false;
         this.loggedInBool = true;
         }
         else

@@ -3,7 +3,7 @@ import { Http,Response } from '@angular/http';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { Headers, RequestOptions } from '@angular/http';
-import { Passanger, VerifyUser } from '../models/user.model';
+import { Passanger, VerifyUser, PassangerTicketList } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +48,15 @@ export class EditProfileService {
 
   GetAllUnverified() : Observable<Passanger[]>{
     return this.HttpClient.get<Passanger[]>("http://localhost:52295/api/Users/GetAllUnverified",{
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json'
+      })
+
+    });
+  }
+
+  GetAllVerified() : Observable<PassangerTicketList[]>{
+    return this.HttpClient.get<PassangerTicketList[]>("http://localhost:52295/api/Users/GetAllVerified",{
       headers: new HttpHeaders({
         'Content-Type' : 'application/json'
       })

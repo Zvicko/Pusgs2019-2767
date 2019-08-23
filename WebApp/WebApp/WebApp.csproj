@@ -318,6 +318,10 @@
     <Compile Include="Migrations\201908201645022_PassangerModification.Designer.cs">
       <DependentUpon>201908201645022_PassangerModification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908221009542_TicketUpdate1.cs" />
+    <Compile Include="Migrations\201908221009542_TicketUpdate1.Designer.cs">
+      <DependentUpon>201908221009542_TicketUpdate1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -496,6 +500,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908201645022_PassangerModification.resx">
       <DependentUpon>201908201645022_PassangerModification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908221009542_TicketUpdate1.resx">
+      <DependentUpon>201908221009542_TicketUpdate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

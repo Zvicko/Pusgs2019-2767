@@ -11,6 +11,7 @@ import { AdminTimetableComponent } from './admin-timetable/admin-timetable.compo
 import { AdminStationComponent } from './admin-station/admin-station.component';
 import { ControllerUsersComponent } from './controller-users/controller-users.component';
 import { TimetableListComponent } from './timetable-list/timetable-list.component';
+import { TicketComponentComponent } from './ticket-component/ticket-component.component';
 const appRoutes: Routes = [
   {path: 'register', component : RegisterComponent, canActivate : ['CanAlwaysActivateGuard'] },
   {path: 'login', component : LoginComponent ,canActivate : ['CanAlwaysActivateGuard']},
@@ -20,7 +21,8 @@ const appRoutes: Routes = [
   {path: 'admin_timetable', component:AdminTimetableComponent, canActivate:[CanActivateAdmin]},
   {path: 'admin_station', component:AdminStationComponent, canActivate: [CanActivateAdmin]},
   {path: 'controller_users', component:ControllerUsersComponent, canActivate: ['CanControllerActivateGuard']},
-  {path: 'timetable_list', component:TimetableListComponent, canActivate : ['CanAlwaysActivateGuard']}
+  {path: 'timetable_list', component:TimetableListComponent, canActivate : ['CanAlwaysActivateGuard']},
+  {path: 'controller_ticket', component:TicketComponentComponent, canActivate: ['CanControllerActivateGuard']}
 ]
 
 @NgModule({

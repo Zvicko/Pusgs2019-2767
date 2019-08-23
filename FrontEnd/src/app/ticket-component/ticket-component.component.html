@@ -1,3 +1,25 @@
-<p>
-  ticket-component works!
-</p>
+<div class="container">
+    <div class="column">
+      
+      <div class="thumbnail"  *ngFor="let p of passangers">
+        <div class="caption">
+         <h3> Ime i prezime putnika: {{p.FullName}} </h3>
+          <p>Email : {{p.Email}}</p>
+         
+       
+          <p>Cena karte: {{p.PassangerTicket.Price}}</p> 
+          <p>Datum izdavanja: {{p.PassangerTicket.DateOfIssue | date :'dd/MM/yyyy HH:mm'}}</p> 
+          <p>Datum isteka: {{p.PassangerTicket.ExpireDate | date :'dd/MM/yyyy HH:mm'}}</p>  
+          <p>Verifikovano od kontrolera : {{(p.PassangerTicket.VerifiedByController) ? "Da" : "Ne"}}</p>
+          </div>
+        
+          <button class="btn btn-primary" [disabled]="!checkExpireDate(p.PassangerTicket.ExpireDate,p.PassangerTicket.VerifiedByController)" (click)="verifyCard(p.PassangerTicket.Id)">Verifikuj</button>
+          <button class="btn btn-primary" [disabled]="checkExpireDate(p.PassangerTicket.ExpireDate)" (click)="cancelCard(p.PassangerTicket.Id)">Ponisti kartu</button>
+         
+          
+        
+        </div>
+      
+      </div>
+    </div>
+  

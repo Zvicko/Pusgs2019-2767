@@ -13,5 +13,6 @@ namespace WebApp.Models
         public DateTime ExpireDate { get; set; }
         public TypeOfTicket TicketType { get; set; }
         public TypeOfPassanger PassangerType { get; set; }
+        public bool VerifiedByController { get; set; }
     }
 }

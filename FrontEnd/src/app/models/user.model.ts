@@ -1,3 +1,5 @@
+import { TicketList } from "./ticket.model";
+
 export class User
 {
 
@@ -78,6 +80,18 @@ export class VerifyUser
     public IsAccepted : boolean
 
     ){}
+
+}
+
+export class PassangerTicketList // putnik sa kartom
+{
+    constructor(
+        public FullName: string,
+        public Email: string,
+        public PassangerTicket: TicketList,
+        
+    )
+    {}
 
 }
 

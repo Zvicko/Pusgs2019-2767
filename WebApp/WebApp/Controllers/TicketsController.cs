@@ -142,6 +142,22 @@ namespace WebApp.Controllers
             return Ok(t.ExpireDate);
         }
 
+        [HttpPut]
+        [Route("api/Tickets/VerifyTicket/{id:int}")]
+        public IHttpActionResult VerifyTicket(int id)
+        {
+            Ticket ticket = db.Tickets.Where(t => t.Id == id && t.VerifiedByController == false).FirstOrDefault();
+            if (ticket == null)
+            {
+               return NotFound();
+            }
+            ticket.VerifiedByController = true;
+            db.Tickets.Attach(ticket);
+            db.Entry(ticket).State = EntityState.Modified;
+            db.SaveChanges();
+            return Ok();
+
+        }
 
         // PUT: api/Tickets/5
         [ResponseType(typeof(void))]
@@ -202,7 +218,14 @@ namespace WebApp.Controllers
             {
                 return NotFound();
             }
-
+            //
+            List<Passanger> passangers = db.AppUsers.Where(u => u.UserType == TypeOfUser.Passanger).OfType<Passanger>().ToList();
+            Passanger pass = passangers.Where(p => p.PassangerTicket != null).ToList().Where(pp => pp.PassangerTicket.Id == id).FirstOrDefault();
+            pass.PassangerTicket = null;
+           
+            db.Entry(pass).State = EntityState.Modified;
+            db.SaveChanges();
+            //
             db.Tickets.Remove(ticket);
             db.SaveChanges();
 

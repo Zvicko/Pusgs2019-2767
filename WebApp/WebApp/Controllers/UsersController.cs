@@ -153,7 +153,6 @@ namespace WebApp.Controllers
         [HttpGet]
         [Route("GetAllUnverified")]
         public IEnumerable<Passanger> GetAllUnverifiedUsers()
-
         {
             List<Passanger> passangers = db.AppUsers.Where(u => u.UserType == TypeOfUser.Passanger).OfType<Passanger>().ToList();
             return passangers.Where(p => p.Verified == VerificationStatus.Inprocess).ToList();
@@ -162,6 +161,20 @@ namespace WebApp.Controllers
            
 
         }
+
+        [HttpGet]
+        [Route("GetAllVerified")]
+        public IEnumerable<Passanger> GetAllVerifiedUsers()
+        {
+            List<Passanger> passangers = db.AppUsers.Where(u => u.UserType == TypeOfUser.Passanger).OfType<Passanger>().ToList();
+            return passangers.Where(p => p.Verified == VerificationStatus.Accepted && p.PassangerTicket != null).ToList();
+
+
+
+
+        }
+
+
         [HttpPut]
         [Route("VerifyUser")]
         public IHttpActionResult VerifyUser(VerifyUserModel model)
