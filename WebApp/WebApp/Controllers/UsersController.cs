@@ -15,6 +15,7 @@ using System.Web.Http.Description;
 using WebApp.Models;
 using WebApp.Persistence;
 using WebApp.Persistence.UnitOfWork;
+using System.Net.Mail;
 
 namespace WebApp.Controllers
 {
@@ -184,9 +185,40 @@ namespace WebApp.Controllers
             var user = db.Users.Where(u => u.UserId == model.Id).Include(u1 => u1.User).First();
             var pass = user.User as Passanger;
             if (model.IsAccepted)
+            {
                 pass.Verified = VerificationStatus.Accepted;
+                MailMessage mail = new MailMessage("cyborg.cimidad@gmail.com", "cyborg.cimidad@gmail.com");
+                SmtpClient client = new SmtpClient();
+                client.Port = 587;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("cyborg.cimidad@gmail.com", "zvickocar");
+                client.Host = "smtp.gmail.com";
+                client.EnableSsl = true;
+                mail.From = new MailAddress("cyborg.cimidad@gmail.com");
+                mail.To.Add("cyborg.cimidad@gmail.com");
+                mail.Subject = "Verifikacija naloga";
+                mail.Body = $"Postovani {pass.FullName} Vas nalog je upravo verifikovan.";
+                client.Send(mail);
+            }
             else
+            {
                 pass.Verified = VerificationStatus.NotAccepted;
+                MailMessage mail = new MailMessage("cyborg.cimidad@gmail.com", "cyborg.cimidad@gmail.com");
+                SmtpClient client = new SmtpClient();
+                client.Port = 587;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("cyborg.cimidad@gmail.com", "zvickocar");
+                client.Host = "smtp.gmail.com";
+                client.EnableSsl = true;
+                mail.From = new MailAddress("cyborg.cimidad@gmail.com");
+                mail.To.Add("cyborg.cimidad@gmail.com");
+                mail.Subject = "Verifikacija naloga";
+                mail.Body = $"Postovani {pass.FullName} verifikacija Vaseg naloga je odbijena. Razlog {model.Reason}";
+                client.Send(mail);
+            }
+                
            
             user.User = pass;
             db.Users.Attach(user);

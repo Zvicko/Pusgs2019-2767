@@ -1,4 +1,8 @@
-<div class="container" >
+<div class="container" *ngIf="passangers?.length ==0">
+  <h2>Nema korisnika za validaciju.</h2>
+</div>
+
+<div class="container" *ngIf="!VerificationFalse" >
     <div class="column">
       <div class="thumbnail"  *ngFor="let p of passangers">
         <div class="caption">
@@ -12,10 +16,40 @@
         
          
           
-          <button class="btn btn-primary" [disabled]="checkPassanger(p)" (click)="verify(p.Id,1)">Verifikuj</button>
-          <button class="btn btn-primary" (click)="verify(p.Id,2)">Odbij</button>
+          <button class="btn btn-primary" [disabled]="checkPassanger(p)" (click)="verify(p.Id,true)">Verifikuj</button>
+          <button class="btn btn-primary" (click)="verify(p.Id,false)">Odbij</button>
+        
+
+
+          </div>
         </div>
+        
       
       </div>
-</div>
+
+<div class="container"  *ngIf="VerificationFalse">
+    <form [formGroup]="reasonForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+        <div class="panel panel-custom">
+          <div class="panel-heading">
+            <h3 class="panel-title">Razlog odbijanja:</h3>
+      
+          </div>
+        <div class="panel-body">
+            <div class="form-group">
+            
+            <div class="col-sm-8">
+              <input id="reason" formControlName="reason" type="text" class="form-control">
+             
+            </div>
+      </div>
+      </div>
+      <div class="panel-footer">
+          <button class="btn btn-primary" type="submit">Sacuvaj</button>
+       </div>
+    
+    
+        </div>
+    </form>
+    </div>
+
 

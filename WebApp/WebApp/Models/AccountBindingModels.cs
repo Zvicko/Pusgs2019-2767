@@ -198,6 +198,9 @@ namespace WebApp.Models
         [Required]
         [Display(Name = "IsAccepted")]
         public bool IsAccepted { get; set; }
+
+        [Display(Name = "Reason")]
+        public string Reason { get; set; }
     }
 
     public class RegisterExternalBindingModel

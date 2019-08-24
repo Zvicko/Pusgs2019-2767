@@ -22,7 +22,7 @@ const appRoutes: Routes = [
   {path: 'admin_station', component:AdminStationComponent, canActivate: [CanActivateAdmin]},
   {path: 'controller_users', component:ControllerUsersComponent, canActivate: ['CanControllerActivateGuard']},
   {path: 'timetable_list', component:TimetableListComponent, canActivate : ['CanAlwaysActivateGuard']},
-  {path: 'controller_ticket', component:TicketComponentComponent, canActivate: ['CanControllerActivateGuard']}
+  {path: 'controller_tickets', component:TicketComponentComponent, canActivate: ['CanControllerActivateGuard']}
 ]
 
 @NgModule({

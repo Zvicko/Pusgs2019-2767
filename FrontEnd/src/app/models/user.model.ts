@@ -63,6 +63,7 @@ export class EditUser
 export class Passanger
 {
     constructor(
+    public Id : number,
     public FullName: string,
     public Email: string,
     public PhotoPath: string,
@@ -77,8 +78,8 @@ export class VerifyUser
 {
     constructor(
     public Id : number,
-    public IsAccepted : boolean
-
+    public IsAccepted : boolean,
+    public Reason : string
     ){}
 
 }

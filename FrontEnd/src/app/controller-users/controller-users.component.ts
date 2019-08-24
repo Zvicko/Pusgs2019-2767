@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Passanger, VerifyUser} from '../models/user.model';
 import {EditProfileService} from '../services/edit-profile.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-controller-users',
   templateUrl: './controller-users.component.html',
@@ -8,13 +9,20 @@ import {EditProfileService} from '../services/edit-profile.service';
 })
 export class ControllerUsersComponent implements OnInit {
 
+  VerificationFalse : boolean = false;
   passangers : Passanger[];
   passangerTypes = {0:"Obican",1:"Ucenik",2:"Penzioner"};
-  
-  constructor(private editProfileService : EditProfileService) { }
+  reasonForm : FormGroup;
+  verifyUser : VerifyUser;
+  constructor(private editProfileService : EditProfileService, private fb: FormBuilder) { }
 
   ngOnInit() {
-
+    this.VerificationFalse = false;
+    this.reasonForm = this.fb.group(
+      {
+        reason : []
+      }
+    );
     this.editProfileService.GetAllUnverified().subscribe(
       data =>
       {
@@ -35,13 +43,18 @@ export class ControllerUsersComponent implements OnInit {
 
   verify(id,option)
   {
-    const verifyUser : VerifyUser = new VerifyUser(id,option);
-    if(option == 1)
+    this.verifyUser = new VerifyUser(id,option,"");
+    if(option)
     {
     
-      this.editProfileService.VerifyUser(verifyUser).subscribe(
+      this.editProfileService.VerifyUser(this.verifyUser).subscribe(
         data =>
         {
+          const i = this.passangers.findIndex( e => e.Id === id);
+          if( i != -1)
+          {
+            this.passangers.splice(i,1);
+          }
           alert("Uspesno ste verifikovali korisnika!");
 
         }
@@ -50,16 +63,41 @@ export class ControllerUsersComponent implements OnInit {
     }
     else
     {
-      this.editProfileService.VerifyUser(verifyUser).subscribe(
-        data=>
-        {
-          alert("Uspesno ste odbili verifikaciju korisnika!");
-        }
-      )
+      this.VerificationFalse = true;
+      // this.editProfileService.VerifyUser(verifyUser).subscribe(
+      //   data=>
+      //   {
+      //     const i = this.passangers.findIndex( e => e.Id === id);
+      //     if( i != -1)
+      //     {
+      //       this.passangers.splice(i,1);
+      //     }
+
+      //     alert("Uspesno ste odbili verifikaciju korisnika!");
+      //   }
+      // )
 
     }
 
 
+  }
+
+  onSubmit()
+  {
+    this.verifyUser.Reason = this.reasonForm.get('reason').value;
+    this.editProfileService.VerifyUser(this.verifyUser).subscribe(
+        data=>
+        {
+          const i = this.passangers.findIndex( e => e.Id === this.verifyUser.Id);
+          if( i != -1)
+          {
+            this.passangers.splice(i,1);
+          }
+
+          alert("Uspesno ste odbili verifikaciju korisnika!");
+          this.VerificationFalse = false;
+        }
+      )
   }
 
 }
