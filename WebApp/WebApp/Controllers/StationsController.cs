@@ -17,11 +17,12 @@ namespace WebApp.Controllers
     public class StationsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private readonly IUnitOfWork unitOfWork;
-
+        //private readonly IUnitOfWork unitOfWork;
+        public IUnitOfWork UnitOfWork { get; set; }
+        private object syncLock = new object();
         public StationsController(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            this.UnitOfWork = unitOfWork;
         }
 
         // GET: api/Stations
@@ -45,26 +46,72 @@ namespace WebApp.Controllers
 
         // PUT: api/Stations/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutStation(int id, StationModel station)
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult PutStation(Station station)
         {
-            Station s = db.Stations.Where(st => st.Id == id).FirstOrDefault();
-            if(s != null)
+            
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                Station s = UnitOfWork.Stations.Get(station.Id);
+
+            if (s == null)
             {
-                s.Name = station.Name;
-                s.Address = station.Address;
+                return Content(HttpStatusCode.Conflict, "Stanica je u medjuvremenu obrisana od strane drugog administratora");
+            }
+
+                s.Address = station.Address;                    
                 s.Latitude = station.Latitude;
                 s.Longitude = station.Longitude;
-                db.Entry(s).State = EntityState.Modified;
-                db.SaveChanges();
-                return Ok();
                 
+                s.Name = station.Name;
 
-            }
-            return NotFound();
+                if (StationExists(s.Id))
+                {
+                    UnitOfWork.Stations.Update(s);
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+                try
+                {
+                    UnitOfWork.Complete();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    return Content(HttpStatusCode.Conflict, ex);
+                }
+                
+                catch (Exception e)
+                {
+                    return InternalServerError(e);
+                }
+
+                return StatusCode(HttpStatusCode.NoContent);
+            
+            //Station s = db.Stations.Where(st => st.Id == id).FirstOrDefault();
+            //if(s != null)
+            //{
+            //    s.Name = station.Name;
+            //    s.Address = station.Address;
+            //    s.Latitude = station.Latitude;
+            //    s.Longitude = station.Longitude;
+            //    db.Entry(s).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return Ok();
+
+
+            //}
+            //return NotFound();
         }
 
         // POST: api/Stations
         [ResponseType(typeof(Station))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PostStation(StationModel model)
         {
             if (!ModelState.IsValid)
@@ -72,29 +119,58 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            Station station = db.Stations.Where(s => s.Id == model.Id).FirstOrDefault();
-            if (station == null)
+            if (!StationExists(model.Id))
             {
-                Station newStation = new Station();
-                newStation.Name = model.Name;
-                newStation.Address = model.Address;
-                newStation.Latitude = model.Latitude;
-                newStation.Longitude = model.Longitude;
-                db.Stations.Add(newStation);
-                db.SaveChanges();
-                return Ok();
-            }
-            else
-            {
-                station.Name = model.Name;
+                Station station = new Station();
                 station.Address = model.Address;
                 station.Latitude = model.Latitude;
                 station.Longitude = model.Longitude;
-                db.Stations.Add(station);
-                db.SaveChanges();
-                return Ok();
+                station.Name = model.Name;
+                UnitOfWork.Stations.Add(station);
 
+                try
+                {
+                    UnitOfWork.Complete();
+                    return Content(HttpStatusCode.OK,"Stanica je kreirana");
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    return Content(HttpStatusCode.Conflict, ex);
+                }
+                catch (Exception e)
+                {
+                    return InternalServerError(e);
+                }
             }
+            else
+            {
+                return Content(HttpStatusCode.Conflict, "Stanica vec postoji!");
+            }
+            
+
+            //Station station = db.Stations.Where(s => s.Id == model.Id).FirstOrDefault();
+            //if (station == null)
+            //{
+            //    Station newStation = new Station();
+            //    newStation.Name = model.Name;
+            //    newStation.Address = model.Address;
+            //    newStation.Latitude = model.Latitude;
+            //    newStation.Longitude = model.Longitude;
+            //    db.Stations.Add(newStation);
+            //    db.SaveChanges();
+            //    return Ok();
+            //}
+            //else
+            //{
+            //    station.Name = model.Name;
+            //    station.Address = model.Address;
+            //    station.Latitude = model.Latitude;
+            //    station.Longitude = model.Longitude;
+            //    db.Stations.Add(station);
+            //    db.SaveChanges();
+            //    return Ok();
+
+            //}
 
         
 
@@ -102,13 +178,14 @@ namespace WebApp.Controllers
         }
         [HttpPost]
         [Route("api/Stations/AddLine")]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult AddLine(AddLineToStation model) // testirati ovo
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            
             Station station = db.Stations.Where(s => s.Name == model.StationName).FirstOrDefault();
             Line line = db.Lines.Where(l => l.LineNumber == model.LineNumber).FirstOrDefault();
 
@@ -182,16 +259,17 @@ namespace WebApp.Controllers
 
         // DELETE: api/Stations/5
         [ResponseType(typeof(Station))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteStation(int id)
         {
-            Station station = db.Stations.Find(id);
+            Station station = UnitOfWork.Stations.Get(id);
             if (station == null)
             {
                 return NotFound();
             }
 
-            db.Stations.Remove(station);
-            db.SaveChanges();
+            UnitOfWork.Stations.Remove(station);
+            UnitOfWork.Complete();
 
             return Ok(station);
         }
@@ -207,7 +285,7 @@ namespace WebApp.Controllers
 
         private bool StationExists(int id)
         {
-            return db.Stations.Count(e => e.Id == id) > 0;
+            return UnitOfWork.Stations.Get(id) != null;
         }
     }
 }

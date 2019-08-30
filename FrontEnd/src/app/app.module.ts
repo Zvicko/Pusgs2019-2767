@@ -19,6 +19,8 @@ import { AdminTimetableComponent } from './admin-timetable/admin-timetable.compo
 import { AdminStationComponent } from './admin-station/admin-station.component';
 import { ControllerUsersComponent } from './controller-users/controller-users.component';
 import { TimetableListComponent } from './timetable-list/timetable-list.component';
+import { LineMeshComponent } from './line-mesh/line-mesh.component';
+import { BusRealtimeComponent } from './bus-realtime/bus-realtime.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { TimetableListComponent } from './timetable-list/timetable-list.componen
     AdminTimetableComponent,
     AdminStationComponent,
     ControllerUsersComponent,
-    TimetableListComponent
+    TimetableListComponent,
+    LineMeshComponent,
+    BusRealtimeComponent
   ],
   imports: [
     BrowserModule,

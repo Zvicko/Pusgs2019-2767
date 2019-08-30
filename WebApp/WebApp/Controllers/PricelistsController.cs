@@ -26,7 +26,7 @@ namespace WebApp.Controllers
         // GET: api/Pricelists/5
         [ResponseType(typeof(Pricelist))]
         public IHttpActionResult GetPricelist(int id)
-      {
+        {
             Pricelist pricelist = db.Pricelists.Find(id);
             if (pricelist == null)
             {
@@ -38,6 +38,7 @@ namespace WebApp.Controllers
 
         // PUT: api/Pricelists/5
         [ResponseType(typeof(void))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PutPricelist(int id, Pricelist pricelist)
         {
             if (!ModelState.IsValid)

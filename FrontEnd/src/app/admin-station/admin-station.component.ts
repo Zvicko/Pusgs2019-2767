@@ -2,14 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormControl,Validators,FormBuilder,AbstractControl} from '@angular/forms';
 import {Station,AddLine, UpdateStation, UpdateLine} from '../models/station.model';
 import {StationServiceService} from '../services/station-service.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-station',
   templateUrl: './admin-station.component.html',
   styleUrls: ['./admin-station.component.css'],
-  providers: [StationServiceService]
+  providers: [StationServiceService],
+  styles: ['agm-map {height: 300px; width: 400px;}']
 })
 export class AdminStationComponent implements OnInit {
+//fokus na mapi
+  latitude : number;
+  longitude: number;
+//marker  
+ markLatitude : number;
+ markLongitude : number;
+ markLatitude2 : number;
+ markLongitude2 : number;
+ showMarkerBool : Boolean = false;
+ showMarkerBool2 : Boolean = false; // za apdejt formu
 
   stationForm: FormGroup;
   lineForm : FormGroup;
@@ -70,6 +82,11 @@ export class AdminStationComponent implements OnInit {
 
       }
     )
+
+  //   this.stationForm.controls["Latitude"].disable();
+  //  this.stationForm.controls["Longitude"].disable();
+  //  this.updateStationForm.controls["Latitude"].disable();
+  //  this.updateStationForm.controls["Longitude"].disable();
   }
 
   stationButton()
@@ -112,6 +129,19 @@ export class AdminStationComponent implements OnInit {
     this.lineListBool = false;
     this.lineUpdateBool = false;
 
+    //
+    this.stationService.getStations().subscribe(
+      data =>
+      {
+        this.stationList = data;
+        console.log(this.stationList);
+
+      }
+    )
+
+
+    //
+
   }
 
   lineButtonList()
@@ -130,9 +160,9 @@ export class AdminStationComponent implements OnInit {
         console.log("Line list :" + data);
 
       },
-      error =>
+      (error : HttpErrorResponse) =>
       {
-
+        alert(error.error);
 
       }
 
@@ -145,11 +175,13 @@ export class AdminStationComponent implements OnInit {
     
    
     const station : Station = Object.assign({},this.stationForm.value);
-    
+    console.log("STATION")
+    console.log(station.Longitude);
+    console.log(station.Latitude);
     this.stationService.postStation(station).subscribe(
       data=>
       {
-
+        this.stationForm.reset();
 
       },
       error=>
@@ -177,9 +209,9 @@ export class AdminStationComponent implements OnInit {
 
       },
 
-      error=>
+      (error : HttpErrorResponse) =>
       {
-
+        alert(error.error);
 
       }
 
@@ -202,6 +234,10 @@ export class AdminStationComponent implements OnInit {
     this.updateStationForm.controls['Latitude'].setValue(stationParam.Latitude);
     this.updateStationForm.controls['Longitude'].setValue(stationParam.Longitude);
     this.updateStationForm.controls['Id'].setValue(stationParam.Id);
+    
+    this.markLatitude2 = stationParam.Latitude;
+    this.markLongitude2 = stationParam.Longitude;
+    this.showMarkerBool2 = true;
    
   }
 
@@ -221,10 +257,10 @@ export class AdminStationComponent implements OnInit {
         this.lineListBool = false;
         this.lineUpdateBool = false;
       },
-      error=>
+      (error : HttpErrorResponse) =>
       {
+        alert(error.error);
 
-        alert("Greska!");
       }
 
     );
@@ -276,6 +312,26 @@ export class AdminStationComponent implements OnInit {
 
   }
 
+  onSubmitLineUpdate()
+  {
+    const line : UpdateLine = Object.assign({},this.updateLineForm.value)
+
+    console.log(`Line id : ${line.Id}`);
+    console.log(`Line number:${line.LineNumber}`);
+    this.stationService.updateLine(line).subscribe(
+     data => 
+      {
+        alert('Uspesno ste azurirali liniju!')
+
+      },
+      error =>
+      {
+
+      }
+    )
+
+  }
+
   updateLineButton(lineParam : UpdateLine)
   {
     this.stationBool = false;
@@ -291,6 +347,26 @@ export class AdminStationComponent implements OnInit {
     this.updateStationForm.controls['LineNumber'].setValue(lineParam.LineNumber);
   
    
+  }
+
+  chosenLocation(event)
+  {
+   this.markLatitude = event.coords.lat;
+   this.markLongitude = event.coords.lng;
+   this.stationForm.controls["Latitude"].setValue(this.markLatitude);
+   this.stationForm.controls["Longitude"].setValue(this.markLongitude);
+   this.showMarkerBool = true;
+ 
+  }
+
+  chosenLocation2(event) // za apdejt 
+  {
+   this.markLatitude2 = event.coords.lat;
+   this.markLongitude2 = event.coords.lng;
+   this.updateStationForm.controls["Latitude"].setValue(this.markLatitude2);
+   this.updateStationForm.controls["Longitude"].setValue(this.markLongitude2);
+   this.showMarkerBool2 = true;
+ 
   }
 
 }

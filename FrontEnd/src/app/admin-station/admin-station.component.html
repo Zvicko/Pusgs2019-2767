@@ -11,6 +11,18 @@
 
     </div>
   <div class="panel-body">
+      <agm-map [latitude]="45.242268" [longitude]="19.842954" [zoom]="18" (mapClick) = "chosenLocation($event)" >
+   
+   
+          <agm-marker [latitude]="markLatitude" [longitude]="markLongitude" *ngIf="showMarkerBool">
+      
+          
+      
+          </agm-marker>
+         
+        </agm-map>
+      <hr/>
+      <hr/>
       <div class="form-group" [ngClass]="{'has-error' : ((stationForm.get('Name').touched || stationForm.get('Name').dirty) && stationForm.get('Name').errors)}">
           <label class="col-sm-2 control-label" for="Name">Naziv stanice:</label>
           <div class="col-sm-8">
@@ -44,8 +56,9 @@
             </div>
       </div>
       
-      
-          <div class="form-group" [ngClass]="{'has-error' : ((stationForm.get('Latitude').touched || stationForm.get('Latitude').dirty) && stationForm.get('Latitude').errors)}">
+      <p>Geografska sirina {{stationForm.get('Latitude').value}} </p>
+      <p>Geografska duzina {{stationForm.get('Longitude').value}} </p>
+          <!-- <div class="form-group" [ngClass]="{'has-error' : ((stationForm.get('Latitude').touched || stationForm.get('Latitude').dirty) && stationForm.get('Latitude').errors)}">
               <label class="col-sm-2 control-label" for="Latitude">Geografska sirina:</label>
               <div class="col-sm-8">
                 <input id="Latitude" formControlName="Latitude" type="text" class="form-control" min="-90" max="90">
@@ -77,7 +90,7 @@
                      
                     </span>
                 </div>
-          </div>
+          </div> -->
   
   
   
@@ -117,6 +130,22 @@
   
       </div>
     <div class="panel-body">
+
+        <agm-map [latitude]="45.242268" [longitude]="19.842954" [zoom]="18" (mapClick) = "chosenLocation2($event)" >
+   
+   
+            <agm-marker [latitude]="markLatitude2" [longitude]="markLongitude2" *ngIf="showMarkerBool2">
+        
+            
+        
+            </agm-marker>
+          </agm-map>
+        <hr/>
+        <hr/>
+
+
+
+
         <div class="form-group" [ngClass]="{'has-error' : ((updateStationForm.get('Name').touched || updateStationForm.get('Name').dirty) && updateStationForm.get('Name').errors)}">
             <label class="col-sm-2 control-label" for="Name">Naziv stanice:</label>
             <div class="col-sm-8">
@@ -150,8 +179,10 @@
               </div>
         </div>
         
+        <p>Geografska sirina {{updateStationForm.get('Latitude').value}} </p>
+        <p>Geografska duzina {{updateStationForm.get('Longitude').value}} </p>
         
-            <div class="form-group" [ngClass]="{'has-error' : ((updateStationForm.get('Latitude').touched || updateStationForm.get('Latitude').dirty) && updateStationForm.get('Latitude').errors)}">
+            <!-- <div class="form-group" [ngClass]="{'has-error' : ((updateStationForm.get('Latitude').touched || updateStationForm.get('Latitude').dirty) && updateStationForm.get('Latitude').errors)}">
                 <label class="col-sm-2 control-label" for="Latitude">Geografska sirina:</label>
                 <div class="col-sm-8">
                   <input id="Latitude" formControlName="Latitude" type="text" class="form-control" min="-90" max="90">
@@ -183,7 +214,7 @@
                        
                       </span>
                   </div>
-            </div>
+            </div> -->
     
     
     
@@ -200,6 +231,7 @@
 </div>
 
 <div class="container" *ngIf="lineBool">
+  <div *ngIf="stationList.length > 0">
     <form [formGroup]="lineForm" (ngSubmit)="onSubmitLine()" class="form-horizontal">
         <div class="panel panel-custom">
             <div class="panel-heading">
@@ -207,7 +239,17 @@
             </div>
             <div class="panel-body">
             
-                <div class="form-group" [ngClass]="{'has-error' : ((lineForm.get('StationName').touched || lineForm.get('StationName').dirty) && lineForm.get('StationName').errors)}">
+
+              <div class="form-group" >
+                <label class="col-sm-2 control-label" for="StationName">Naziv stanice:</label>
+                <div class="col-sm-8">
+                  <select id="StationName" formControlName="StationName" type="text" class="form-control">
+                 <option *ngFor="let s of stationList " [value]="s.Name" >{{s.Name}}</option>
+                  </select>
+                </div>
+          </div>
+
+                <!-- <div class="form-group" [ngClass]="{'has-error' : ((lineForm.get('StationName').touched || lineForm.get('StationName').dirty) && lineForm.get('StationName').errors)}">
                     <label class="col-sm-2 control-label" for="StationName">Naziv stanice:</label>
                     <div class="col-sm-8">
                       <input id="StationName" formControlName="StationName" type="text" class="form-control">
@@ -219,9 +261,9 @@
                         Startna cena mora biti broj veci ili jednak 0!
                         </span> -->
                          
-                        </span>
+                        <!-- </span>
                     </div>
-              </div>
+              </div>-->
               
               <div class="form-group" [ngClass]="{'has-error' : ((lineForm.get('LineNumber').touched || lineForm.get('LineNumber').dirty) && lineForm.get('LineNumber').errors)}">
                   <label class="col-sm-2 control-label" for="LineNumber">Broj linije:</label>
@@ -249,8 +291,13 @@
   
     </div>
     </form>
+  </div>
+  <div *ngIf="stationList.length == 0">
+    <h3>Dodajte nove stanice kako biste mogli da ih uvezete sa linijama...</h3>
+  </div>
 </div>
 <div class="container" *ngIf="lineListBool" >
+  <div *ngIf="lineList.length > 0">
   <div class="column">
     <div class="thumbnail"  *ngFor="let l of lineList">
       <div class="caption">
@@ -269,6 +316,10 @@
     
     </div>
     </div>
+  </div>
+  <div *ngIf ="lineList == 0">
+    <h3>Nema linija, uvezite ih sa stanicama ...</h3>
+  </div>
 </div>
 
 <div class="container" *ngIf="lineUpdateBool">

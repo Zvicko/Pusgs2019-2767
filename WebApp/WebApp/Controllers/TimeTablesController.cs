@@ -29,6 +29,25 @@ namespace WebApp.Controllers
         {
             return db.TimeTables.ToList();
         }
+        [Route("api/TimeTables/GetTimeTablesUrban")]
+        public IEnumerable<Line> GetTimeTablesUrban()
+        {
+           List<TimeTable> timeTables = db.TimeTables.Where(l => l.Line.Stations.Where(s => s.Name != null).FirstOrDefault() != null && l.Transportation == TypeOfTransportation.Urban).ToList();
+            List<Line> lines = new List<Line>();
+            timeTables.ForEach(t => lines.Add(t.Line));
+            return lines;
+
+        }
+
+        [Route("api/TimeTables/GetTimeTablesSuburban")]
+        public IEnumerable<Line> GetTimeTablesSuburban()
+        {
+            List<TimeTable> timeTables = db.TimeTables.Where(l => l.Line.Stations.Where(s => s.Name != null).FirstOrDefault() != null && l.Transportation == TypeOfTransportation.Suburban).ToList();
+            List<Line> lines = new List<Line>();
+            timeTables.ForEach(t => lines.Add(t.Line));
+            return lines;
+        }
+
 
         // GET: api/TimeTables/5
         [ResponseType(typeof(TimeTable))]
@@ -45,6 +64,7 @@ namespace WebApp.Controllers
 
         // PUT: api/TimeTables/5
         [ResponseType(typeof(void))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PutTimeTable(int id, TimeTable timeTable)
         {
             if (!ModelState.IsValid)
@@ -80,6 +100,7 @@ namespace WebApp.Controllers
 
         // POST: api/TimeTables
         [ResponseType(typeof(TimeTable))]
+        [Authorize(Roles ="Admin")]
         public IHttpActionResult PostTimeTable(TimeTableBindingModel model)
         {
             Line line = db.Lines.Where(l => l.LineNumber == model.LineNumber).FirstOrDefault();
@@ -116,6 +137,7 @@ namespace WebApp.Controllers
 
         [HttpPost]
         [Route("api/TimeTables/PostDeparture")]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PostDeparture(DepartureModel model)
         {
             TimeTable timeTable = db.TimeTables.Where(t => t.Id == model.TimeT).FirstOrDefault();
@@ -129,6 +151,7 @@ namespace WebApp.Controllers
 
         // DELETE: api/TimeTables/5
         [ResponseType(typeof(TimeTable))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteTimeTable(int id)
         {
             TimeTable timeTable = db.TimeTables.Find(id);

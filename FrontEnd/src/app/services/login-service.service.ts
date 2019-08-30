@@ -42,7 +42,14 @@ export class LoginServiceService {
           
           localStorage.setItem('jwt', jwt)
           localStorage.setItem('role', role);
-          this.router.navigateByUrl('profile')
+          if(role == "Admin")
+          {
+            this.router.navigateByUrl('/');
+          }
+          else
+          {
+            this.router.navigateByUrl('profile');
+          }
         },
         err => {
           console.log("Error occured");

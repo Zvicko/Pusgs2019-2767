@@ -1,7 +1,7 @@
 export class Station
 {
     constructor(
-    // public Id : number = 0,
+    public Id : number,
     public Name : string,
     public Address: string,
     public Latitude: number,

@@ -11,7 +11,9 @@
           <li *ngIf="isLoggedIn() && isInRole('Admin')"><a routerLink="admin_station" routerLinkActive="active"><span> Uredi stanice</span> </a></li>
           <li *ngIf="isLoggedIn() && isInRole('Controller')"><a routerLink="controller_users" routerLinkActive="active"><span>Validacija korisnika</span> </a></li>
           <li *ngIf="isLoggedIn() && isInRole('Controller')"><a routerLink="controller_tickets" routerLinkActive="active"><span>Validacija karata</span> </a></li>
-          <li><a routerLink="ticket" routerLinkActive="active"><span>Kupi kartu</span> </a></li>
+          <li><a routerLink="ticket" routerLinkActive="active"><span>Karte</span> </a></li>
+          <li><a routerLink="line_mesh" routerLinkActive="active"><span>Mreza linija</span> </a></li>
+          <li><a routerLink="bus_realtime" routerLinkActive="active"><span>Lokacija autobusa</span> </a></li>
         </ul>
         </div>
         <ul class="nav navbar-nav navbar-right">

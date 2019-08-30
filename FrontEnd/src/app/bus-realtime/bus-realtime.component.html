@@ -1,0 +1,17 @@
+<button (click) = "startTimer()">Start Timer</button>
+<button (click) = "stopTimer()">Stop Timer</button>
+
+<agm-map [latitude]="45.243858" [longitude]="19.838819" [zoom]="16">
+
+    <agm-polyline [strokeColor]="green">
+        <agm-polyline-point *ngFor="let s of Stations " [latitude]="s?.Latitude" [longitude]="s?.Longitude">
+        </agm-polyline-point>
+       
+      </agm-polyline>
+
+  <agm-marker [latitude]="lat" [longitude]="lng">
+   
+
+  </agm-marker>
+
+</agm-map>

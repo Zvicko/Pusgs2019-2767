@@ -1,4 +1,4 @@
-import { Line, LineForList } from "./line.model";
+import { Line, LineForList, LineForMap } from "./line.model";
 import { Time } from "@angular/common";
 
 export class TimeTable
@@ -59,4 +59,12 @@ export class Departure
     )
     {}
 
+}
+
+export class TimeTableForMap
+{
+    constructor(
+     public Line : LineForMap[],
+     public Transportation: TypeOfTransportation   
+    ){}
 }

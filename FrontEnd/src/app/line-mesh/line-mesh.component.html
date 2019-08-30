@@ -1,0 +1,22 @@
+<select (change)="onChange($event.target.value)">
+    <option disabled hidden value="selectUndefinedOptionValue">--Izaberi opciju--</option>
+    <option value="urban">gradski</option>
+    <option value="suburban">prigradski</option>
+</select>
+<div class="container">
+<agm-map [latitude]="45.242268" [longitude]="19.842954" [zoom]="18">
+   
+  <ng-container *ngFor="let l of lines">
+  <agm-polyline [strokeColor] = 'blue'>
+  <agm-polyline-point *ngFor="let s of l.Stations" [latitude]="s.Latitude" [longitude]="s.Longitude" ></agm-polyline-point>
+  </agm-polyline>
+  
+   
+    <agm-marker *ngFor="let s of l.Stations " [latitude]="s.Latitude" [longitude]="s.Longitude">
+
+    
+
+    </agm-marker>
+  </ng-container>
+  </agm-map>
+</div>

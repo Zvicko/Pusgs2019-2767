@@ -262,6 +262,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hub\NotificationHub.cs" />
     <Compile Include="Migrations\201906081538261_Initial.cs" />
     <Compile Include="Migrations\201906081538261_Initial.Designer.cs">
       <DependentUpon>201906081538261_Initial.cs</DependentUpon>
@@ -321,6 +322,10 @@
     <Compile Include="Migrations\201908221009542_TicketUpdate1.cs" />
     <Compile Include="Migrations\201908221009542_TicketUpdate1.Designer.cs">
       <DependentUpon>201908221009542_TicketUpdate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908240846530_RowVersionAdded.cs" />
+    <Compile Include="Migrations\201908240846530_RowVersionAdded.Designer.cs">
+      <DependentUpon>201908240846530_RowVersionAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -503,6 +508,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908221009542_TicketUpdate1.resx">
       <DependentUpon>201908221009542_TicketUpdate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908240846530_RowVersionAdded.resx">
+      <DependentUpon>201908240846530_RowVersionAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -32,6 +32,27 @@ export class TimetableServiceService {
     });
   }
 
+  getTimeTablesUrban() : Observable<any>{
+    return this.HttpClient.get<any>("http://localhost:52295/api/TimeTables/GetTimeTablesUrban",{
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json'
+      })
+
+    });
+
+  }
+
+  getTimeTablesSuburban() : Observable<any>{
+    return this.HttpClient.get<any>("http://localhost:52295/api/TimeTables/GetTimeTablesSuburban",{
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json'
+      })
+
+    });
+
+  }
+
+
   deleteTimeTable(id) : Observable<any>
   {
     return this.HttpClient.delete(`http://localhost:52295/api/TimeTables/${id}`,);

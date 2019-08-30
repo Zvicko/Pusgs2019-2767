@@ -12,6 +12,8 @@ import { AdminStationComponent } from './admin-station/admin-station.component';
 import { ControllerUsersComponent } from './controller-users/controller-users.component';
 import { TimetableListComponent } from './timetable-list/timetable-list.component';
 import { TicketComponentComponent } from './ticket-component/ticket-component.component';
+import { LineMeshComponent } from './line-mesh/line-mesh.component';
+import { BusRealtimeComponent } from './bus-realtime/bus-realtime.component';
 const appRoutes: Routes = [
   {path: 'register', component : RegisterComponent, canActivate : ['CanAlwaysActivateGuard'] },
   {path: 'login', component : LoginComponent ,canActivate : ['CanAlwaysActivateGuard']},
@@ -22,7 +24,9 @@ const appRoutes: Routes = [
   {path: 'admin_station', component:AdminStationComponent, canActivate: [CanActivateAdmin]},
   {path: 'controller_users', component:ControllerUsersComponent, canActivate: ['CanControllerActivateGuard']},
   {path: 'timetable_list', component:TimetableListComponent, canActivate : ['CanAlwaysActivateGuard']},
-  {path: 'controller_tickets', component:TicketComponentComponent, canActivate: ['CanControllerActivateGuard']}
+  {path: 'controller_tickets', component:TicketComponentComponent, canActivate: ['CanControllerActivateGuard']},
+  {path: 'line_mesh', component:LineMeshComponent, canActivate : ['CanAlwaysActivateGuard']},
+  {path: "bus_realtime", component:BusRealtimeComponent, canActivate : ['CanAlwaysActivateGuard']}
 ]
 
 @NgModule({
