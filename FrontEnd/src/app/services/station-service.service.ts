@@ -113,7 +113,7 @@ export class StationServiceService {
 
   updateLine(updateLine : UpdateLine) : Observable<any>
   {
-    return this.HttpClient.put(`http://localhost:52295/api/Stations/${updateLine.Id}`,updateLine,
+    return this.HttpClient.put(`http://localhost:52295/api/Lines/${updateLine.Id}`,updateLine,
     {
       headers: new HttpHeaders({
         'Content-Type' : 'application/json'

@@ -231,7 +231,7 @@
 </div>
 
 <div class="container" *ngIf="lineBool">
-  <div *ngIf="stationList.length > 0">
+  <div *ngIf="stationList?.length > 0">
     <form [formGroup]="lineForm" (ngSubmit)="onSubmitLine()" class="form-horizontal">
         <div class="panel panel-custom">
             <div class="panel-heading">
@@ -271,7 +271,7 @@
                     <input id="LineNumber" formControlName="LineNumber" type="text" class="form-control" >
                     <span class="help-block" *ngIf="((lineForm.get('LineNumber').touched || lineForm.get('LineNumber').dirty) && lineForm.get('LineNumber').errors)">
                       <span *ngIf="lineForm.get('LineNumber').errors.required">
-                      Geografska sirina je obavezna!
+                      Broj linije je obavezan!
                       </span>
                     <!-- <span *ngIf="lineForm.get('LineNumber').errors.min || lineForm.get('LineNumber').errors.max">
                       Geografska sirina mora biti u rasponu od -90 do 90 stepeni!
@@ -292,12 +292,12 @@
     </div>
     </form>
   </div>
-  <div *ngIf="stationList.length == 0">
+  <div *ngIf="stationList?.length == 0">
     <h3>Dodajte nove stanice kako biste mogli da ih uvezete sa linijama...</h3>
   </div>
 </div>
 <div class="container" *ngIf="lineListBool" >
-  <div *ngIf="lineList.length > 0">
+  <div *ngIf="lineList?.length > 0">
   <div class="column">
     <div class="thumbnail"  *ngFor="let l of lineList">
       <div class="caption">
@@ -311,13 +311,13 @@
        
         
         <button class="btn btn-primary" (click)="deleteLine(l.Id)">Brisanje linije</button>
-        <button class="btn btn-primary" (click)="updateLineButton(l)">Izmeni liniju</button>
+        <button class="btn btn-primary" (click)="updateLineButton(l.Id,l.LineNumber)">Izmeni liniju</button>
       </div>
     
     </div>
     </div>
   </div>
-  <div *ngIf ="lineList == 0">
+  <div *ngIf ="lineList?.length == 0">
     <h3>Nema linija, uvezite ih sa stanicama ...</h3>
   </div>
 </div>
@@ -338,7 +338,7 @@
                   <input id="LineNumber" formControlName="LineNumber" type="text" class="form-control" >
                   <span class="help-block" *ngIf="((updateLineForm.get('LineNumber').touched || updateLineForm.get('LineNumber').dirty) && lineForm.get('LineNumber').errors)">
                     <span *ngIf="updateLineForm.get('LineNumber').errors.required">
-                    Geografska sirina je obavezna!
+                    Broj linije je obavezan!
                     </span>
                   <!-- <span *ngIf="lineForm.get('LineNumber').errors.min || lineForm.get('LineNumber').errors.max">
                     Geografska sirina mora biti u rasponu od -90 do 90 stepeni!

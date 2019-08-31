@@ -212,8 +212,22 @@ namespace WebApp.Controllers
                 {
                     Line newLine = new Line();
                     newLine.LineNumber = model.LineNumber;
+
+                    //
+                    if (station.Lines == null)
+                    {
+                        station.Lines = new List<Line>();
+                    }
+                    if (newLine.Stations == null)
+                    {
+                        newLine.Stations = new List<Station>();
+                    }
+                    //
+
                     station.Lines.Add(newLine);
                     newLine.Stations.Add(station);
+
+
                     db.Lines.Add(newLine);
                     db.Entry(station).State = EntityState.Modified;
                     db.SaveChanges();
@@ -228,6 +242,19 @@ namespace WebApp.Controllers
                 {
                     Station newStation = new Station();
                     newStation.Name = model.StationName;
+
+                    //
+                    if (newStation.Lines == null)
+                    {
+                        newStation.Lines = new List<Line>();
+                    }
+                    if (line.Stations == null)
+                    {
+                        line.Stations = new List<Station>();
+                    }
+
+
+                    //
                     newStation.Lines.Add(line);
                     line.Stations.Add(newStation);
                     db.Stations.Add(newStation);

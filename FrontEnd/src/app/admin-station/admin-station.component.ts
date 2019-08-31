@@ -296,7 +296,7 @@ export class AdminStationComponent implements OnInit {
         const i = this.lineList.findIndex( e => e.Id === id);
           if( i != -1)
           {
-            this.stationList.splice(i,1);
+            this.lineList.splice(i,1);
           }
 
       },
@@ -324,15 +324,16 @@ export class AdminStationComponent implements OnInit {
         alert('Uspesno ste azurirali liniju!')
 
       },
-      error =>
+      (error : HttpErrorResponse) =>
       {
+        alert(error.error.Message);
 
       }
     )
 
   }
 
-  updateLineButton(lineParam : UpdateLine)
+  updateLineButton(id,lineNumber)
   {
     this.stationBool = false;
     this.stationListBool = false;
@@ -341,10 +342,11 @@ export class AdminStationComponent implements OnInit {
     this.lineBool = false;
     this.lineListBool = false;
     this.lineUpdateBool = true;
-
-    this.updateLineForm.controls['Id'].setValue(lineParam.Id);
+    console.log("line param id : " + id);
+    console.log("line number param " + lineNumber );
+    this.updateLineForm.controls['Id'].setValue(id);
     
-    this.updateStationForm.controls['LineNumber'].setValue(lineParam.LineNumber);
+    this.updateLineForm.controls['LineNumber'].setValue(lineNumber);
   
    
   }

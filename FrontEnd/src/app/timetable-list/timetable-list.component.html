@@ -64,7 +64,7 @@
         <!-- prvi upitnik proveravat da li je Line null i preventira gresku -->
         <p>Broj linije: {{(t.Line?.LineNumber !== null) ? t.Line.LineNumber : "Nedostupno"}}</p> 
         <div *ngFor="let d of t.Departures">
-            <p>Polazak : {{d.DepartureTime | date :'dd/MM/yyyy hh:mm'}}</p>
+            <p>Polazak : {{d.DepartureTime | date :'dd/MM/yyyy HH:mm'}}</p>
     
         </div>
       

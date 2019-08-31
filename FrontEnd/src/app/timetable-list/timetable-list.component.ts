@@ -20,7 +20,7 @@ export class TimetableListComponent implements OnInit {
   ngOnInit() {
     this.timeTableForm = this.fb.group(
     {
-      LineNumber : [0],
+      LineNumber : [],
       DayType : [],
       Transportation : []
 

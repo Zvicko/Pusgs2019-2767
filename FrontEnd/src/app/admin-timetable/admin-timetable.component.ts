@@ -16,6 +16,7 @@ export class AdminTimetableComponent implements OnInit {
   timeTableBool : boolean = false;
   departureBool : boolean = false;
   timeTableDelete : TimeTableDelete[];
+  timeTables : TimeTableDelete[]; // ovo je za polaske, nema veze sa brisanjem... model odgovara
   deleteBool : boolean;
   constructor(private fb : FormBuilder,private fb2: FormBuilder,private timeTableService : TimetableServiceService) { }
 
@@ -54,6 +55,15 @@ export class AdminTimetableComponent implements OnInit {
     this.departureBool = true;
     this.timeTableBool = false;
     this.deleteBool = false;
+    this.timeTableService.getTimeTables().subscribe(
+      data =>
+      {
+        this.timeTables = data;
+      
+
+      }
+    )
+
   }
 
   deleteButton()
