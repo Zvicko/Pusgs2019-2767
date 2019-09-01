@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Station, UpdateStation, UpdateLine} from '../models/station.model';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { LineForMap, Line } from '../models/line.model';
+import { LineForMap, Line, LineForList } from '../models/line.model';
 
 @Injectable({
   providedIn: 'root'
@@ -59,8 +59,8 @@ export class StationServiceService {
     });
   }
 
-  getLinesWithStations():Observable<Line[]>{
-    return this.HttpClient.get<Line[]>("http://localhost:52295/api/Lines/GetLinesWithStations",{
+  getLinesWithStations():Observable<LineForList[]>{
+    return this.HttpClient.get<LineForList[]>("http://localhost:52295/api/Lines/GetLinesWithStations",{
       headers: new HttpHeaders({
         'Content-Type' : 'application/json'
       })

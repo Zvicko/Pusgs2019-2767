@@ -18,13 +18,13 @@ namespace WebApp.Controllers
     public class LinesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private NotificationHub notificationHub;
+     
         public IUnitOfWork UnitOfWork { get; set; }
 
-        public LinesController(IUnitOfWork unitOfWork, NotificationHub hub)
+        public LinesController(IUnitOfWork unitOfWork)
         {
             this.UnitOfWork = unitOfWork;
-            this.notificationHub = hub;
+           
         }
 
         // GET: api/Lines
@@ -50,17 +50,18 @@ namespace WebApp.Controllers
 
             return Ok(line);
         }
-        //[Route("api/Lines/GetLineHub/{id}")]
-        //public IHttpActionResult GetLineHub(int id)
-        //{
-        //    Line line = db.Lines.Find(id);
-        //    if (line == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    notificationHub.NotificationLine(line);
-        //    return Ok(line);
-        //}
+        [Route("api/Lines/GetLineHub/{id}")]
+        public IHttpActionResult GetLineHub(int id)
+        {
+            Line line = db.Lines.Find(id);
+            if (line == null)
+            {
+                return NotFound();
+            }
+
+            NotificationHub.NotificationLine(line);
+            return Ok(line);
+        }
 
 
 

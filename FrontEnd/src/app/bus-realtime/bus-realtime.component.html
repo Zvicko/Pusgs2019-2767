@@ -1,5 +1,23 @@
-<button (click) = "startTimer()">Start Timer</button>
-<button (click) = "stopTimer()">Stop Timer</button>
+<!-- <button (click) = "startTimer()">Start Timer</button>
+<button (click) = "stopTimer()">Stop Timer</button> -->
+<div class="container">
+<form [formGroup]="lineForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+<div class="form-group" >
+    <label class="col-sm-2 control-label" for="StationName">Broj linije</label>
+    <div class="col-sm-8">
+      <select id="Id" formControlName="Id" type="text" class="form-control">
+     <option *ngFor="let l of lines " [value]="l.Id" >{{l.LineNumber}}</option>
+      </select>
+    </div>
+</div>
+
+<div class="panel-footer">
+    <button class="btn btn-primary" type="submit" [disabled]="!lineForm.valid">Prikazi</button>
+    
+ </div>
+</form>
+</div>
+<button class="btn btn-primary" *ngIf="submitedBool" (click) = "stopTimer()">Zaustavi pracenje</button>
 
 <agm-map [latitude]="45.243858" [longitude]="19.838819" [zoom]="16">
 

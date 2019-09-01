@@ -13,7 +13,13 @@
   
    
     <agm-marker *ngFor="let s of l.Stations " [latitude]="s.Latitude" [longitude]="s.Longitude">
-
+      <agm-info-window [latitude]="s.Latitude" [longitude]="s.Longitude">
+        
+        <span style="font-size: 16px;font-family:'Times New Roman'">Naziv stanice : {{s.Name}}</span>
+        <br/>
+        <span style="font-family:'Times New Roman'; color:gray;"><strong>Adresa : {{s.Address}}</strong></span>
+       
+      </agm-info-window>
     
 
     </agm-marker>

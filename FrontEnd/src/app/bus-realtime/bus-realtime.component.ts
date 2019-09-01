@@ -1,8 +1,9 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import {RealtimeService} from '../services/realtime.service'
-import { LineForMap, Line } from '../models/line.model';
+import { LineForMap, Line, LineForList } from '../models/line.model';
 import { StationServiceService } from '../services/station-service.service';
 import { Station } from '../models/station.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-bus-realtime',
   templateUrl: './bus-realtime.component.html',
@@ -16,10 +17,34 @@ export class BusRealtimeComponent implements OnInit {
   lng: number;
   location : string;
   locationArray : string[];
-  lines : Line[]
+  lines : LineForList[]
   Stations : Station[] = [];
-  constructor(private notifService: RealtimeService, private ngZone: NgZone, private stationService : StationServiceService) {
+  lineForm : FormGroup;
+  submitedBool : Boolean = false;
+  constructor(private notifService: RealtimeService, private ngZone: NgZone, private stationService : StationServiceService, private fb : FormBuilder) {
     this.isConnected = false;
+    // this.stationService.getLinesWithStations().subscribe(
+    //   data=>
+    //   {
+    //     this.lines = data;
+    //     console.log("this lines [0] id : " + this.lines[0].Id); 
+    //   }
+
+    // )
+    
+   }
+
+  ngOnInit() {
+    this.submitedBool = false;
+    this.lineForm = this.fb.group(
+      {
+        Id : ['',Validators.required],
+        
+        
+
+      }
+    )
+
     this.stationService.getLinesWithStations().subscribe(
       data=>
       {
@@ -28,10 +53,7 @@ export class BusRealtimeComponent implements OnInit {
       }
 
     )
-    
-   }
 
-  ngOnInit() {
     this.checkConnection();
     this.subscribeForBus();
     
@@ -70,6 +92,20 @@ export class BusRealtimeComponent implements OnInit {
     this.location = "";
   }
 
+
+  onSubmit()
+  {
+    const line : Line = Object.assign({},this.lineForm.value);
+
+    this.stationService.getLineHub(line.Id).subscribe(
+      data=>
+      {
+        this.startTimer();
+        this.submitedBool = true;
+      }
+    )
+
+  }
   
 
 }
